@@ -1,0 +1,46 @@
+.loading {
+	background: url(../images/loading.gif) no-repeat;
+	border:#3873a5 2px solid;
+	width:80%;
+	background-color: #FCFAE4;
+	padding-top:10px;
+	margin-top: 30%;
+	margin-left:50px;
+	text-align: right;
+	color: #3873a5;
+	position: absolute; 
+	z-index: 99;
+}
+/*下载进度条层*/
+.process_div{
+	background-color: #A9C2D5;
+	opacity: 1.0; /*背景透明度*/
+	vertical-align: middle;
+}
+/*下载进度条样式*/
+.upload_process_bar{  
+	opacity: 1.0; 
+    width:100%;  
+    border:#ccc 2px solid;  
+    height:20px;  
+    padding:1px;  
+    background:#fff;  
+    -moz-border-radius:10px;  
+    -webkit-border-radius:10px;  
+    border-radius:20px; 
+    margin-top: 30%;
+    z-index: 8;
+}
+.upload_current_process{  
+	opacity: 1.0; 
+    height:20px;  
+    width:0%;  
+    background:#A4C639;  
+    -moz-border-radius:10px;  
+    -webkit-border-radius:10px;  
+    border-radius:20px; 
+    z-index: 8;     
+}
+.edeal{
+	color: blue;
+}

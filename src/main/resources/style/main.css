@@ -1,0 +1,400 @@
+*{
+	font-size: 50px;
+	line-height: 70px;
+	letter-spacing: 1px;	
+	vertical-align: middle;	
+}
+body {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	border: 0px solid #D4D0C8;
+	background-image: url(../images/bg.png);
+}
+
+table {
+	vertical-align: middle;
+}
+
+input {
+	padding: 2px 8px 0pt 3px;
+	height: 70px;
+	border: 1px solid #999;
+}
+
+select {
+	border: 1px solid #999;
+	height: 70px;
+}
+
+img {
+	vertical-align: middle;
+}
+
+.wrapperExt {
+	top: 100px;
+	bottom: 120px;
+	left: 0;
+}
+
+.scrollerExt {
+	
+}
+
+.header {
+	width: 100%;
+	height: 100px;
+	color: #3873a5;
+	z-index: 5;
+}
+
+.header #header_main {
+	background-image: url(../images/header.png?ver=1.0.1);
+	text-align: center;
+	vertical-align: middle;
+	border: 0px solid #FFFFFF;
+	color: #FFFFFF;
+	font-size: 55px;
+	font-weight: bold;
+	letter-spacing: 15px;
+}
+
+.commonBtn {
+	background: url(../images/btn.png?ver=1.0.0) no-repeat;
+	background-position: center;
+	text-align: center;
+	font-size: 50px;
+	border: 0px;
+	height: 100px;
+	width: 245px;
+	cursor: pointer;
+}
+
+.commonFooter {
+	background: url(../images/header.png?ver=1.0.9);
+	height: 120px;
+	width: 100%;
+	bottom: 0;
+	position: fixed;
+	z-index: 5;
+}
+
+.commonFooter td {
+	text-align: center;
+}
+
+.commonBtnSmall {
+	background: url(../images/btn.png?ver=1.0.0) no-repeat;
+	background-position: center;
+	text-align: center;
+	font-size: 30px;
+	border: 0px;
+	height: 80px;
+	width: 196px;
+	cursor: pointer;
+}
+
+.commonBtnMini {
+	background: url(../images/btn.png?ver=1.0.0) no-repeat;
+	background-position: center;
+	text-align: center;
+	font-size: 30px;
+	border: 0px;
+	height: 70px;
+	width: 90px;
+	cursor: pointer;
+}
+
+.loginbg {
+	border: 0px solid #D4D0C8;
+	margin: 0 auto;
+	width: 680px;
+}
+
+.loginbg th {
+	height: 180px;
+}
+
+.loginbg tr {
+	height: 120px;
+}
+
+.login_input {
+	width: 350px;
+	vertical-align: middle;
+}
+
+.itemTable {
+	width: 100%;
+	/*
+	background: url(../images/taxbadgebgh.png) no-repeat;
+	background-position: center;
+	*/
+}
+
+.itemTable td {
+	text-align: center;
+	vertical-align: middle;
+	padding-top: 20px;
+	padding-bottom: 5px;
+}
+
+.itemTable div {
+	margin-top: 25px;
+	font-weight: bold;
+}
+
+.itemPage {
+	text-align: center;
+}
+
+.listTable {
+	width: 100%;
+	font-size: 60px;
+	border-top: 0px solid #D5D5AE;
+	border-right: 0px solid #D5D5AE;
+	border-left: 0px solid #D5D5AE;
+	border-bottom: 0px solid #D5D5AE;
+}
+
+.listTable tr {
+	height: 130px;
+}
+
+.listTable th {
+	border-top: 0px none #D5D5AE;
+	border-right: 0px solid #D5D5AE;
+	border-left: 0px none #D5D5AE;
+	border-bottom: 1px solid #D5D5AE;
+	vertical-align: middle;
+	text-align: center;
+	font-weight: bold;
+}
+
+.listTable td {
+	border-top: 0px none #D5D5AE;
+	border-right: 0px solid #D5D5AE;
+	border-left: 0px none #D5D5AE;
+	border-bottom: 1px solid #D5D5AE;
+	border: solid 1px #a0a0a0;
+	vertical-align: middle;
+}
+
+.listTable span {
+	font-size: 40px;
+}
+
+.listTable label,ul,li,div,a {
+	font-size: 35px;
+}
+
+.txlListTable td {
+	height: 145px;
+	font-size: 40px;
+}
+
+.formTable {
+	width: 100%;
+	border-top: 1px solid #D5D5AE;
+	border-right: 0px solid #D5D5AE;
+	border-left: 1px solid #D5D5AE;
+	border-bottom: 0px solid #D5D5AE;
+}
+
+.formTable tr {
+	height: 110px;
+}
+
+.formTable th {
+	border-top: 0px solid #D5D5AE;
+	border-right: 1px solid #D5D5AE;
+	border-left: 0px solid #D5D5AE;
+	border-bottom: 1px solid #D5D5AE;
+	vertical-align: middle;
+	text-align: center;
+	font-weight: bold;
+}
+
+.formTable td {
+	border-top: 0px solid #D5D5AE;
+	border-right: 1px solid #D5D5AE;
+	border-left: 0px solid #D5D5AE;
+	border-bottom: 1px solid #D5D5AE;
+	vertical-align: middle;
+	border: 1px solid #a0a0a0;
+}
+
+.formTable label,ul,li,td,th {
+	font-size: 40px;
+}
+
+.dataTable {
+	width: 100%;
+	border-top: 1px solid #D5D5AE;
+	border-right: 0px solid #D5D5AE;
+	border-left: 1px solid #D5D5AE;
+	border-bottom: 0px solid #D5D5AE;
+	font-size: 30px;
+}
+
+.dataTable th {
+	border-top: 0px solid #D5D5AE;
+	border-right: 1px solid #D5D5AE;
+	border-left: 0px solid #D5D5AE;
+	border-bottom: 1px solid #D5D5AE;
+	vertical-align: middle;
+	text-align: center;
+	background-color: #aaa;
+	color: #4f6b72;
+}
+
+.dataTable td {
+	border-top: 0px solid #D5D5AE;
+	border-right: 1px solid #D5D5AE;
+	border-left: 0px solid #D5D5AE;
+	border-bottom: 1px solid #D5D5AE;
+	vertical-align: middle;
+	border: solid 1px #a0a0a0;
+}
+
+.dataTable label,ul,li {
+	font-size: 28px;
+}
+
+.dataTitle {
+	font-weight: bold;
+	color: #880000;
+	font-size: 35px;
+}
+
+.dataTableTitle {
+	background-color: #fff;
+	color: #4f6b72;
+	padding: 6px 6px 6px 12px;
+	text-Align: center;
+}
+/*涉税查询——“统计至：”样式*/
+.dataTitleTj {
+	font-weight: bold;
+	font-size: 35px;
+}
+
+.dataTableNum {
+	text-align: right;
+	background-color: #fff;
+	white-space: nowrap;
+}
+
+.chartdiv {
+	height: 800px;
+}
+
+.openClosed {
+	border: 1px solid #880000;
+	width: 37px;
+	height: 37px;
+	text-align: center;
+	font-size: 35px;
+}
+
+.mailSearch {
+	height: 90px;
+	width: 100%;
+	bottom: 120px;
+	padding: 10px;
+	left: 0px;
+	position: fixed;
+	z-index: 99;
+	background-color: #a2c9e8;
+	border: 2px solid #D5D5AE;
+}
+
+.moreInfo {
+	height: 28%;
+	width: 45%;
+	top: 100px;
+	padding: 10px;
+	right: 0px;
+	position: fixed;
+	z-index: 99;
+	background-color: #000000;
+	border: 2px solid #D5D5AE;
+	/*透明度*/
+	filter: alpha(opacity = 85);
+	-moz-opacity: 0.85;
+	opacity: 0.85;
+}
+
+.eclose {
+	/*background: url(../images/eclose.png) no-repeat;*/
+	padding-left: 10px;
+}
+
+.eopen {
+	/*background: url(../images/eopen.png) no-repeat;*/
+	padding-left: 10px;
+}
+/*
+.list ul,li {
+	font-size: 50px;
+}
+*/
+.centerDiv div {
+	text-align: center;
+	line-height: 900px;
+}
+
+.mainTop {
+	/*background: url(../images/main_top.png?ver=1.0.45) repeat-x;*/
+	width: 100%;
+	padding-top: 0px;
+	padding-left: 0px;
+}
+
+.infoTable {
+	width: 100%;
+	border-top: 0px solid #D5D5AE;
+	border-right: 0px solid #D5D5AE;
+	border-left: 0px solid #D5D5AE;
+	border-bottom: 0px solid #D5D5AE;
+	line-height: 90px;
+}
+
+.infoTable tr {
+	height: 100px;
+}
+
+.infoTable td {
+	border-top: 0px solid #D5D5AE;
+	border-right: 0px solid #D5D5AE;
+	border-left: 0px solid #D5D5AE;
+	border-bottom: 1px dotted #D5D5AE;
+}
+.infoNotice{
+	font-size: 40px;
+	padding-left: 5px;
+	color: #880000;
+}
+.copyright{
+	width:100%;
+	position: absolute;
+	bottom: 20px;
+	text-Align: center;
+	font-size: 30px;
+}
+.imgadd {
+	height: 50px;
+	width: 50px;
+}
+.buttonStyle{
+   border: 2px solid #ccc;
+   background: #ffffff;
+   text-align: center;
+   margin: 1%;
+   padding: 10px;
+   -moz-border-radius: 30px;
+   -webkit-border-radius: 30px;
+   border-radius: 30px;
+   FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#c3cdd3,endColorStr=#f6f6f8); /*IE*/ 
+   background:-moz-linear-gradient(top,#c3cdd3,#f6f6f8);/*火狐*/ 
+   background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#c3cdd3), to(#f6f6f8));/*谷歌*/ 
+}

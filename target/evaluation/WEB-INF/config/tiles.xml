@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<!-- 通用布局 -->
+	<definition name="baseLayout" template="/WEB-INF/views/framework/simpleLayout.jsp">
+		<put-attribute name="basepath" value="/WEB-INF/views/framework/basepath.jsp" />
+		<put-attribute name="meta" value="/WEB-INF/views/framework/meta.jsp" />
+		<put-attribute name="title" value="文件管理系统" />
+		<put-attribute name="css" value="/WEB-INF/views/framework/css.jsp" />
+		<put-attribute name="javascript" value="/WEB-INF/views/framework/javascript.jsp" />
+		<put-attribute name="common_header" value="/WEB-INF/views/framework/common_header.jsp" />
+		<put-attribute name="header" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="" />
+		<put-attribute name="common_footer" value="/WEB-INF/views/framework/common_footer.jsp" />
+	</definition>
+
+	<!-- 登录界面  -->
+	<definition name="loginview" extends="baseLayout">
+		<put-attribute name="title" value="用户登录" />
+		<put-attribute name="body" value="/WEB-INF/views/evaluation/login/login.jsp" />
+	</definition>
+</tiles-definitions>
