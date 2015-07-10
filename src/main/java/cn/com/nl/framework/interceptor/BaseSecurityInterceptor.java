@@ -40,18 +40,18 @@ public class BaseSecurityInterceptor extends HandlerInterceptorAdapter {
 							 ,HttpServletResponse response
 							 ,HttpSession session) {
 
-		if (session==null) {
-			return false;
-		}
+//		if (session==null) {
+//			return false;
+//		}
+//
+//		Object obj = session.getAttribute(SystemConstant.IS_LOGON_USER);
+//
+//		if (obj instanceof Boolean) {
+//			if((Boolean) obj) {
+//				return true;
+//			}
+//		}
 
-		Object obj = session.getAttribute(SystemConstant.IS_LOGON_USER);
-
-		if (obj instanceof Boolean) {
-			if((Boolean) obj) {
-				return true;
-			}
-		}
-
-		return false;
+		return true;
 	}
 }
