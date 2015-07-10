@@ -3,12 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-<script type="text/javascript" src="resources/scripts/base/jquery-1.10.0.min.js"></script>
-<script type="text/javascript" src="resources/scripts/base/jquery-migrate-1.1.1.min.js"></script>
-<script type="text/javascript" src="resources/scripts/base/json2.min.js"></script>
+<script type="text/javascript" src="resources/scripts/base/jquery-1.10.0.js"></script>
+<script type="text/javascript" src="resources/scripts/base/jquery-migrate-1.1.1.js"></script>
+<script type="text/javascript" src="resources/scripts/base/json2.js"></script>
 <script type="text/javascript" src="resources/scripts/base/utils.js"></script>
 <script type="text/javascript" src="resources/scripts/base/main.js"></script>
-
-<script type="text/javascript">
-initEvent();
-</script>

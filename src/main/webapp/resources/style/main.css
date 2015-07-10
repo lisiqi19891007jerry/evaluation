@@ -1,0 +1,76 @@
+*{
+	font-size: 16px;
+	letter-spacing: 1px;
+	vertical-align: middle;
+}
+body {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	border: 0px solid #D4D0C8;
+}
+
+table {
+	vertical-align: middle;
+}
+
+input {
+	padding: 2px 8px 0pt 3px;
+	height: 26px;
+	border: 1px solid #999;
+}
+
+select {
+	border: 1px solid #999;
+	height: 70px;
+}
+
+img {
+	vertical-align: middle;
+}
+
+.commonBtn {
+	background: url(../images/btn.png) no-repeat;
+	background-position: center;
+	text-align: center;
+	font-size: 20px;
+	border: 1px;
+	height: 30px;
+	width: 200px;
+	cursor: pointer;
+}
+
+.commonBtnSmall {
+	background: url(../images/btn.png) no-repeat;
+	background-position: center;
+	text-align: center;
+	font-size: 30px;
+	border: 0px;
+	height: 80px;
+	width: 196px;
+	cursor: pointer;
+}
+
+.commonBtnMini {
+	background: url(../images/btn.png) no-repeat;
+	background-position: center;
+	text-align: center;
+	font-size: 30px;
+	border: 0px;
+	height: 70px;
+	width: 90px;
+	cursor: pointer;
+}
+
+.buttonStyle{
+   border: 2px solid #ccc;
+   background: #ffffff;
+   text-align: center;
+   margin: 1%;
+   padding: 10px;
+   -moz-border-radius: 30px;
+   -webkit-border-radius: 30px;
+   border-radius: 30px;
+   FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#c3cdd3,endColorStr=#f6f6f8); /*IE*/ 
+   background:-moz-linear-gradient(top,#c3cdd3,#f6f6f8);/*火狐*/ 
+   background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#c3cdd3), to(#f6f6f8));/*谷歌*/ 
+}
