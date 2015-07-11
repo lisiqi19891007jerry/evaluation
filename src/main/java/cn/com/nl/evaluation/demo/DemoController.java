@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.nl.framework.base.BasicController;
+import cn.com.nl.framework.constant.SystemConstant;
+import cn.com.nl.framework.tools.MessageUtils;
 
 @Scope("prototype")
 @Controller
