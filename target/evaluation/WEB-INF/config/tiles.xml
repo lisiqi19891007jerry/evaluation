@@ -23,4 +23,10 @@
 		<put-attribute name="title" value="用户登录" />
 		<put-attribute name="body" value="/WEB-INF/views/evaluation/login/login.jsp" />
 	</definition>
+
+	<!-- demo  -->
+	<definition name="demoview" extends="baseLayout">
+		<put-attribute name="title" value="Demo" />
+		<put-attribute name="body" value="/WEB-INF/views/evaluation/demo/show_demo.jsp" />
+	</definition>
 </tiles-definitions>
