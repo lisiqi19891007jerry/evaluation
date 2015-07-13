@@ -1,17 +1,18 @@
 package cn.com.nl.evaluation.demo;
 
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.com.nl.evaluation.demo.dao.DemoDao;
 import cn.com.nl.framework.base.BasicController;
 
 @Scope("prototype")
@@ -19,6 +20,9 @@ import cn.com.nl.framework.base.BasicController;
 public class DemoController extends BasicController {
 
 	private Logger log = LoggerFactory.getLogger(DemoController.class);
+
+	@Autowired
+	private DemoDao demoDao;
 
 	/**
 	 *
@@ -30,31 +34,18 @@ public class DemoController extends BasicController {
 	 */
 	@RequestMapping(value = "/demo")
 	public ModelAndView doLogin(ModelMap model) {
+		log.info("=== 显示show_demo.jsp ===");
 		return new ModelAndView("demoview", model);
 	}
 
 	@RequestMapping(value = "/demo/select")
 	public ModelAndView doSelect(ModelMap model) {
 
-		Map<String, Object> argMap = new HashMap<String, Object>();
+		List<Map<String, Object>> modelList = demoDao.doSelect(getScreenParameterMap());
 
-		Map<String, String> screenParameterMap = getParameterMap();
-
-		Iterator<Map.Entry<String, String>> iterator = screenParameterMap.entrySet().iterator();
-
-		while(iterator.hasNext()) {
-
-			Map.Entry<String, String> entry = iterator.next();
-
-			String key = entry.getKey();
-			String val = entry.getValue();
-
-			System.out.println("key = " + key + ", value = " + val);
-
-			argMap.put(key, val);
-		}
-
-		model.addAttribute("argMap", argMap);
+		// 将浏览器传入的参数回传到浏览器界面显示
+		model.addAttribute("argMap", getScreenParameterMap());
+		model.addAttribute("modelList", modelList);
 
 		return new ModelAndView("demoview", model);
 	}
