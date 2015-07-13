@@ -1,6 +1,3 @@
-/**
- * 
-*/
 package cn.com.nl.framework.base;
 
 import java.util.HashMap;
@@ -25,9 +22,23 @@ import cn.com.nl.framework.tools.MessageUtils;
  */
 public class BasicController {
 
+	private Map<String, String> screenParameterMap = null;
+
 	private HttpServletRequest clienHttpRequest = null;
 	private HttpServletResponse clienHttpResponse = null;
 	private HttpSession clienHttpSession = null;
+
+	/**
+	 * 取得浏览器传入的参数
+	 */
+	protected Map<String, String> getScreenParameterMap() {
+
+		if (screenParameterMap == null) {
+			screenParameterMap = getParameterMap();
+		}
+
+		return screenParameterMap;
+	}
 
 	public HttpServletRequest getClienHttpRequest() {
 		return clienHttpRequest;
