@@ -68,4 +68,19 @@
 			</td>
 		</tr>
 	</table>
+
+	<table border="1" cellspacing="0px" cellpadding="0px">
+		<c:forEach var="item" items="${modelList}" varStatus="idx">
+			<tr>
+				<td>${item.id}</td>
+				<td>${item.name}</td>
+				<td>${item.content}</td>
+			</tr>
+		</c:forEach>
+		<c:if test="${empty modelList}">
+			<tr>
+				<td>无记录.</td>
+			</tr>
+		</c:if>
+	</table>
 </form>
