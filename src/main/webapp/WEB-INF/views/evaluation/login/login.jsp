@@ -6,6 +6,9 @@
 <!-- 引入login。css -->
 <link rel="stylesheet" type="text/css" media="all" href="resources/style/login.css">
 
+<title>md5加密</title>
+<script type="text/ecmascript" src="resources/scripts/base/md5.js"></script>
+
 <script type="text/javascript">
 	function doLoginAction() {
 
@@ -22,10 +25,19 @@
 			alert("密码不能为空！");
 			return false;
 		}
-
+		pwdMd5();
 		document.getElementById("loginForm").submit();
 	}
+	
+	function pwdMd5(){
+		//密码加密
+		  var hash = hex_md5($("#pwd").val());
+		document.getElementByID("pwd").value = hash;
+
+	}
 </script>
+
+
 <form id="loginForm" action="loginProcess.html" method="post">
 	<table id="__01" width="1024" height="641" border="0" cellpadding="0" cellspacing="0" align="center">
 		<tr>
