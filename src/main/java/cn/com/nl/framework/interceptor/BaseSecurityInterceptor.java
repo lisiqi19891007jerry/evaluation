@@ -6,8 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import cn.com.nl.framework.constant.SystemConstant;
-
 public class BaseSecurityInterceptor extends HandlerInterceptorAdapter {
 
 	/**
