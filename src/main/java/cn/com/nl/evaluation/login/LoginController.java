@@ -1,6 +1,5 @@
 package cn.com.nl.evaluation.login;
 
-
 import java.util.List;
 import java.util.Map;
 
@@ -17,11 +16,10 @@ import cn.com.nl.framework.base.BasicController;
 @Scope("prototype")
 @Controller
 public class LoginController extends BasicController {
-	
+
 	@Autowired
 	private LoginDao logindao;
-	
-	
+
 	/**
 	 *
 	 * 根据URL请求跳转到login.jsp画面
@@ -34,7 +32,6 @@ public class LoginController extends BasicController {
 		return new ModelAndView("loginview", model);
 	}
 
-
 	/**
 	 *
 	 * 执行login界面点击“登录”按钮后的响应方法
@@ -44,10 +41,11 @@ public class LoginController extends BasicController {
 	 */
 	@RequestMapping(value = "/loginProcess")
 	public ModelAndView doLoginProcess(ModelMap model) {
-	
+
 		List<Map<String, Object>> mList = logindao.doSelect(getScreenParameterMap());
-		
+
 		String pwdString = null;
+
 		//判断有没有取到密码，若没有取到，则说明没有对应的用户
 		if (mList.isEmpty() || mList.size()>=2) {
 			model.addAttribute("returnValue", "用户名错误");
@@ -55,7 +53,6 @@ public class LoginController extends BasicController {
 			Map<String, Object> pwdMap = mList.get(0);
 			pwdString =  (String) pwdMap.get("pwd");
 		}
-		
 
 		System.out.println("@@@@@@ 用户名 =" + getScreenParameterMap().get("user"));
 		System.out.println("@@@@@@ 密码  =" + getScreenParameterMap().get("pwd"));
@@ -64,12 +61,9 @@ public class LoginController extends BasicController {
 		if (pwdString.equals(getScreenParameterMap().get("pwd"))) {
 			model.addAttribute("returnValue", "登录成功");
 			//并且跳转到新页面，是通过上面的requestmapping注解就可以实现跳转的？？？
-			
-			
 		}else {
 			model.addAttribute("returnValue", "密码错误");
 		}
-		
 
 		return new ModelAndView("loginview", model);
 	}
