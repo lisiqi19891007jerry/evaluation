@@ -43,8 +43,6 @@ public class LoginController extends BasicController {
 	@RequestMapping(value = "/loginProcess")
 	public ModelAndView doLoginProcess(ModelMap model) {
 
-		List<Map<String, Object>> mList = logindao.doSelect(getScreenParameterMap());
-
 		String pwdString   = "";
 		String returnValue = "";
 		String username    = StringUtils.trimToEmpty(getScreenParameterMap().get("user"));
@@ -53,23 +51,26 @@ public class LoginController extends BasicController {
 		System.out.println("@@@@@@ 用户名 =" + username);
 		System.out.println("@@@@@@ 密码  =" + password);
 
+		List<Map<String, Object>> mList = logindao.doSelect(getScreenParameterMap());
+
 		// 判断有没有取到密码，若没有取到，则说明没有对应的用户
 		if (mList == null || mList.size() != 1) {
 			returnValue = "用户名错误！";
 		}else {
-			Map<String, Object> pwdMap = mList.get(0);
-			pwdString =  (String) pwdMap.get("password");
-		}
 
-		// 判断密码是否正确（取出的是已经加密过的密码）
-		if (pwdString.equals(getScreenParameterMap().get("pwd"))) {
-			returnValue = "登录成功";
-		} else {
-			returnValue = "密码错误！";
+			Map<String, Object> pwdMap = mList.get(0);
+
+			pwdString = (String) pwdMap.get("password");
+
+			// 判断密码是否正确（取出的是已经加密过的密码）
+			if (pwdString.equals(getScreenParameterMap().get("pwd"))) {
+				returnValue = "登录成功";
+			} else {
+				returnValue = "密码错误！";
+			}
 		}
 
 		model.addAttribute("user", username);
-		model.addAttribute("pwd", password);
 		model.addAttribute("returnValue", returnValue);
 
 		return new ModelAndView("loginview", model);
