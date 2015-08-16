@@ -5,9 +5,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import cn.com.nl.evaluation.login.dao.LoginDao;
 
+@Repository
 public class LoginDaoImpl implements LoginDao {
 
 	@Autowired
@@ -24,8 +26,10 @@ public class LoginDaoImpl implements LoginDao {
 
 		StringBuffer sql = new StringBuffer();
 
-		sql.append("select pwd from c_user where account =");
-		sql.append(argMap.get("user"));
+		// 查询用户状态为可用的用户密码
+		sql.append(" SELECT password FROM c_user ");
+		sql.append(" WHERE username = '" + argMap.get("user") + "' ");
+		sql.append(" AND userstatus = 1 ");
 
 		return jdbcTemplate.queryForList(sql.toString());
 	}
