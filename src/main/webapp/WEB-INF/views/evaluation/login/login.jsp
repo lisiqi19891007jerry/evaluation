@@ -82,7 +82,7 @@
 				<img src="resources/images/login/login_07.gif" width="57" height="40" alt=""><!-- 密码图标 -->
 			</td>
 			<td style="border-collapse:collapse;">
-				<input class="pwd" id="pwd" name="pwd" type="password" value="${pwd}" /><!-- 密码 -->
+				<input class="pwd" id="pwd" name="pwd" type="password" value="" /><!-- 密码 -->
 			</td>
 		</tr>
 		<tr>
