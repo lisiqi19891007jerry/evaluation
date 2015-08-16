@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2015-08-16 15:09:22
+Date: 2015-08-16 16:14:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -65,6 +65,7 @@ DROP TABLE IF EXISTS `c_attribute`;
 CREATE TABLE `c_attribute` (
   `attribute_id` int(11) NOT NULL AUTO_INCREMENT,
   `attribute_index_name` varchar(255) DEFAULT NULL,
+  `attribute_ranking` int(11) DEFAULT NULL,
   `attribute_name` char(20) DEFAULT NULL,
   `attribute_value` char(20) DEFAULT NULL,
   PRIMARY KEY (`attribute_id`)
@@ -73,39 +74,39 @@ CREATE TABLE `c_attribute` (
 -- ----------------------------
 -- Records of c_attribute
 -- ----------------------------
-INSERT INTO `c_attribute` VALUES ('1', 'scene', '场景', '2D');
-INSERT INTO `c_attribute` VALUES ('2', 'scene', '场景', '3D');
-INSERT INTO `c_attribute` VALUES ('3', 'out_test_type_1', '对外测试类型1', '删档');
-INSERT INTO `c_attribute` VALUES ('4', 'out_test_type_1', '对外测试类型1', '不删档');
-INSERT INTO `c_attribute` VALUES ('5', 'out_test_type_2', '对外测试类型2', '付费');
-INSERT INTO `c_attribute` VALUES ('6', 'out_test_type_2', '对外测试类型2', '不付费');
-INSERT INTO `c_attribute` VALUES ('7', 'pay_type', '付费方式', 'SDK');
-INSERT INTO `c_attribute` VALUES ('8', 'pay_type', '付费方式', '短代');
-INSERT INTO `c_attribute` VALUES ('9', 'pay_type', '付费方式', '第三方');
-INSERT INTO `c_attribute` VALUES ('10', 'pay_type', '付费方式', '未知');
-INSERT INTO `c_attribute` VALUES ('11', 'favorable_type', '付费优惠类型', '多倍');
-INSERT INTO `c_attribute` VALUES ('12', 'favorable_type', '付费优惠类型', '百分比');
-INSERT INTO `c_attribute` VALUES ('13', 'retest_status', '复测情况', '首测');
-INSERT INTO `c_attribute` VALUES ('14', 'retest_status', '复测情况', '二测');
-INSERT INTO `c_attribute` VALUES ('15', 'retest_status', '复测情况', '三测');
-INSERT INTO `c_attribute` VALUES ('16', 'painting_style_1', '画风1', 'Q版');
-INSERT INTO `c_attribute` VALUES ('17', 'painting_style_1', '画风1', '写实');
-INSERT INTO `c_attribute` VALUES ('18', 'painting_style_2', '画风2', '日韩');
-INSERT INTO `c_attribute` VALUES ('19', 'painting_style_2', '画风2', '欧美');
-INSERT INTO `c_attribute` VALUES ('20', 'painting_style_2', '画风2', '中国风');
-INSERT INTO `c_attribute` VALUES ('21', 'platform_type', '平台', 'Android');
-INSERT INTO `c_attribute` VALUES ('22', 'platform_type', '平台', 'IOS');
-INSERT INTO `c_attribute` VALUES ('23', 'evaluate_mode', '评测模式', '独代');
-INSERT INTO `c_attribute` VALUES ('24', 'evaluate_mode', '评测模式', '联运');
-INSERT INTO `c_attribute` VALUES ('25', 'evaluate_mode', '评测模式', '其他');
-INSERT INTO `c_attribute` VALUES ('26', 'show_person_type', '人物', '2D');
-INSERT INTO `c_attribute` VALUES ('27', 'show_person_type', '人物', '3D');
-INSERT INTO `c_attribute` VALUES ('28', 'game_type', '游戏类型', '单机');
-INSERT INTO `c_attribute` VALUES ('29', 'game_type', '游戏类型', '网游');
-INSERT INTO `c_attribute` VALUES ('30', 'game_type', '游戏类型', '弱联网单据');
-INSERT INTO `c_attribute` VALUES ('31', 'playing_method', '游戏玩法', '轻度');
-INSERT INTO `c_attribute` VALUES ('32', 'playing_method', '游戏玩法', '中度');
-INSERT INTO `c_attribute` VALUES ('33', 'playing_method', '游戏玩法', '重度');
+INSERT INTO `c_attribute` VALUES ('1', 'scene', '1', '场景', '2D');
+INSERT INTO `c_attribute` VALUES ('2', 'scene', '2', '场景', '3D');
+INSERT INTO `c_attribute` VALUES ('3', 'out_test_type_1', '1', '对外测试类型1', '删档');
+INSERT INTO `c_attribute` VALUES ('4', 'out_test_type_1', '2', '对外测试类型1', '不删档');
+INSERT INTO `c_attribute` VALUES ('5', 'out_test_type_2', '1', '对外测试类型2', '付费');
+INSERT INTO `c_attribute` VALUES ('6', 'out_test_type_2', '2', '对外测试类型2', '不付费');
+INSERT INTO `c_attribute` VALUES ('7', 'pay_type', '1', '付费方式', 'SDK');
+INSERT INTO `c_attribute` VALUES ('8', 'pay_type', '2', '付费方式', '短代');
+INSERT INTO `c_attribute` VALUES ('9', 'pay_type', '3', '付费方式', '第三方');
+INSERT INTO `c_attribute` VALUES ('10', 'pay_type', '4', '付费方式', '未知');
+INSERT INTO `c_attribute` VALUES ('11', 'favorable_type', '1', '付费优惠类型', '多倍');
+INSERT INTO `c_attribute` VALUES ('12', 'favorable_type', '2', '付费优惠类型', '百分比');
+INSERT INTO `c_attribute` VALUES ('13', 'retest_status', '1', '复测情况', '首测');
+INSERT INTO `c_attribute` VALUES ('14', 'retest_status', '2', '复测情况', '二测');
+INSERT INTO `c_attribute` VALUES ('15', 'retest_status', '3', '复测情况', '三测');
+INSERT INTO `c_attribute` VALUES ('16', 'painting_style_1', '1', '画风1', 'Q版');
+INSERT INTO `c_attribute` VALUES ('17', 'painting_style_1', '2', '画风1', '写实');
+INSERT INTO `c_attribute` VALUES ('18', 'painting_style_2', '1', '画风2', '日韩');
+INSERT INTO `c_attribute` VALUES ('19', 'painting_style_2', '2', '画风2', '欧美');
+INSERT INTO `c_attribute` VALUES ('20', 'painting_style_2', '3', '画风2', '中国风');
+INSERT INTO `c_attribute` VALUES ('21', 'platform_type', '1', '平台', 'Android');
+INSERT INTO `c_attribute` VALUES ('22', 'platform_type', '2', '平台', 'IOS');
+INSERT INTO `c_attribute` VALUES ('23', 'evaluate_mode', '1', '评测模式', '独代');
+INSERT INTO `c_attribute` VALUES ('24', 'evaluate_mode', '2', '评测模式', '联运');
+INSERT INTO `c_attribute` VALUES ('25', 'evaluate_mode', '3', '评测模式', '其他');
+INSERT INTO `c_attribute` VALUES ('26', 'show_person_type', '1', '人物', '2D');
+INSERT INTO `c_attribute` VALUES ('27', 'show_person_type', '2', '人物', '3D');
+INSERT INTO `c_attribute` VALUES ('28', 'game_type', '1', '游戏类型', '单机');
+INSERT INTO `c_attribute` VALUES ('29', 'game_type', '2', '游戏类型', '网游');
+INSERT INTO `c_attribute` VALUES ('30', 'game_type', '3', '游戏类型', '弱联网单据');
+INSERT INTO `c_attribute` VALUES ('31', 'playing_method', '1', '游戏玩法', '轻度');
+INSERT INTO `c_attribute` VALUES ('32', 'playing_method', '2', '游戏玩法', '中度');
+INSERT INTO `c_attribute` VALUES ('33', 'playing_method', '3', '游戏玩法', '重度');
 
 -- ----------------------------
 -- Table structure for c_user
