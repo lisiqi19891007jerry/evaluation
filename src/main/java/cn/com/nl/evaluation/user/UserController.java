@@ -20,7 +20,7 @@ public class UserController extends BasicController {
 	 * @return
 	 */
 	@RequestMapping(value = "/user")
-	public ModelAndView doLogin(ModelMap model) {
+	public ModelAndView doShowUserView(ModelMap model) {
 		return new ModelAndView("userview", model);
 	}
 }
