@@ -43,11 +43,14 @@
         <div class="add-form dform">
             <form class="add-sign" name="addUser" action="" method="post">
                 <ol>
-                    <li>
-                    	<span>用户名：</span><input class="ipt" type="text"  name="pwd"/>
+                	<li>
+                    	<span>账号：</span><input class="ipt" type="text" name="account" id="account"/>
                     </li>
                     <li>
-                    	<span>密码：</span><input class="ipt" type="password" name="pwd2"/>
+                    	<span>用户名：</span><input class="ipt" type="text"  name="username" id="username"/>
+                    </li>
+                    <li>
+                    	<span>密码：</span><input class="ipt" type="password" name="pwd" id="pwd"/>
                     </li>
                     <li><span>权限：</span>
                         <select class="PerSel"  name="SysPermission">
