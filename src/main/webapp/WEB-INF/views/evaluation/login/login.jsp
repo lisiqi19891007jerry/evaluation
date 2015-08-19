@@ -42,10 +42,6 @@
 	function pwdMd5() {
 		document.getElementById("pwd").value = hex_md5($("#pwd").val()); // 密码加密
 	}
-
-	function showMessage(msg) {
-		alert(msg);
-	}
 </script>
 
 <form id="loginForm" action="loginProcess.html" method="post">
