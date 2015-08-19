@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface UserDao {
+
 	/**
 	 *
 	 * 执行查询sql
@@ -13,7 +14,7 @@ public interface UserDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> doSelectList();
-	
+
 	/**
 	 *
 	 * 修改单个用户的密码
@@ -21,8 +22,8 @@ public interface UserDao {
 	 * @param argMap 查询参数
 	 * @return
 	 */
-	public List<Map<String, Object>> doAlertUserPwd(Map<String, String> argMap);
-	
+	public boolean doUpdatetUserPwd(Map<String, String> argMap);
+
 	/**
 	 *
 	 * 创建一个新用户
@@ -31,7 +32,7 @@ public interface UserDao {
 	 * @return
 	 */
 	public boolean doCreateUser(Map<String, String> argMap);
-	
+
 	/**
 	 *
 	 * 删除用户，即把删除字段由0置为1
@@ -39,6 +40,5 @@ public interface UserDao {
 	 * @param argMap 查询参数
 	 * @return
 	 */
-	public List<Map<String, Object>> doDeleteUser(Map<String, String> argMap);
-
+	public boolean doDeleteUser(Map<String, String> argMap);
 }
