@@ -87,8 +87,8 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="4" onclick="doLoginAction();">
-				<input class="loginBtn" type="button" value="登  录  "/><!-- 登录按钮 -->
+			<td colspan="4">
+				<input class="loginBtn" type="button" value="登  录  " onclick="doLoginAction();"/><!-- 登录按钮 -->
 			</td>
 		</tr>
 		<tr>
