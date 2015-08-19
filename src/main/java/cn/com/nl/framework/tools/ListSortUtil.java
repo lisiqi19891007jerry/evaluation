@@ -17,6 +17,10 @@ public class ListSortUtil {
 
 	public static List<AttributeValueModel> sortAttributeValueList(List<AttributeValueModel> valueModelList) {
 
+		if (valueModelList == null || valueModelList.size() < 2) {
+			return valueModelList;
+		}
+
 		Collections.sort(valueModelList, new AttributeValueModelComparator());
 
 		return valueModelList;
