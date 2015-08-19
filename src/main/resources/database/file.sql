@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : File
+Source Server         : file
 Source Server Version : 50625
-Source Host           : localhost:3306
+Source Host           : localhost:3360
 Source Database       : file
 
 Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2015-08-16 16:14:11
+Date: 2015-08-18 23:43:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -113,19 +113,15 @@ INSERT INTO `c_attribute` VALUES ('33', 'playing_method', '3', '游戏玩法', '
 -- ----------------------------
 DROP TABLE IF EXISTS `c_user`;
 CREATE TABLE `c_user` (
-  `user_id` int(50) NOT NULL AUTO_INCREMENT,
-  `account` int(20) NOT NULL DEFAULT '0',
-  `password` char(40) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `userstatus` tinyint(1) NOT NULL,
+  `user_id` varchar(50) NOT NULL,
+  `account` varchar(100) NOT NULL DEFAULT '0000' COMMENT '用户编号，默认0000',
+  `password` varchar(500) NOT NULL,
+  `username` varchar(500) NOT NULL,
+  `userstatus` tinyint(2) NOT NULL DEFAULT '1',
+  `userright` tinyint(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of c_user
 -- ----------------------------
-INSERT INTO `c_user` VALUES ('1', '101', '81dc9bdb52d04dc20036dbd8313ed055', 'test1', '1');
-INSERT INTO `c_user` VALUES ('2', '102', '81dc9bdb52d04dc20036dbd8313ed055', 'test2', '1');
-INSERT INTO `c_user` VALUES ('3', '103', '81dc9bdb52d04dc20036dbd8313ed055', 'test3', '0');
-INSERT INTO `c_user` VALUES ('4', '104', '81dc9bdb52d04dc20036dbd8313ed055', 'test4', '1');
-INSERT INTO `c_user` VALUES ('5', '105', '81dc9bdb52d04dc20036dbd8313ed055', 'test5', '1');
