@@ -14,7 +14,6 @@ import cn.com.nl.framework.model.AttributeValueModel;
  */
 public class AttributeValueModelComparator implements Comparator<AttributeValueModel> {
 
-	@Override
 	public int compare(AttributeValueModel valueModel1
 					  ,AttributeValueModel valueModel2) {
 		return Integer.compare(valueModel1.getAttributeRanking(), valueModel2.getAttributeRanking());

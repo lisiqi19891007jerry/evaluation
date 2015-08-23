@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.nl.evaluation.login.dao.LoginDao;
 import cn.com.nl.framework.base.BasicController;
+import cn.com.nl.framework.constant.SystemConstant;
 
 @Scope("prototype")
 @Controller
@@ -45,32 +46,34 @@ public class LoginController extends BasicController {
 
 		String pwdString   = "";
 		String returnValue = "";
-		String username    = StringUtils.trimToEmpty(getScreenParameterMap().get("user"));
+		String account     = StringUtils.trimToEmpty(getScreenParameterMap().get("account"));
 		String password    = StringUtils.trimToEmpty(getScreenParameterMap().get("pwd"));
 
-		System.out.println("@@@@@@ 用户名 =" + username);
-		System.out.println("@@@@@@ 密码  =" + password);
-
-		List<Map<String, Object>> mList = logindao.doSelect(getScreenParameterMap());
+		List<Map<String, Object>> mList = logindao.doSelect(account);
 
 		// 判断有没有取到密码，若没有取到，则说明没有对应的用户
 		if (mList == null || mList.size() != 1) {
 			returnValue = "用户名错误！";
-		}else {
+		} else {
 
 			Map<String, Object> pwdMap = mList.get(0);
 
 			pwdString = (String) pwdMap.get("password");
 
 			// 判断密码是否正确（取出的是已经加密过的密码）
-			if (pwdString.equals(getScreenParameterMap().get("pwd"))) {
-				returnValue = "登录成功";
+			if (pwdString.equals(password)) {
+
+				// 设置登录成功标志
+				setAttributeToSession(SystemConstant.IS_LOGON_USER, true);
+
+				// TODO  登录验证成功后需要跳转的界面
+				returnValue = getAttributeFromSession(SystemConstant.IS_LOGON_USER) + "|登录成功";
 			} else {
 				returnValue = "密码错误！";
 			}
 		}
 
-		model.addAttribute("user", username);
+		model.addAttribute("account", account); // 返回页面显示参数
 		model.addAttribute("returnValue", returnValue);
 
 		return new ModelAndView("loginview", model);

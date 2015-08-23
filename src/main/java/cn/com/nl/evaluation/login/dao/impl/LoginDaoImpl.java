@@ -19,17 +19,17 @@ public class LoginDaoImpl implements LoginDao {
 	 *
 	 * 查询account对应的密码，存放
 	 *
-	 * @param model
+	 * @param account 登录用户账号
 	 * @return
 	 */
-	public List<Map<String, Object>> doSelect(Map<String, String> argMap) {
+	public List<Map<String, Object>> doSelect(String account) {
 
 		StringBuffer sql = new StringBuffer();
 
 		// 查询用户状态为可用的用户密码
 		sql.append(" SELECT password FROM c_user ");
-		sql.append(" WHERE username = '" + argMap.get("user") + "' ");
-		sql.append(" AND userstatus = 1 ");
+		sql.append("  WHERE account = '" + account + "' ");
+		sql.append("    AND userstatus = 1 ");
 
 		return jdbcTemplate.queryForList(sql.toString());
 	}

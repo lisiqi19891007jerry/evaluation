@@ -5,5 +5,5 @@ import java.util.Map;
 
 public interface LoginDao {
 
-	public List<Map<String, Object>> doSelect(Map<String, String> argMap);
+	public List<Map<String, Object>> doSelect(String account);
 }
