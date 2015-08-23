@@ -4,6 +4,9 @@ function isMobile(sMobile) {
 function isInt(i) {
 	return /^\d+$/.test(i);
 }
+function itemEncrypt(item) {
+	document.getElementById(item).value = hex_md5($("#" + item).val());
+}
 function showMessage(msg) {
 	alert(msg);
 }

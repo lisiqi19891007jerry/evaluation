@@ -6,5 +6,5 @@
 <script type="text/javascript" src="resources/scripts/base/jquery-1.10.0.js"></script>
 <script type="text/javascript" src="resources/scripts/base/jquery-migrate-1.1.1.js"></script>
 <script type="text/javascript" src="resources/scripts/base/json2.js"></script>
-<script type="text/javascript" src="resources/scripts/base/utils.js"></script>
+<script type="text/javascript" src="resources/scripts/base/md5.js"></script>
 <script type="text/javascript" src="resources/scripts/base/main.js"></script>

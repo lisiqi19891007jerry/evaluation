@@ -6,42 +6,35 @@
 <!-- 引入login.css -->
 <link rel="stylesheet" type="text/css" media="all" href="resources/style/login.css">
 
-<!-- md5加密 -->
-<script type="text/javascript" src="resources/scripts/base/md5.js"></script>
-
 <script type="text/javascript">
-	$(document).ready(function() {
+$(document).ready(function() {
 
-		var msg = $("#returnValue").val();
+	var msg = $("#returnValue").val();
 
-		if (msg != '') {
-			showMessage(msg);
-		}
-	});
+	if (msg != '') {
+		showMessage(msg);
+	}
+});
 
-	function doLoginAction() {
+function doLoginAction() {
 
-		// 用户名字段为必输
-		// 验证用户名字段是否输入数据
-		if ($("#user").val() == '') {
-			showMessage("用户名不能为空！");
-			return false;
-		}
-
-		// 密码字段为必输
-		// 验证密码字段是否输入数据
-		if ($("#pwd").val() == '') {
-			showMessage("密码不能为空！");
-			return false;
-		}
-
-		pwdMd5();
-		document.getElementById("loginForm").submit();
+	// 账号字段为必输
+	// 验证账号字段是否输入数据
+	if ($("#account").val() == '') {
+		showMessage("账号不能为空！");
+		return false;
 	}
 
-	function pwdMd5() {
-		document.getElementById("pwd").value = hex_md5($("#pwd").val()); // 密码加密
+	// 密码字段为必输
+	// 验证密码字段是否输入数据
+	if ($("#pwd").val() == '') {
+		showMessage("密码不能为空！");
+		return false;
 	}
+
+	itemEncrypt("pwd"); // 加密
+	document.getElementById("loginForm").submit();
+}
 </script>
 
 <form id="loginForm" action="loginProcess.html" method="post">
@@ -62,7 +55,7 @@
 				<img src="resources/images/login/login_03.gif" width="57" height="40" alt=""><!-- 用户图标 -->
 			</td>
 			<td style="border-collapse:collapse;">
-				<input class="userName" id="user" name="user" type="text" value="${user}" /><!-- 用户 -->
+				<input class="userName" id="account" name="account" type="text" value="${account}" /><!-- 用户 -->
 			</td>
 			<td rowspan="5">
 				<img src="resources/images/login/login_05.gif" width="374" height="161" alt="">
