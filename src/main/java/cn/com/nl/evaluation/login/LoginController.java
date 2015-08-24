@@ -63,11 +63,12 @@ public class LoginController extends BasicController {
 			// 判断密码是否正确（取出的是已经加密过的密码）
 			if (pwdString.equals(password)) {
 
-				// 设置登录成功标志
+				// 设置登录成功标志和登录用户名
 				setAttributeToSession(SystemConstant.IS_LOGON_USER, true);
+				setAttributeToSession(SystemConstant.LOGON_USERNAME, (String) pwdMap.get("username"));
 
 				// TODO  登录验证成功后需要跳转的界面
-				returnValue = getAttributeFromSession(SystemConstant.IS_LOGON_USER) + "|登录成功";
+				returnValue = getAttributeFromSession(SystemConstant.LOGON_USERNAME) + "|登录成功";
 			} else {
 				returnValue = "密码错误！";
 			}

@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.nl.evaluation.user.dao.UserDao;
@@ -21,26 +22,23 @@ public class UserController extends BasicController {
 	private UserDao userDao;
 
 	/**
-	 *
-	 * 根据URL请求跳转到setManager.js画面
-	 *
+	 * 查询用户信息
 	 * @param model
+	 * @param username
 	 * @return
 	 */
 	@RequestMapping(value = "/user")
-	public ModelAndView doShowUserView(ModelMap model) {
+	public ModelAndView doShowUserView(ModelMap model
+									  ,@RequestParam(value = "username", required = false) String username) {
 
-		List<Map<String, Object>> mList = userDao.doSelectList();
+		List<Map<String, Object>> userList = userDao.doSelectList(username);
 
-//		//如果取出来没有数据
-//		if (mList.isEmpty()) {
-//			System.out.println("用户列表为空");
-//			//然后要怎么处理呢？
-//		}else {
-//			model.addAttribute("userList", mList);
-//		}
-//	//如何把这个list显示到页面
-		model.addAttribute("userList", mList); // 直接把查询出来的数据传到画面
+		for (Map<String, Object> dataMap : userList) {
+			dataMap.put("userright", setUserRight(dataMap));
+		}
+
+		model.addAttribute("userList", userList); // 直接把查询出来的数据传到画面
+
 		return new ModelAndView("userview", model);
 	}
 
@@ -49,22 +47,22 @@ public class UserController extends BasicController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/createUser")
+	@RequestMapping(value = "user/createUser")
 	public ModelAndView doCreate(ModelMap model) {
 
 		String returnValue = "";
 
-		boolean b = userDao.doCreateUser(getParameterMap());
+		boolean isAddUserOK = userDao.doCreateUser(getParameterMap());
 
-		if (b) {
-			returnValue = "新增用户成功！";
-		}else {
-			returnValue = "新增用户失败！";
+		if (isAddUserOK) {
+			returnValue = "新增用户操作成功！";
+		} else {
+			returnValue = "新增用户操作失败！";
 		}
 
-		model.addAttribute("returnValueCreate", returnValue);
+		model.addAttribute("returnValue", returnValue);
 
-		return new ModelAndView("setManager", model);
+		return doShowUserView(model, "");
 	}
 
 	/**
@@ -72,12 +70,23 @@ public class UserController extends BasicController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/deleteUser")
-	public ModelAndView doDelete(ModelMap model) {
+	@RequestMapping(value = "user/deleteUser")
+	public ModelAndView doDeleteUser(ModelMap model
+									,@RequestParam(value = "userID", required = false) String userID) {
 
-		userDao.doDeleteUser(getParameterMap());
+		String returnValue = "";
 
-		return null;
+		boolean isDeleteUserOK = userDao.doDeleteUser(userID);
+
+		if (isDeleteUserOK) {
+			returnValue = "删除用户操作成功！";
+		} else {
+			returnValue = "删除用户操作失败！";
+		}
+
+		model.addAttribute("returnValue", returnValue);
+
+		return doShowUserView(model, "");
 	}
 
 	/**
@@ -85,11 +94,43 @@ public class UserController extends BasicController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/deleteUser")
-	public ModelAndView doAlertPwd(ModelMap model) {
+	@RequestMapping(value = "user/updatetUserPwd")
+	public ModelAndView doUpdatetUserPwd(ModelMap model
+										,@RequestParam(value = "userID", required = false) String userID
+										,@RequestParam(value = "newpwd", required = false) String newpwd) {
 
-		userDao.doUpdatetUserPwd(getParameterMap());
+		String returnValue = "";
 
-		return null;
+		boolean isUpateUserOK = userDao.doUpdatetUserPwd(userID, newpwd);
+
+		if (isUpateUserOK) {
+			returnValue = "修改用户登录密码操作成功！";
+		} else {
+			returnValue = "修改用户登录密码操作失败！";
+		}
+
+		model.addAttribute("returnValue", returnValue);
+
+		return doShowUserView(model, "");
+	}
+
+	/**
+	 * 设置用户权限显示效果
+	 * @param dataMap
+	 * @return
+	 */
+	private Object setUserRight(Map<String, Object> dataMap) {
+
+		Integer right = (Integer) dataMap.get("userright");
+
+		String userRight = "";
+
+		if (right.equals(1)) {
+			userRight = "管理员";
+		} else if (right.equals(0)) {
+			userRight = "普通用户";
+		}
+
+		return userRight;
 	}
 }

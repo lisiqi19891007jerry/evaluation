@@ -21,33 +21,7 @@ while(c--)
 
 var themeUrl = '/wp-content/themes/d-simple/';
 $(document).ready(function($) {
-	//添加用户
-	$('.add-user').click(function(){
-		$('.add-fadein').fadeIn(100);
-		$('.add-fadeout').slideDown(200);
-	});
-	$('.add-close .close').click(function(){
-		$('.add-fadein').fadeOut(100);
-		$('.add-fadeout').slideUp(200);
-	});
-	
-	//编辑用户
-	$('.theme-login').click(function(){
-		$('.theme-popover-mask').fadeIn(100);
-		$('.theme-popover').slideDown(200);
-	});
-	$('.theme-poptit .close').click(function(){
-		$('.theme-popover-mask').fadeOut(100);
-		$('.theme-popover').slideUp(200);
-	});
-	//删除用户
-	$("#ui-delete").click(function(){
-		var delText=confirm("请确认是否删除?");
-		if (delText==true){
-			alert("删除成功");
-		}
-	});
-	//
+
 	if($.browser.msie&&($.browser.version==6.0)&&!$.support.style){
 		$('.nav li').each(function(){
 			$(this).hover(function(){

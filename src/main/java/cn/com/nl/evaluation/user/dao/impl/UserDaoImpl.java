@@ -1,98 +1,98 @@
 package cn.com.nl.evaluation.user.dao.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import cn.com.nl.evaluation.user.dao.UserDao;
 import cn.com.nl.framework.tools.SequenceUtil;
 
+@Repository
 public class UserDaoImpl implements UserDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	/**
-	 *
-	 * 执行查询sql
-	 * 查询当前所有的未删除用户，并存放账号、用户名字段
-	 *
-	 * @return
-	 */
-	public List<Map<String, Object>> doSelectList() {
+	public List<Map<String, Object>> doSelectList(String username) {
 
 		StringBuffer sql = new StringBuffer();
 
+		if (username == null) {
+			username = "";
+		}
+
 		// 查询用户状态为可用的用户密码
-		sql.append(" SELECT user_id, username, account, userright FROM c_user WHERE userstatus != 0 ");
+		sql.append(" SELECT user_id, account, username, userright, modifyDateTime FROM c_user");
+		sql.append("  WHERE userstatus != 0 AND username LIKE '%" + username + "%'");
+		sql.append("  ORDER BY account, username ");
 
 		return jdbcTemplate.queryForList(sql.toString());
 	}
 
-	/**
-	 *
-	 * 修改单个用户的密码
-	 *
-	 * @param argMap 查询参数
-	 * @return
-	 */
-	public boolean doUpdatetUserPwd(Map<String, String> argMap) {
+	public boolean doUpdatetUserPwd(String userID, String newPwd) {
 	
 		StringBuffer sql = new StringBuffer();
 
-		sql.append("UPDATE c_user SET password = " + argMap.get("pwd"));
-		sql.append(" WHERE account = " + argMap.get("account"));
+		sql.append("UPDATE c_user SET password = '" + newPwd + "' ");
+		sql.append("                 ,modifyDateTime = '" + new Timestamp(System.currentTimeMillis()) + "' ");
+		sql.append(" WHERE user_id = '" + userID + "' ");
 
-		int i = jdbcTemplate.update(sql.toString());
+		int excuseCount = jdbcTemplate.update(sql.toString());
 
-		if (i == 1) {
+		if (excuseCount == 1) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
 
-	/**
-	 * 管理用户--新增用户
-	 * @see cn.com.nl.evaluation.user.dao.UserDao#doCreateUser(java.util.Map)
-	 */
 	public boolean doCreateUser(Map<String, String> argMap) {
 
 		StringBuffer sql = new StringBuffer();
 
-		sql.append(" INSERT INTO c_user(user_id,account,c_user.password,username,userstatus) ");
-		sql.append("VALUES('"+SequenceUtil.getSequenceStr());
-		sql.append("',"+argMap.get("account"));
-		sql.append("',"+argMap.get("username"));
-		sql.append("',"+argMap.get("pwd"));
-		sql.append("',0");
+		sql.append(" INSERT INTO c_user (user_id");
+		sql.append("                    ,account");
+		sql.append("                    ,c_user.password");
+		sql.append("                    ,username");
+		sql.append("                    ,userstatus");
+		sql.append("                    ,userright");
+		sql.append("                    ,createDateTime");
+		sql.append("                    ,modifyDateTime)");
+		sql.append(" VALUES ('" + SequenceUtil.getSequenceStr() + "' ");
+		sql.append("        ,'" + argMap.get("account") + "' ");
+		sql.append("        ,'" + argMap.get("pwd") + "' ");
+		sql.append("        ,'" + argMap.get("username") + "' ");
+		sql.append("        ,1");
+		sql.append("        ," + argMap.get("SysPermission") + " ");
+		sql.append("        ,'" + new Timestamp(System.currentTimeMillis()) + "' ");
+		sql.append("        ,'" + new Timestamp(System.currentTimeMillis()) + "') ");
 
-		int i =jdbcTemplate.update(sql.toString());
+		int excuseCount = jdbcTemplate.update(sql.toString());
 
-		if (i == 1) {
+		if (excuseCount == 1) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
 
-	/**
-	 * 根据用户账号，来删除用户，即把userstatus字段置为1
-	 * @see cn.com.nl.evaluation.user.dao.UserDao#doDeleteUser(java.util.Map)
-	 */
-	public boolean doDeleteUser(Map<String, String> argMap) {
+	public boolean doDeleteUser(String userID) {
 
 		StringBuffer sql = new StringBuffer();
 
-		sql.append("UPDATE c_user SET userstatus = 1 WHERE account = " + argMap.get("account"));
+		sql.append(" UPDATE c_user SET userstatus = 0 ");
+		sql.append("                  ,modifyDateTime = '" + new Timestamp(System.currentTimeMillis()) + "' ");
+		sql.append("WHERE user_id = '" + userID + "' ");
 
-		int i = jdbcTemplate.update(sql.toString());
+		int excuseCount = jdbcTemplate.update(sql.toString());
 
-		if (i == 1) {
+		if (excuseCount == 1) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}

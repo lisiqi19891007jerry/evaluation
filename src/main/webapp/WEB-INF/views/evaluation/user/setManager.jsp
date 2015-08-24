@@ -15,12 +15,36 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-    var msg = $("#returnValueCreate").val();
+    var msg = $("#returnValue").val();
 
     if (msg != '') {
         showMessage(msg);
     }
 });
+
+function doQueryUserAction() {
+
+	var username = $("#userText").val();
+
+	if (username == '') {
+		alert("请输出查询条件（用户名），支持模糊查询。")
+		return;
+	}
+
+	var url = 'user.html?username=' + username;
+
+	doRedriect(url);
+}
+
+function showAddUser() {
+	$('.add-fadein').fadeIn(100);
+	$('.add-fadeout').slideDown(200);
+}
+
+function closeAddUserWindow() {
+	$('.add-fadein').fadeOut(100);
+	$('.add-fadeout').slideUp(200);
+}
 
 function doCreateUserAction() {
 
@@ -45,16 +69,58 @@ function doCreateUserAction() {
         return false;
     }
 
-    pwdMd5();
-    document.getElementById("addUserForm").submit();
+    itemEncrypt("pwd"); // 加密
+    document.getElementById("addUser").submit();
 }
 
-function pwdMd5() {
-    document.getElementById("pwd").value = hex_md5($("#pwd").val()); // 密码加密
+function showUpdatePwd(userID) {
+	$("#theme-popover-mask_" + userID).fadeIn(100);
+	$("#theme-popover_" + userID).slideDown(200);
+}
+
+function doUpatePwdAction(userID) {
+
+	var newpwd  = $("#newpwd_" + userID).val();
+	var newpwd2 = $("#newpwd2_" + userID).val();
+
+	if (newpwd == '') {
+		alert("请输出新密码");
+		return;
+	}
+
+	if (newpwd2 == '') {
+		alert("请输出确认密码");
+		return;
+	}
+
+	if (newpwd != newpwd2) {
+		alert("新密码和确认密码不相同！");
+		$("#newpwd_" + userID).val('');
+		$("#newpwd2_" + userID).val('');
+		return;
+	}
+
+	var url = 'user/updatetUserPwd.html?userID=' + userID + '&newpwd=' + hex_md5(newpwd);
+
+	doRedriect(url);
+}
+
+function doDeleteUserAction(userID) {
+
+	var delText = confirm("请确认是否删除用户数据?");
+
+	if (delText == true) {
+		doRedriect('user/deleteUser.html?userID=' + userID);
+	}
+}
+
+function closeUpatePwdWindow(userID) {
+	$("#theme-popover-mask_" + userID).fadeOut(100);
+	$("#theme-popover_" + userID).slideUp(200);
 }
 </script>
 
-<input type="hidden" id="returnValueCreate" name="returnValueCreate" value="${returnValueCreate}" />
+<input type="hidden" id="returnValue" name="returnValue" value="${returnValue}" />
 
 <div class="container-fluid">
     <div class="row-fluid">
@@ -74,25 +140,26 @@ function pwdMd5() {
 
     <div class="tab_content" id="tab1" style="display: block; ">
 
-        <div class="add-fadein"></div>
+        <div class="add-fadein">
+        </div>
 
         <!-- 查询显示 区域-->
         <div class="add-theme" align="left">
             <span class="name">用户名：</span>
-                <input type="text" id="userText" class="userSelect"/>
-                <input id="selBtn" class="btn radius btn-inverse btn-small" type="button" value="查询">
+                <input type="text" id="userText" name="userText" class="userSelect"/>
+                <input id="selBtn" class="btn radius btn-inverse btn-small" type="button" onclick="doQueryUserAction()" value="查询">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input id="addBtn" class="btn radius btn-primary btn-small add-user"  type="button" value="添加">
+                <input id="addBtn" class="btn radius btn-primary btn-small add-user" onclick="showAddUser()" type="button" value="添加">
         </div>
 
         <!-- 添加用户操作区域-->
         <div class="add-fadeout">
             <div class="add-close">
-                <a href="javascript:;" title="关闭" class="close">×</a>
+                <a href="javascript:closeAddUserWindow()" title="关闭" class="close">×</a>
                 <h3>添加用户</h3>
             </div>
             <div class="add-form dform">
-                <form id="addUserForm" name="addUserForm" class="add-sign" action="createUser.html" method="post">
+                <form id="addUser" name="addUser" class="add-sign" action="user/createUser.html" method="post">
                     <ol>
                         <li>
                             <span>账号：</span><input class="ipt" type="text" name="account" id="account"/>
@@ -105,7 +172,7 @@ function pwdMd5() {
                         </li>
                         <li>
                             <span>权限：</span>
-                            <select class="PerSel"  name="SysPermission">
+                            <select class="PerSel" id="SysPermission" name="SysPermission">
                                 <option value="0" >普通用户</option>
                                 <option value="1">管理员</option>
                             </select>
@@ -127,6 +194,7 @@ function pwdMd5() {
                         <th>用户账号</th>
                         <th>用户名</th>
                         <th>权限</th>
+                        <th>修改日期</th>
                         <th>操作</th>
                     </tr>
                 </thead>
@@ -138,35 +206,34 @@ function pwdMd5() {
                             <td>${status.index + 1}</td>
                             <td>${user.account}</td>
                             <td>${user.username}</td>
-                            <td>系统管理员</td>
+                            <td>${user.userright}</td>
+                            <td>${user.modifyDateTime}</td>
                             <td>
-                                <div class="theme-popover-mask">
+                                <div class="theme-popover-mask" id="theme-popover-mask_${user.user_id}">
                                 </div>
                                 <div class="theme-buy">
-                                    <a id="ui-edit" class="theme-login" href="javascript:;">修改密码</a> |
-                                    <a id="ui-delete" href="#">删除</a>
+                                    <a id="ui-edit" class="theme-login" href="javascript:showUpdatePwd('${user.user_id}')">修改密码</a> |
+                                    <a id="ui-delete" href='javascript:doDeleteUserAction("${user.user_id}")'>删除</a>
                                 </div>
-                                <div class="theme-popover">
+                                <div class="theme-popover" id="theme-popover_${user.user_id}">
                                     <div class="theme-poptit">
-                                        <a href="javascript:;" title="关闭" class="close">×</a>
+                                        <a href="javascript:closeUpatePwdWindow('${user.user_id}')" title="关闭" class="close">×</a>
                                         <h3>重置密码</h3>
                                     </div>
                                     <div class="theme-popbod dform">
-                                        <form class="theme-signin" name="loginform" action="deleteUser.html" method="post">
-                                            <ol>
-                                                <li>
-                                                    <span>设新密码：</span>
-                                                    <input class="ipt" type="text" name="newpwd"/>
-                                                </li>
-                                                <li>
-                                                    <span>确认密码：</span>
-                                                    <input class="ipt" type="password" name="newpwd2"/>
-                                                </li>
-                                                <li>
-                                                    <input id="saveBtn" class="btn btn-primary" type="button" name="submit" value=" 保存 "/>
-                                                </li>
-                                            </ol>
-                                        </form>
+                                        <ol>
+                                            <li>
+                                                <span>设新密码：</span>
+                                                <input class="ipt" type="password" id="newpwd_${user.user_id}" name="newpwd_${user.user_id}"/>
+                                            </li>
+                                            <li>
+                                                <span>确认密码：</span>
+                                                <input class="ipt" type="password" id="newpwd2_${user.user_id}" name="newpwd2_${user.user_id}"/>
+                                            </li>
+                                            <li>
+                                                <input class="btn btn-primary" type="button" onclick="doUpatePwdAction('${user.user_id}')" value=" 保存 "/>
+                                            </li>
+                                        </ol>
                                     </div>
                                 </div>
                             </td>
@@ -178,13 +245,14 @@ function pwdMd5() {
                 <!-- 判断用户列表为空时显示提示内容 -->
                     <tbody>
                         <tr>
-                            <td colspan="4">没有用户记录</td>
+                            <td colspan="6">没有用户记录</td>
                         </tr>
                     </tbody>
                 </c:if>
             </table>
 
             <!-- 分页显示 区域-->
+<!-- 
             <table>
                 <tr>
                     <td class="settd1">
@@ -207,7 +275,7 @@ function pwdMd5() {
                     </td>
                 </tr>
             </table>
-
+ -->
         </div>
     </div>
 </div>

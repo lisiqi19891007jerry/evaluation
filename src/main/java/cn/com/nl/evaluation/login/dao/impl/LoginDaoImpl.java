@@ -27,7 +27,7 @@ public class LoginDaoImpl implements LoginDao {
 		StringBuffer sql = new StringBuffer();
 
 		// 查询用户状态为可用的用户密码
-		sql.append(" SELECT password FROM c_user ");
+		sql.append(" SELECT username, password FROM c_user ");
 		sql.append("  WHERE account = '" + account + "' ");
 		sql.append("    AND userstatus = 1 ");
 
