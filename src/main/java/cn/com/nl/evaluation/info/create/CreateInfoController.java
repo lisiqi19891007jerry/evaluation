@@ -32,14 +32,14 @@ public class CreateInfoController extends BasicController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/cresteInfo")
-	public ModelAndView doLogin(ModelMap model) {
+	@RequestMapping(value = "/createInfo")
+	public ModelAndView doShowCreateInfo(ModelMap model) {
 
 		// 取得话单显示项数据
 		Map<String, AttributeModel> attributeMap = AttributeConfig.getInstance(attributeDao).getAttributemap();
 
 		model.addAttribute("attributeMap", attributeMap);
 
-		return new ModelAndView("cresteInfo", model);
+		return new ModelAndView("createInfo", model);
 	}
 }

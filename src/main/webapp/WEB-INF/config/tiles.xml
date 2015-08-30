@@ -31,7 +31,7 @@
 	</definition>
 
 	<!-- 游戏信息登记界面  -->
-	<definition name="cresteInfo" extends="baseLayout">
+	<definition name="createInfo" extends="baseLayout">
 		<put-attribute name="title" value="游戏信息登记" />
 		<put-attribute name="body" value="/WEB-INF/views/evaluation/info/create/createInfo.jsp" />
 	</definition>
