@@ -1,4 +1,4 @@
-package cn.com.nl.framework.dao.impl;
+package cn.com.nl.evaluation.info.create.dao.impl;
 
 import java.util.List;
 import java.util.Map;
@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import cn.com.nl.framework.dao.AttributeDao;
+import cn.com.nl.evaluation.info.create.dao.AttributeDao;
 
 @Repository
 public class AttributeDaoImpl implements AttributeDao {

@@ -1,8 +1,8 @@
-package cn.com.nl.framework.tools;
+package cn.com.nl.evaluation.info.attribute.comparator;
 
 import java.util.Comparator;
 
-import cn.com.nl.framework.model.AttributeValueModel;
+import cn.com.nl.evaluation.info.attribute.model.AttributeValueModel;
 
 /**
  * @Title AttributeValueModelComparator.java

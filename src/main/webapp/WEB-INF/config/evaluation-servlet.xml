@@ -39,36 +39,30 @@
 	<mvc:interceptors>
 
 		<mvc:interceptor>
+			<!-- 需要拦截器过滤的URI -->
 			<mvc:mapping path="/**" />
+			<!-- 拦截器不过滤的URI -->
 			<mvc:exclude-mapping path="/resources/**/" />
 			<bean class="cn.com.nl.framework.interceptor.UserBaseInterceptor" />
 		</mvc:interceptor>
 
 		<!-- 用户认证拦截器 -->
 		<mvc:interceptor>
-			 <!-- 需要拦截器过滤的URI -->
+			<!-- 需要拦截器过滤的URI -->
 			<mvc:mapping path="/**" />
-			 <!-- 拦截器不过滤的URI -->
+			<!-- 拦截器不过滤的URI -->
 			<mvc:exclude-mapping path="/login**" />
-			<mvc:exclude-mapping path="/logon**" />
-			<mvc:exclude-mapping path="/oalogin**" />
-			<mvc:exclude-mapping path="/oalogon**" />
-			<mvc:exclude-mapping path="/resources/**/" />
-			<mvc:exclude-mapping path="/system/config*" />
-			<mvc:exclude-mapping path="/notify*.html" />
-			<mvc:exclude-mapping path="*.(jpg|png|gif|bmp|txt|doc|xls|ppt|txt|rtf|js|css)" />
 			<bean class="cn.com.nl.framework.interceptor.SecurityInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 
-<!-- 	<bean id="handlerExceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+	<bean id="handlerExceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
-				<prop key="cn.com.pansky.panmobi.framework.core.AuthorizationException">forward:/login.html</prop>
-				<prop key="cn.com.pansky.panmobi.framework.core.BizException">forward:/error.html</prop>
+				<prop key="cn.com.nl.framework.exception.AuthorizationException">forward:/login.html</prop>
 			</props>
 		</property>
-	</bean> -->
+	</bean>
 
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
@@ -80,5 +74,5 @@
 				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
 			</list>
 		</property>
-	</bean>	
+	</bean>
 </beans>

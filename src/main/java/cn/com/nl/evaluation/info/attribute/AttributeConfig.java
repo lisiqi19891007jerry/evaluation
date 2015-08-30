@@ -1,4 +1,4 @@
-package cn.com.nl.framework.config;
+package cn.com.nl.evaluation.info.attribute;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,11 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import cn.com.nl.framework.dao.AttributeDao;
-import cn.com.nl.framework.model.AttributeModel;
-import cn.com.nl.framework.model.AttributeValueModel;
+import cn.com.nl.evaluation.info.attribute.model.AttributeModel;
+import cn.com.nl.evaluation.info.attribute.model.AttributeValueModel;
+import cn.com.nl.evaluation.info.create.dao.AttributeDao;
 import cn.com.nl.framework.tools.ListSortUtil;
 
 /**
@@ -29,9 +28,6 @@ public class AttributeConfig {
 	private static final String COLUMN_NAME_ATT_NAME   = "attribute_name";
 	private static final String COLUMN_NAME_ATT_VALUE  = "attribute_value";
 
-	@Autowired
-	private AttributeDao attributeDao;
-
 	/**
 	 * 将数据库中的数据缓存到内存中，提高画面显示速度
 	 */
@@ -40,16 +36,16 @@ public class AttributeConfig {
 	/**
 	 * 使用单例模式
 	 */
-	private static AttributeConfig attributeConfig = new AttributeConfig();
+	private static AttributeConfig attributeConfig = null;
 
-	private AttributeConfig() {
-		attributeMap = initAttributeMap();
+	private AttributeConfig(AttributeDao dao) {
+		attributeMap = initAttributeMap(dao);
 	}
 
-	public static AttributeConfig getAttributeConfigInstance() {
+	public synchronized static AttributeConfig getInstance(AttributeDao dao) {
 
 		if (attributeConfig == null) {
-			attributeConfig = new AttributeConfig();
+			attributeConfig = new AttributeConfig(dao);
 		}
 
 		return attributeConfig;
@@ -61,7 +57,7 @@ public class AttributeConfig {
 	 *
 	 * @return
 	 */
-	private Map<String, AttributeModel> initAttributeMap() {
+	private Map<String, AttributeModel> initAttributeMap(AttributeDao dao) {
 
 		// 如果已经缓存成功则直接返回
 		if (attributeMap != null) {
@@ -69,7 +65,7 @@ public class AttributeConfig {
 		}
 
 		// 查询数据库中的数据
-		List<Map<String, Object>> valueList = attributeDao.doSelectAttribute();
+		List<Map<String, Object>> valueList = dao.doSelectAttribute();
 
 		if (valueList == null || valueList.isEmpty()) {
 			return null;

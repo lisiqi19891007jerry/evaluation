@@ -6,6 +6,8 @@ public class SystemConstant {
 
 	public static final String LOGON_USERNAME = "LOGON_USERNAME"; // 登录用户用户名
 
+	public static final String IS_ADMIN_USER = "IS_ADMIN_USER"; // 管理员标志
+
 	public static final String CHARSET_UTF8 = "UTF-8";
 
 	public static final String CHARSET_GBK = "GBK";

@@ -1,4 +1,4 @@
-package cn.com.nl.framework.model;
+package cn.com.nl.evaluation.info.attribute.model;
 
 /**
  * @Title AttributeValueModel.java

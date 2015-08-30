@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2015-08-25 01:31:31
+Date: 2015-08-30 21:29:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -117,8 +117,8 @@ CREATE TABLE `c_user` (
   `account` varchar(100) NOT NULL DEFAULT '0000' COMMENT '用户编号，默认0000',
   `password` varchar(500) NOT NULL,
   `username` varchar(500) NOT NULL,
-  `userstatus` tinyint(2) NOT NULL DEFAULT '1',
-  `userright` tinyint(2) NOT NULL DEFAULT '0',
+  `userstatus` tinyint(2) NOT NULL DEFAULT '1' COMMENT '0=已删除；1=正常',
+  `userright` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0=普通用户；1=管理员',
   `createDateTime` datetime NOT NULL,
   `modifyDateTime` datetime NOT NULL,
   PRIMARY KEY (`user_id`)
@@ -130,5 +130,5 @@ CREATE TABLE `c_user` (
 INSERT INTO `c_user` VALUES ('0dd7bfcf1bf3', '444', '202cb962ac59075b964b07152d234b70', '李四', '1', '1', '2015-08-25 00:22:23', '2015-08-25 01:25:41');
 INSERT INTO `c_user` VALUES ('3366584bdf8a', '555', '6074c6aa3488f3c2dddff2a7ca821aab', '王五', '1', '0', '2015-08-25 00:24:31', '2015-08-25 01:24:56');
 INSERT INTO `c_user` VALUES ('7adfa845c45c', '333', '81dc9bdb52d04dc20036dbd8313ed055', '张三', '0', '0', '2015-08-23 11:04:22', '2015-08-23 11:04:26');
-INSERT INTO `c_user` VALUES ('b71353591a85', '111', '4297f44b13955235245b2497399d7a93', '赵一', '1', '0', '2015-08-25 00:13:32', '2015-08-25 00:13:32');
+INSERT INTO `c_user` VALUES ('b71353591a85', '111', '698d51a19d8a121ce581499d7b701668', '赵一', '1', '0', '2015-08-25 00:13:32', '2015-08-29 13:44:31');
 INSERT INTO `c_user` VALUES ('c79e8683b224', '222', 'bcbe3365e6ac95ea2c0343a2395834dd', '钱二', '1', '1', '2015-08-25 00:17:38', '2015-08-25 01:25:16');

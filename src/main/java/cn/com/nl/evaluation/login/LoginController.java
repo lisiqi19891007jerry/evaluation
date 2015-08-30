@@ -56,19 +56,19 @@ public class LoginController extends BasicController {
 			returnValue = "用户名错误！";
 		} else {
 
-			Map<String, Object> pwdMap = mList.get(0);
+			Map<String, Object> userInfoMap = mList.get(0);
 
-			pwdString = (String) pwdMap.get("password");
+			pwdString = (String) userInfoMap.get("password");
 
 			// 判断密码是否正确（取出的是已经加密过的密码）
 			if (pwdString.equals(password)) {
 
-				// 设置登录成功标志和登录用户名
-				setAttributeToSession(SystemConstant.IS_LOGON_USER, true);
-				setAttributeToSession(SystemConstant.LOGON_USERNAME, (String) pwdMap.get("username"));
+				// 将登录成功用户信息保存到session中
+				saveUserMessage(userInfoMap);
 
-				// TODO  登录验证成功后需要跳转的界面
-				returnValue = getAttributeFromSession(SystemConstant.LOGON_USERNAME) + "|登录成功";
+				// 登录验证成功后需要跳转的界面
+				returnValue = getAttributeFromSession(SystemConstant.IS_ADMIN_USER) + "|登录成功";
+//				return new ModelAndView("", model);
 			} else {
 				returnValue = "密码错误！";
 			}
@@ -78,5 +78,23 @@ public class LoginController extends BasicController {
 		model.addAttribute("returnValue", returnValue);
 
 		return new ModelAndView("loginview", model);
+	}
+
+	/**
+	 *
+	 * 将用户信息保存到session中
+	 *
+	 * @param userInfoMap
+	 */
+	private void saveUserMessage(Map<String, Object> userInfoMap) {
+
+		// 设置登录成功标志
+		setAttributeToSession(SystemConstant.IS_LOGON_USER, true);
+
+		// 保存登录用户名到session
+		setAttributeToSession(SystemConstant.LOGON_USERNAME, (String) userInfoMap.get("username"));
+
+		// 保存用户权限（0=普通用户；1=管理员）到session
+		setAttributeToSession(SystemConstant.IS_ADMIN_USER, (Integer) userInfoMap.get("userright"));
 	}
 }

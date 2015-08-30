@@ -3,7 +3,8 @@ package cn.com.nl.framework.tools;
 import java.util.Collections;
 import java.util.List;
 
-import cn.com.nl.framework.model.AttributeValueModel;
+import cn.com.nl.evaluation.info.attribute.comparator.AttributeValueModelComparator;
+import cn.com.nl.evaluation.info.attribute.model.AttributeValueModel;
 
 /**
  * @Title ListSortUtil.java
