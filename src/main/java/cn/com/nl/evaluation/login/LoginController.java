@@ -11,6 +11,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.com.nl.evaluation.info.attribute.AttributeConfig;
+import cn.com.nl.evaluation.info.attribute.model.AttributeModel;
+import cn.com.nl.evaluation.info.create.dao.AttributeDao;
 import cn.com.nl.evaluation.login.dao.LoginDao;
 import cn.com.nl.framework.base.BasicController;
 import cn.com.nl.framework.constant.SystemConstant;
@@ -21,6 +24,9 @@ public class LoginController extends BasicController {
 
 	@Autowired
 	private LoginDao logindao;
+
+	@Autowired
+	private AttributeDao attributeDao;
 
 	/**
 	 *
@@ -66,9 +72,12 @@ public class LoginController extends BasicController {
 				// 将登录成功用户信息保存到session中
 				saveUserMessage(userInfoMap);
 
-				// 登录验证成功后需要跳转的界面
-				returnValue = getAttributeFromSession(SystemConstant.IS_ADMIN_USER) + "|登录成功";
-//				return new ModelAndView("", model);
+				// 取得话单显示项数据
+				Map<String, AttributeModel> attributeMap = AttributeConfig.getInstance(attributeDao).getAttributemap();
+
+				model.addAttribute("attributeMap", attributeMap);
+
+				return new ModelAndView("createInfo", model);
 			} else {
 				returnValue = "密码错误！";
 			}

@@ -4,7 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <!-- 引入login.css -->
-<link rel="stylesheet" type="text/css" media="all" href="resources/style/login.css">
+<link rel="stylesheet" type="text/css" media="all" href="resources/style/login/login.css" />
 
 <script type="text/javascript">
 $(document).ready(function() {

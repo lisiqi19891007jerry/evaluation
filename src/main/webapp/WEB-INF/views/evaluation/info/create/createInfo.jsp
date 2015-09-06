@@ -3,18 +3,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-<!-- 引入login.css -->
-<link rel="stylesheet" type="text/css" media="all" href="resources/style/info/create/bootstrap.min.css"/>
-<link rel="stylesheet" type="text/css" media="all" href="resources/style/info/create/bootstrap-custom.css" />
-<link rel="stylesheet" type="text/css" media="all" href="resources/style/info/create/pikaday.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" media="all" href="resources/style/info/create/site.css" rel="stylesheet" />
+<!-- 引入css -->
+<link rel="stylesheet" type="text/css" media="all" href="resources/style/info/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" media="all" href="resources/style/info/bootstrap-custom.css" />
+<link rel="stylesheet" type="text/css" media="all" href="resources/style/info/pikaday.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" media="all" href="resources/style/info/site.css" rel="stylesheet" />
 
 <script>
 
 <!--实现标签页切换 -->
 $(document).ready(function() {	
 
-	//默认显示	
+	//默认显示
 	$(".tab_content").hide();
 	$("ul.tabFirst li:first").addClass("active").show();
 	$(".tab_content:first").show(); 

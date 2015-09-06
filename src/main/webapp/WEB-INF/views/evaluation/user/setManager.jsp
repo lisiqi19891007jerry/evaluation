@@ -4,13 +4,10 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <!-- 引入css文件 -->
-<link rel="stylesheet" href="resources/style/user/setManager.min.css" />
-<link rel="stylesheet" href="resources/style/user/setManager.css" />
+<link rel="stylesheet" media="all" href="resources/style/user/setManager.min.css" />
+<link rel="stylesheet" media="all" href="resources/style/user/setManager.css" />
 <link rel="stylesheet" media="all" href="resources/style/user/adduserManager.css" />
 <link rel="stylesheet" media="all" href="resources/style/user/editSetManager.css" />
-
-<!-- 引入javascript文件 -->
-<script type="text/javascript" src="resources\scripts\user\setManager.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -128,7 +125,7 @@ function closeUpatePwdWindow(userID) {
            <div class="navbar">
                <div class="navbar-bd">
                    <ul>
-                       <li class="active"><a href="#">用户管理</a></li>
+                       <li class="active"><a href="javascript:alert(1);">用户管理</a></li>
                    </ul>
                </div>
            </div>
@@ -146,10 +143,9 @@ function closeUpatePwdWindow(userID) {
         <!-- 查询显示 区域-->
         <div class="add-theme" align="left">
             <span class="name">用户名：</span>
-                <input type="text" id="userText" name="userText" class="userSelect"/>
-                <input id="selBtn" class="btn radius btn-inverse btn-small" type="button" onclick="doQueryUserAction()" value="查询">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input id="addBtn" class="btn radius btn-primary btn-small add-user" onclick="showAddUser()" type="button" value="添加">
+            <input type="text" id="userText" name="userText" class="userSelect" />
+            <input id="selBtn" class="btn radius btn-inverse btn-small" type="button" onclick="doQueryUserAction()" value="查询" />
+            <input id="addBtn" class="btn radius btn-primary btn-small add-user" style="margin-left: 100px;" onclick="showAddUser()" type="button" value="添加" />
         </div>
 
         <!-- 添加用户操作区域-->

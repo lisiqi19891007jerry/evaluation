@@ -15,10 +15,16 @@
 	</head>
 
 	<body>
+	
 		<tiles:insertAttribute name="common_header" />
-		<tiles:insertAttribute name="header" />
-		<tiles:insertAttribute name="body" />
-		<tiles:insertAttribute name="footer" />
-		<tiles:insertAttribute name="common_footer" />
+
+		<div class="main">
+			<tiles:insertAttribute name="header" />
+			<div class="main-wrapper">
+				<tiles:insertAttribute name="body" />
+			</div>
+			<tiles:insertAttribute name="footer" />
+			<tiles:insertAttribute name="common_footer" />
+		</div>
 	</body>
 </html>
