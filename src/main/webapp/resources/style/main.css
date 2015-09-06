@@ -75,3 +75,12 @@ img {
    background:-moz-linear-gradient(top,#c3cdd3,#f6f6f8);/*火狐*/ 
    background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#c3cdd3), to(#f6f6f8));/*谷歌*/ 
 }
+
+.wrapperExt {
+	top: 112px;
+	left: 0;
+}
+
+.scrollerExt {
+	
+}

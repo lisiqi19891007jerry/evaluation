@@ -19,12 +19,14 @@
 		<tiles:insertAttribute name="common_header" />
 
 		<div class="main">
+
 			<tiles:insertAttribute name="header" />
+
 			<div class="main-wrapper">
+				<tiles:insertAttribute name="iScroll_s" />
 				<tiles:insertAttribute name="body" />
+				<tiles:insertAttribute name="iScroll_e" />
 			</div>
-			<tiles:insertAttribute name="footer" />
-			<tiles:insertAttribute name="common_footer" />
 		</div>
 	</body>
 </html>

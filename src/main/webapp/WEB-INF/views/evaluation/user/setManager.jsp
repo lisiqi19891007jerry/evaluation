@@ -117,21 +117,21 @@ function closeUpatePwdWindow(userID) {
 }
 </script>
 
-<input type="hidden" id="returnValue" name="returnValue" value="${returnValue}" />
-
 <div class="container-fluid">
     <div class="row-fluid">
        <div class="span12">
            <div class="navbar">
                <div class="navbar-bd">
                    <ul>
-                       <li class="active"><a href="javascript:alert(1);">用户管理</a></li>
+                       <li class="active"><a href="#">用户管理</a></li>
                    </ul>
                </div>
            </div>
        </div>
     </div>
 </div>
+
+<input type="hidden" id="returnValue" name="returnValue" value="${returnValue}" />
 
 <div class="container-content">
 

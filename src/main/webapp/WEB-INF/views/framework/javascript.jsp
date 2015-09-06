@@ -8,3 +8,9 @@
 <script type="text/javascript" src="resources/scripts/base/json2.js"></script>
 <script type="text/javascript" src="resources/scripts/base/md5.js"></script>
 <script type="text/javascript" src="resources/scripts/base/main.js"></script>
+<script type="text/javascript" src="resources/scripts/base/iscroll.4.2.5.min.js"></script>
+<script type="text/javascript" src="resources/scripts/base/load.js"></script>
+
+<script type="text/javascript">
+initEvent();
+</script>
