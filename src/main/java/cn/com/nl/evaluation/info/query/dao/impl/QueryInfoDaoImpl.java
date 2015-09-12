@@ -13,7 +13,7 @@ import cn.com.nl.evaluation.info.query.dao.QueryInfoDao;
 /**
  * @Title QueryInfoDaoImpl.java
  * @Package cn.com.nl.evaluation.info.query.dao.impl
- * @Description 
+ * @Description 游戏评测信息查询接口实现
  * @Author Li Siqi
  * @Date 2015年9月12日 下午5:48:23
  * @Version V1.0

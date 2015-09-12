@@ -88,20 +88,4 @@ public class QueryInfoController extends BasicController {
 
 		return new ModelAndView("queryInfo", model);
 	}
-
-	/**
-	 *
-	 * 设置查询界面显示的数据格式
-	 *
-	 * @param parameter 数据查询得到的数据
-	 * @param attributeIndexName 参数标记名称
-	 * @param attributeMap 参数配置表
-	 * @return 符合界面显示格式要求的数据
-	 */
-	private Object setScreenShowDataFormate(Object parameter
-										   ,String attributeIndexName
-										   ,Map<String, AttributeModel> attributeMap) {
-
-		return null;
-	}
 }
