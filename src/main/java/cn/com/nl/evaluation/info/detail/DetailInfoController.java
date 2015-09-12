@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.nl.evaluation.info.attribute.AttributeConfig;
+import cn.com.nl.evaluation.info.attribute.dao.AttributeDao;
 import cn.com.nl.evaluation.info.attribute.model.AttributeModel;
-import cn.com.nl.evaluation.info.create.dao.AttributeDao;
 import cn.com.nl.framework.base.BasicController;
 
 @Scope("prototype")
@@ -29,7 +29,7 @@ public class DetailInfoController extends BasicController {
 	 * @return
 	 */
 	@RequestMapping(value = "/detailInfo")
-	public ModelAndView doShowCreateInfo(ModelMap model) {
+	public ModelAndView doShowDetailInfo(ModelMap model) {
 
 		// 取得话单显示项数据
 		Map<String, AttributeModel> attributeMap = AttributeConfig.getInstance(attributeDao).getAttributemap();

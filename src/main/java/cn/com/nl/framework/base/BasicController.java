@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
+
 import cn.com.nl.framework.constant.SystemConstant;
 import cn.com.nl.framework.tools.MessageUtils;
 
@@ -130,7 +132,7 @@ public class BasicController {
 				}
 			}
 
-			postParamMap.put(key, MessageUtils.convertCharset(val, SystemConstant.CHARSET_UTF8));
+			postParamMap.put(key, StringUtils.trimToNull(MessageUtils.convertCharset(val, SystemConstant.CHARSET_UTF8)));
 		}
 
 		return postParamMap;

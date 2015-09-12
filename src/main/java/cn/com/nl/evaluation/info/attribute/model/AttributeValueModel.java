@@ -12,6 +12,8 @@ public class AttributeValueModel {
 
 	private int attributeRanking; // 元素值排序编号
 
+	private String attributeName; // 元素名称
+
 	private String attributeValue; // 元素值
 
 	public int getAttributeRanking() {
@@ -28,5 +30,13 @@ public class AttributeValueModel {
 
 	public void setAttributeValue(String attributeValue) {
 		this.attributeValue = attributeValue;
+	}
+
+	public String getAttributeName() {
+		return attributeName;
+	}
+
+	public void setAttributeName(String attributeName) {
+		this.attributeName = attributeName;
 	}
 }

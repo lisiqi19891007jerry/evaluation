@@ -7,9 +7,9 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import cn.com.nl.evaluation.info.attribute.dao.AttributeDao;
 import cn.com.nl.evaluation.info.attribute.model.AttributeModel;
 import cn.com.nl.evaluation.info.attribute.model.AttributeValueModel;
-import cn.com.nl.evaluation.info.create.dao.AttributeDao;
 import cn.com.nl.framework.tools.ListSortUtil;
 
 /**
@@ -24,6 +24,7 @@ import cn.com.nl.framework.tools.ListSortUtil;
 public class AttributeConfig {
 
 	private static final String COLUMN_NAME_INDEX_NAME = "attribute_index_name";
+	private static final String COLUMN_NAME_SHOW_NAME  = "attribute_show_name";
 	private static final String COLUMN_NAME_RAKING     = "attribute_ranking";
 	private static final String COLUMN_NAME_ATT_NAME   = "attribute_name";
 	private static final String COLUMN_NAME_ATT_VALUE  = "attribute_value";
@@ -94,6 +95,7 @@ public class AttributeConfig {
 		int ranking = 0;
 
 		String indexName = "";
+		String showName  = "";
 		String attributeName = "";
 		String attributeValue = "";
 
@@ -110,6 +112,7 @@ public class AttributeConfig {
 			ranking = (Integer) tempRecordMap.get(COLUMN_NAME_RAKING);
 
 			indexName      = StringUtils.trimToEmpty((String) tempRecordMap.get(COLUMN_NAME_INDEX_NAME));
+			showName       = StringUtils.trimToEmpty((String) tempRecordMap.get(COLUMN_NAME_SHOW_NAME));
 			attributeName  = StringUtils.trimToEmpty((String) tempRecordMap.get(COLUMN_NAME_ATT_NAME));
 			attributeValue = StringUtils.trimToEmpty((String) tempRecordMap.get(COLUMN_NAME_ATT_VALUE));
 
@@ -120,13 +123,14 @@ public class AttributeConfig {
 				tempAttributeModel = new AttributeModel();
 
 				tempAttributeModel.setAttributeIndexName(indexName);
-				tempAttributeModel.setAttributeName(attributeName);
+				tempAttributeModel.setAttributeShowName(showName);
 				tempAttributeModel.setAttributeValueList(new ArrayList<AttributeValueModel>());
 			}
 
 			tempValueModel = new AttributeValueModel();
 
 			tempValueModel.setAttributeRanking(ranking);
+			tempValueModel.setAttributeName(attributeName);
 			tempValueModel.setAttributeValue(attributeValue);
 
 			valueModelList = tempAttributeModel.getAttributeValueList();

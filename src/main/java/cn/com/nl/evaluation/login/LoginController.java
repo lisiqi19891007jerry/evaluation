@@ -3,7 +3,6 @@ package cn.com.nl.evaluation.login;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -12,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.nl.evaluation.info.attribute.AttributeConfig;
+import cn.com.nl.evaluation.info.attribute.dao.AttributeDao;
 import cn.com.nl.evaluation.info.attribute.model.AttributeModel;
-import cn.com.nl.evaluation.info.create.dao.AttributeDao;
 import cn.com.nl.evaluation.login.dao.LoginDao;
 import cn.com.nl.framework.base.BasicController;
 import cn.com.nl.framework.constant.SystemConstant;
@@ -52,8 +51,8 @@ public class LoginController extends BasicController {
 
 		String pwdString   = "";
 		String returnValue = "";
-		String account     = StringUtils.trimToEmpty(getScreenParameterMap().get("account"));
-		String password    = StringUtils.trimToEmpty(getScreenParameterMap().get("pwd"));
+		String account     = getScreenParameterMap().get("account");
+		String password    = getScreenParameterMap().get("pwd");
 
 		List<Map<String, Object>> mList = logindao.doSelect(account);
 

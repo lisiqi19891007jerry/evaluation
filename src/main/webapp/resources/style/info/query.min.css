@@ -191,7 +191,8 @@ body {
 	font-size: 12px;
 	line-height: 20px;
 	color: #333;
-	background-color: #fff
+	background-color: #fff;
+	background: #fafafa;
 }
 
 a {
@@ -1731,7 +1732,7 @@ legend+.control-group {
 }
 
 table {
-	max-width: 85%;
+	width: 90%;
 	background-color: transparent;
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -5773,6 +5774,7 @@ to {
 
 .tab_content {
 	padding-left: 50px;
+	width: 90%;
 }
 
 .add-theme {
@@ -5823,7 +5825,7 @@ td{
 	padding-top:5px;
 	padding-bottom:5px;
 }
-td.td1 {text-align:left;padding-left:120px;}
+td.td1 {text-align:left;padding-left:80px;}
 td.td2 {text-align:left;padding-left:40px;}
 td.td3 {text-align:left;padding-left:70px;}
 td.td4 {text-align:left;padding-left:255px;}
@@ -5832,10 +5834,10 @@ td.td22{text-align:left;padding-left:150px;}
 td.td5{text-align:left;padding-left:245px;}
 td.td6{text-align:left;padding-left:168px;}
 .twopeople{
-	padding-left:15px;	
+	padding-left:79px;
 }
 .twostyle{
-	padding-left:15px;
+	padding-left: 55px;
 }
 	
 .testText{
@@ -5856,21 +5858,12 @@ td.td6{text-align:left;padding-left:168px;}
 	margin-bottom:8px;
 }
 .selText1{
-	width:80px;
+	width:120px;
 }
 .testS{
-	width:30px;
+	width:40px;
 }
 .tdtext,.tdtext2,.tdtext3,.tdtext4,.tdtext5{
 	text-align:left;
 	padding-left:
-}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+}	

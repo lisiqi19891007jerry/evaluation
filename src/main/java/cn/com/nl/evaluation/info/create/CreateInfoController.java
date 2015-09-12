@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.nl.evaluation.info.attribute.AttributeConfig;
+import cn.com.nl.evaluation.info.attribute.dao.AttributeDao;
 import cn.com.nl.evaluation.info.attribute.model.AttributeModel;
-import cn.com.nl.evaluation.info.create.dao.AttributeDao;
 import cn.com.nl.evaluation.login.dao.LoginDao;
 import cn.com.nl.framework.base.BasicController;
 

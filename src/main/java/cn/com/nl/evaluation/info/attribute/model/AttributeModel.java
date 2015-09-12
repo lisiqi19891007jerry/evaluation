@@ -14,7 +14,7 @@ public class AttributeModel {
 
 	private String attributeIndexName; // 元素标记名称
 
-	private String attributeName; // 元素显示名称
+	private String attributeShowName; // 元素显示名称
 
 	private List<AttributeValueModel> attributeValueList; // 元素值
 
@@ -26,12 +26,12 @@ public class AttributeModel {
 		this.attributeIndexName = attributeIndexName;
 	}
 
-	public String getAttributeName() {
-		return attributeName;
+	public String getAttributeShowName() {
+		return attributeShowName;
 	}
 
-	public void setAttributeName(String attributeName) {
-		this.attributeName = attributeName;
+	public void setAttributeShowName(String attributeShowName) {
+		this.attributeShowName = attributeShowName;
 	}
 
 	public List<AttributeValueModel> getAttributeValueList() {

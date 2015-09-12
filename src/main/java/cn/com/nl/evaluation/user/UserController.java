@@ -33,8 +33,10 @@ public class UserController extends BasicController {
 
 		List<Map<String, Object>> userList = userDao.doSelectList(username);
 
-		for (Map<String, Object> dataMap : userList) {
-			dataMap.put("userright", setUserRight(dataMap));
+		if (userList != null && userList.size() > 0) {
+			for (Map<String, Object> dataMap : userList) {
+				dataMap.put("userright", setUserRight(dataMap));
+			}
 		}
 
 		model.addAttribute("userList", userList); // 直接把查询出来的数据传到画面

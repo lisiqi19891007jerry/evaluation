@@ -1,4 +1,4 @@
-package cn.com.nl.evaluation.info.create.dao;
+package cn.com.nl.evaluation.info.attribute.dao;
 
 import java.util.List;
 import java.util.Map;
