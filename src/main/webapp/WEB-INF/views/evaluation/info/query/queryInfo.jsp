@@ -193,10 +193,11 @@ function doShowDetailInfoAction(gameInfoID) {
 						</td>
 						<td class="td2">
 							<span class="info">
-								单机or网游<strong>：</strong>
+								${attributeMap.game_type.attributeShowName}<strong>：</strong>
 							</span>
 							<c:forEach var="game_type" items="${attributeMap.game_type.attributeValueList}" varStatus="status">
-								<input type="radio" name="game_type" value="${game_type.attributeValue}" />${game_type.attributeName}&nbsp;
+								<input type="radio" name="game_type" value="${game_type.attributeValue}"
+									<c:if test="${game_type.attributeValue eq parameterMap.game_type}">checked="checked"</c:if> />${game_type.attributeName}&nbsp;
 							</c:forEach>
 						</td>
 						<td class="td11">

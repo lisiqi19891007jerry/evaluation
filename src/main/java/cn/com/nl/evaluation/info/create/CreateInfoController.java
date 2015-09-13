@@ -11,8 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.nl.evaluation.info.attribute.AttributeConfig;
 import cn.com.nl.evaluation.info.attribute.dao.AttributeDao;
-import cn.com.nl.evaluation.info.attribute.model.AttributeModel;
-import cn.com.nl.evaluation.login.dao.LoginDao;
+import cn.com.nl.evaluation.info.create.dao.CreateInfoDao;
 import cn.com.nl.framework.base.BasicController;
 
 @Scope("prototype")
@@ -23,7 +22,7 @@ public class CreateInfoController extends BasicController {
 	private AttributeDao attributeDao;
 
 	@Autowired
-	private LoginDao createInfodao;
+	private CreateInfoDao createInfodao;
 
 	/**
 	 *
@@ -35,10 +34,38 @@ public class CreateInfoController extends BasicController {
 	@RequestMapping(value = "/createInfo")
 	public ModelAndView doShowCreateInfo(ModelMap model) {
 
-		// 取得话单显示项数据
-		Map<String, AttributeModel> attributeMap = AttributeConfig.getInstance(attributeDao).getAttributemap();
+		model.addAttribute("attributeMap", AttributeConfig.getInstance(attributeDao).getAttributemap());
 
-		model.addAttribute("attributeMap", attributeMap);
+		return new ModelAndView("createInfo", model);
+	}
+
+	/**
+	 *
+	 * 根据画面传入数据创建游戏评测信息记录
+	 *
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/createInfo/create")
+	public ModelAndView doCreateInfo(ModelMap model) {
+
+		String returnValue = "";
+
+		Map<String, String> parameterMap = getScreenParameterMap();
+
+		// 上传文件和登记记录全部操作是一个事务。要保证事务的完整性。
+		// 要在画面中控制，当文件上传成功后才可以进行记录创建
+		boolean isAddUserOK = createInfodao.createEvaluationInfo(parameterMap);
+
+		if (isAddUserOK) {
+			returnValue = "新增评测信息操作成功！";
+		} else {
+			returnValue = "新增评测信息操作失败！";
+		}
+
+		model.addAttribute("returnValue", returnValue);
+		model.addAttribute("attributeMap", AttributeConfig.getInstance(attributeDao).getAttributemap());
+		model.addAttribute("parameterMap", parameterMap);
 
 		return new ModelAndView("createInfo", model);
 	}

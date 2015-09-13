@@ -16,7 +16,7 @@ public interface CreateInfoDao {
 	 *
 	 * 根据节目传入的信息，添加b_gameinformation表的数据
 	 *
-	 * @param screenParameterMap
+	 * @param screenParameterMap 画面传入参数
 	 * @return
 	 */
 	public boolean createEvaluationInfo(Map<String, String> screenParameterMap);

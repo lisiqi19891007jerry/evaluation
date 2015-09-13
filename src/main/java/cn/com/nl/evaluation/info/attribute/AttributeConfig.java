@@ -109,7 +109,9 @@ public class AttributeConfig {
 
 			tempRecordMap = valueList.get(i); // 读取一条数据库记录
 
-			ranking = (Integer) tempRecordMap.get(COLUMN_NAME_RAKING);
+			if (tempRecordMap.get(COLUMN_NAME_RAKING) != null) {
+				ranking = (Integer) tempRecordMap.get(COLUMN_NAME_RAKING);
+			}
 
 			indexName      = StringUtils.trimToEmpty((String) tempRecordMap.get(COLUMN_NAME_INDEX_NAME));
 			showName       = StringUtils.trimToEmpty((String) tempRecordMap.get(COLUMN_NAME_SHOW_NAME));

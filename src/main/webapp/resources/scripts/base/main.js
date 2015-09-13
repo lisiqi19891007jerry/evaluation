@@ -1,9 +1,3 @@
-function isMobile(sMobile) {
-	return /^1[3|5|8][0-9]\d{8}$/.test(sMobile);
-}
-function isInt(i) {
-	return /^\d+$/.test(i);
-}
 function itemEncrypt(item) {
 	document.getElementById(item).value = hex_md5($("#" + item).val());
 }

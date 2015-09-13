@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.nl.evaluation.info.attribute.AttributeConfig;
 import cn.com.nl.evaluation.info.attribute.dao.AttributeDao;
-import cn.com.nl.evaluation.info.attribute.model.AttributeModel;
 import cn.com.nl.evaluation.info.query.dao.QueryInfoDao;
 import cn.com.nl.framework.base.BasicController;
 
@@ -36,10 +35,7 @@ public class QueryInfoController extends BasicController {
 	@RequestMapping(value = "/queryInfo")
 	public ModelAndView doShowQueryInfo(ModelMap model) {
 
-		// 取得话单显示项数据
-		Map<String, AttributeModel> attributeMap = AttributeConfig.getInstance(attributeDao).getAttributemap();
-
-		model.addAttribute("attributeMap", attributeMap);
+		model.addAttribute("attributeMap", AttributeConfig.getInstance(attributeDao).getAttributemap());
 
 		return new ModelAndView("queryInfo", model);
 	}
@@ -53,8 +49,6 @@ public class QueryInfoController extends BasicController {
 	 */
 	@RequestMapping(value = "/queryInfo/query")
 	public ModelAndView doQueryInfo(ModelMap model) {
-
-		Map<String, AttributeModel> attributeMap = AttributeConfig.getInstance(attributeDao).getAttributemap();
 
 		Map<String, String> parameterMap = getScreenParameterMap();
 
@@ -82,7 +76,7 @@ public class QueryInfoController extends BasicController {
 			}
 		}
 
-		model.addAttribute("attributeMap", attributeMap);
+		model.addAttribute("attributeMap", AttributeConfig.getInstance(attributeDao).getAttributemap());
 		model.addAttribute("parameterMap", parameterMap);
 		model.addAttribute("gameInfoList", gameInfoList);
 
