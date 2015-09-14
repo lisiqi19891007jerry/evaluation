@@ -2,6 +2,7 @@ package cn.com.nl.framework.tools;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -16,6 +17,12 @@ import org.apache.commons.lang3.StringUtils;
 public class DateUtil {
 
 	public static final String SIMPLE_DATE_FORMAT = "yyyy-MM-dd";
+
+	public static final String ALL_DATE_FORMAT = "yyyyMMddHHmmss";
+
+	public static final String BASE_DATE_FORMAT = "yyyyMMdd";
+
+	public static final String DATE_FORMAT_YM = "yyyyMM";
 
 	/**
 	 * 
@@ -62,5 +69,26 @@ public class DateUtil {
 		}
 
 		return new Timestamp(dataTime);
+	}
+
+	/**
+	 *
+	 * 格式化日期
+	 *
+	 * @param date
+	 * @param formatString
+	 * @return
+	 */
+	public static String formatDate(Date date,String formatString) {
+
+		SimpleDateFormat sdf = null;
+
+		try {
+			sdf = new SimpleDateFormat(formatString);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return sdf.format(date);
 	}
 }

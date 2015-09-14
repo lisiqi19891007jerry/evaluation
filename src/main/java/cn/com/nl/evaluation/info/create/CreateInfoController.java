@@ -34,6 +34,7 @@ public class CreateInfoController extends BasicController {
 	@RequestMapping(value = "/createInfo")
 	public ModelAndView doShowCreateInfo(ModelMap model) {
 
+		model.addAttribute("userList", attributeDao.doSelectUserList());
 		model.addAttribute("attributeMap", AttributeConfig.getInstance(attributeDao).getAttributemap());
 
 		return new ModelAndView("createInfo", model);
@@ -64,8 +65,9 @@ public class CreateInfoController extends BasicController {
 		}
 
 		model.addAttribute("returnValue", returnValue);
-		model.addAttribute("attributeMap", AttributeConfig.getInstance(attributeDao).getAttributemap());
 		model.addAttribute("parameterMap", parameterMap);
+		model.addAttribute("userList", attributeDao.doSelectUserList());
+		model.addAttribute("attributeMap", AttributeConfig.getInstance(attributeDao).getAttributemap());
 
 		return new ModelAndView("createInfo", model);
 	}

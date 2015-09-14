@@ -6,4 +6,6 @@ import java.util.Map;
 public interface AttributeDao {
 
 	public List<Map<String, Object>> doSelectAttribute();
+
+	public List<Map<String, Object>> doSelectUserList();
 }

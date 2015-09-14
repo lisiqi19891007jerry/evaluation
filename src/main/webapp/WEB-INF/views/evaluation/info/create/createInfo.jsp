@@ -32,6 +32,12 @@ $(document).ready(function() {
 		$(activeTab).fadeIn();
 		return false;
 	});
+
+	var msg = $("#returnValue").val();
+
+	if (msg != '') {
+		showMessage(msg);
+	}
 });
 
 function doSaveDataAction() {
@@ -79,11 +85,36 @@ function doSaveDataAction() {
 		return false;
 	}
 
+	document.getElementById("createForm").action = "createInfo/create.html";
 	document.getElementById("createForm").submit();
 }
 
 function doCleanDataAction() {
 
+	$('#in_game_name').val(''); // 游戏名
+	$('input:radio[name="game_type"]').attr("checked", false); // 单机or网游
+
+	$('#developName').val(''); // 研发商
+	$('input:radio[name="scene"]').attr("checked", false); // 场景
+	$('input:radio[name="show_person_type"]').attr("checked", false); // 人物
+
+	
+}
+
+function doUploadReport() {
+
+	var fileName = $('#testReport').val();
+
+	if(fileName == "") {
+		showMessage("请选择需要上传的评测报告！");
+		return;
+	}
+
+	document.getElementById("createForm").action = "reportUpload.html";
+	document.getElementById("createForm").submit();
+}
+
+function doTenUploadReport() {
 	
 }
 </script>
@@ -104,10 +135,12 @@ function doCleanDataAction() {
 	</div>
 </div>
 
+<input type="hidden" id="returnValue" name="returnValue" value="${returnValue}" />
+
 <!-- 游戏信息内容设置 -->
 <div class="container-content">
 
-	<form id="createForm" action="createInfo/create.html" method="post">
+	<form id="createForm" method="post" enctype="multipart/form-data">
 
 	<div class="tab_content" id="tab1" style="display: block; ">
 		<div class="form-horizontal">
@@ -144,14 +177,16 @@ function doCleanDataAction() {
 						<span class="info"><i class="mei">*</i>画面纬度:</span>
 					</td>
 					<td class="td4">
+						<!-- 场景 -->
 						<strong>①</strong>
 						<span class="sence">${attributeMap.scene.attributeShowName}:</span>
 						<c:forEach var="scene" items="${attributeMap.scene.attributeValueList}" varStatus="status">
 							<input type="radio" name="scene" value="${scene.attributeValue}" 
 								<c:if test="${scene.attributeValue eq parameterMap.scene}">checked="checked"</c:if> />${scene.attributeName}&nbsp;
 						</c:forEach>
+						<!-- 人物 -->
 						<strong>②</strong>
-						<span class="people">${attributeMap.show_person_type.attributeShowName}*</i>:</span>
+						<span class="people">${attributeMap.show_person_type.attributeShowName}:</span>
 						<c:forEach var="show_person_type" items="${attributeMap.show_person_type.attributeValueList}" varStatus="status">
 							<input type="radio" name="show_person_type" value="${show_person_type.attributeValue}" 
 								<c:if test="${show_person_type.attributeValue eq parameterMap.show_person_type}">checked="checked"</c:if> />${show_person_type.attributeName}&nbsp;
@@ -170,16 +205,18 @@ function doCleanDataAction() {
 						<span class="info"><i class="mei">*</i>画风:</span>
 					</td>
 					<td class="td4">
+						<!-- 绘画 -->
 						<div>
 							<strong>①</strong>
-							<span class="sence">绘画:</span>
+							<span class="sence">${attributeMap.painting_style_1.attributeShowName}:</span>
 							<c:forEach var="painting_style_1" items="${attributeMap.painting_style_1.attributeValueList}" varStatus="status">
 								<input type="radio" name="painting_style_1" value="${painting_style_1.attributeValue}" 
 									<c:if test="${painting_style_1.attributeValue eq parameterMap.painting_style_1}">checked="checked"</c:if> />${painting_style_1.attributeName}
 							</c:forEach>
 						</div>
+						<!-- 风格 -->
 						<strong>②</strong>
-						<span class="people">风格:</span>
+						<span class="people">${attributeMap.painting_style_2.attributeShowName}:</span>
 						<c:forEach var="painting_style_2" items="${attributeMap.painting_style_2.attributeValueList}" varStatus="status">
 							<input type="radio" name="painting_style_2" value="${painting_style_2.attributeValue}"
 								<c:if test="${painting_style_2.attributeValue eq parameterMap.painting_style_2}">checked="checked"</c:if> />${painting_style_2.attributeName}
@@ -207,8 +244,9 @@ function doCleanDataAction() {
 					<td class="td2">
 						<input type="text" id="in_game_theme" name="in_game_theme" class="textSet" value="${parameterMap.in_game_theme}" />
 					</td>
+					<!-- 游戏玩法轻重度 -->
 					<td class="td3">
-						<span class="info"><i class="mei">*</i>游戏玩法轻重度:</span>
+						<span class="info"><i class="mei">*</i>${attributeMap.playing_method.attributeShowName}:</span>
 					</td>
 					<td class="td4">
 						<c:forEach var="playing_method" items="${attributeMap.playing_method.attributeValueList}" varStatus="status">
@@ -263,7 +301,7 @@ function doCleanDataAction() {
 				<tr class="row8">
 					<!-- 平台 -->
 					<td class="td1">
-						<span class="info"><i class="mei">*</i>平台:</span>
+						<span class="info"><i class="mei">*</i>${attributeMap.platform_type.attributeShowName}:</span>
 					</td>
 					<td class="td2">
 						<c:forEach var="platform_type" items="${attributeMap.platform_type.attributeValueList}" varStatus="status">
@@ -273,7 +311,7 @@ function doCleanDataAction() {
 					</td>
 					<!-- 付费优惠类型 -->
 					<td class="td3">
-						<span class="info"><i class="mei">*</i>付费优惠类型:</span>
+						<span class="info"><i class="mei">*</i>${attributeMap.favorable_type.attributeShowName}:</span>
 					</td>
 					<td class="td4"> 
 						<c:forEach var="favorable_type" items="${attributeMap.favorable_type.attributeValueList}" varStatus="status">
@@ -287,18 +325,24 @@ function doCleanDataAction() {
 			<div class="comment">
 				&nbsp;&nbsp;&nbsp;
 				<span class="info">评测报告:</span>
-				<input type="text" name="testReport" class="report1" />&nbsp;&nbsp;&nbsp;
-				<button class="btn"><i class="icon-arrow-up"></i>上传</button>
-				<button class="btn"><i class="icon-arrow-down"></i>下载</button>
-				<button class="btn"><i class="icon-trash"></i>删除</button>
+				<input type="file" class="report1" style="width: 400px;" id="testReport" name="testReport" value="${parameterMap.testReport}" />
+				<button class="btn" onclick="doUploadReport()"><i class="icon-arrow-up"></i>上传</button>
+				<button class="btn"  onclick=""><i class="icon-trash"></i>删除</button>
+				<c:if test="${testFileId != null}">
+					<font color="red">评测报告上传成功</font>
+				</c:if>
+				<input type="hidden" id="testFileId" name="testFileId" value="${testFileId}" />
 			</div>
 
 			<div class="tenTry">
 				<span class="info">10分钟人工试玩:</span>
-				<input type="text" name="tenReport" class="report2" />&nbsp;&nbsp;&nbsp;
-				<button class="btn"><i class="icon-arrow-up"></i>上传</button>
-				<span class="upJian"><button class="btn"><i class="icon-arrow-down"></i>下载</button></span>
-				<button class="btn"><i class="icon-trash"></i>删除</button>
+				<input type="file" class="report2" style="width: 400px;" id="tenReport" name="tenReport" value="${parameterMap.tenReport}" />
+				<button class="btn"  onclick="doTenUploadReport()"><i class="icon-arrow-up"></i>上传</button>
+				<button class="btn"  onclick=""><i class="icon-trash"></i>删除</button>
+				<c:if test="${playFileId != null}">
+					<font color="red">10分钟人工试玩上传成功</font>
+				</c:if>
+				<input type="hidden" id="playFileId" name="playFileId" value="${playFileId}" />
 			</div>
 
 			<!-- 
@@ -362,14 +406,16 @@ function doCleanDataAction() {
 					</td>
 				</tr>
 				<tr>
+					<!-- 测评人 -->
 	 				<td class="td3">
 	 					<span class="info"><i class="mei">*</i>${attributeMap.evaluation_person.attributeShowName}:</span>
 	 				</td>
 	 				<td class="td4">
-	 					<select>
-	 						<option value="user1">张贤琴</option>
-	 						<option value="user2">刘婧</option>
-	 						<option value="user3">肖宙</option>
+	 					<select id="tester" name="tester">
+	 						<c:forEach var="tester" items="${userList}" varStatus="status">
+								<option value="${tester.account}"
+									<c:if test="${tester.account eq parameterMap.tester}">selected="selected"</c:if>>${tester.username}</option>
+							</c:forEach>
 	 					</select>
 	 				</td>	
 				</tr>
@@ -382,6 +428,7 @@ function doCleanDataAction() {
 					</td>
 				</tr>
 				<tr>
+					<!-- 测评评级 -->
 					<td class="td3">
 						<span class="info"><i class="mei">*</i>${attributeMap.evaluation_level.attributeShowName}:</span>
 					</td>
@@ -395,6 +442,7 @@ function doCleanDataAction() {
 					</td>
 				</tr>
 				<tr>
+					<!-- 潜力等级 -->
 					<td class="td3">
 						<span class="info"><i class="mei">*</i>${attributeMap.evaluation_potential_grade.attributeShowName}:</span>
 					</td>
@@ -408,6 +456,7 @@ function doCleanDataAction() {
 					</td>
 				</tr>
 				<tr>
+					<!-- 上线表现级别 -->
 					<td class="td3">
 						<span class="info"><i class="mei">*</i>${attributeMap.online_level.attributeShowName}:</span>
 					</td>
@@ -433,7 +482,7 @@ function doCleanDataAction() {
 						<span class="info"><i class="mei">*</i>参考竞品养成方面:</span>
 					</td>
 					<td class="td4">
-						<textarea id="qualityGoods_cultivate" name="qualityGoods_cultivate" rows="5" cols="20">${parameterMap.qualityGoods_cultivate}</textarea>
+						<textarea id="qualityGoods_cultivate" name="qualityGoods_cultivate" rows="1" cols="20">${parameterMap.qualityGoods_cultivate}</textarea>
 					</td>
 				</tr>
 				<tr>
@@ -441,7 +490,7 @@ function doCleanDataAction() {
 						<span class="info"><i class="mei">*</i>参考战斗养成方面:</span>
 					</td>
 					<td class="td4">
-						<textarea id="qualityGoods_combat" name="qualityGoods_combat" rows="5" cols="20">${parameterMap.qualityGoods_combat}</textarea>
+						<textarea id="qualityGoods_combat" name="qualityGoods_combat" rows="1" cols="20">${parameterMap.qualityGoods_combat}</textarea>
 					</td>
 				</tr>
 			</table>

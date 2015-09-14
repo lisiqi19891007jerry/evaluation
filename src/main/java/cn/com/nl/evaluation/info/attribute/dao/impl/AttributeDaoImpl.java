@@ -29,4 +29,15 @@ public class AttributeDaoImpl implements AttributeDao {
 
 		return jdbcTemplate.queryForList(sql.toString());
 	}
+
+	public List<Map<String, Object>> doSelectUserList() {
+
+		StringBuffer sql = new StringBuffer();
+
+		sql.append(" SELECT username, account FROM c_user ");
+		sql.append("  WHERE userstatus = 1 ");
+		sql.append("  ORDER BY account ");
+
+		return jdbcTemplate.queryForList(sql.toString());
+	}
 }

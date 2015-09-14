@@ -39,7 +39,9 @@
 	<!-- 游戏信息登记界面  -->
 	<definition name="createInfo" extends="baseLayout">
 		<put-attribute name="title" value="游戏信息登记" />
+		<put-attribute name="iScroll_s" value="" />
 		<put-attribute name="body" value="/WEB-INF/views/evaluation/info/create/createInfo.jsp" />
+		<put-attribute name="iScroll_e" value="" />
 	</definition>
 
 	<!-- 游戏信息查询界面  -->
