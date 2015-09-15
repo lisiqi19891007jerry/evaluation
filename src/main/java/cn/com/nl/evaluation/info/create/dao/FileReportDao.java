@@ -1,4 +1,6 @@
-package cn.com.nl.evaluation.info.file.dao;
+package cn.com.nl.evaluation.info.create.dao;
+
+import cn.com.nl.evaluation.info.create.model.UploadFileModel;
 
 
 /**
@@ -15,11 +17,10 @@ public interface FileReportDao {
 	 *
 	 * 为上传文件插入一条记录
 	 *
-	 * @param filePath 文件存放路径
-	 * @param fileType 文件名称
+	 * @param fileModel 文件数据 
 	 * @return
 	 */
-	public String doCreateUploadFileRecord(String filePath, String fileType);
+	public boolean doCreateUploadFileRecord(UploadFileModel fileModel);
 
 	/**
 	 *
