@@ -1,14 +1,13 @@
-package cn.com.nl.evaluation.info.file.dao.impl;
+package cn.com.nl.evaluation.info.create.dao.impl;
 
 import java.sql.Timestamp;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import cn.com.nl.evaluation.info.file.dao.FileReportDao;
-import cn.com.nl.framework.tools.SequenceUtil;
+import cn.com.nl.evaluation.info.create.dao.FileReportDao;
+import cn.com.nl.evaluation.info.create.model.UploadFileModel;
 
 /**
  * @Title FileReportDaoImpl.java
@@ -24,18 +23,9 @@ public class FileReportDaoImpl implements FileReportDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	public String doCreateUploadFileRecord(String filePath, String fileType) {
-
+	public boolean doCreateUploadFileRecord(UploadFileModel fileModel) {
 
 		StringBuffer sql = new StringBuffer();
-
-		String fileId = SequenceUtil.getSequenceStr();
-
-		int start = StringUtils.lastIndexOf(filePath, "/") + 1;
-		int end   = StringUtils.lastIndexOf(filePath, ".");
-
-		String fileName = StringUtils.substring(filePath, start, end);
-		String fileExt  = StringUtils.substringAfterLast(filePath, ".");
 
 		sql.append(" INSERT INTO b_upload_file (file_id");
 		sql.append("                           ,file_type");
@@ -43,19 +33,19 @@ public class FileReportDaoImpl implements FileReportDao {
 		sql.append("                           ,file_path");
 		sql.append("                           ,file_extension");
 		sql.append("                           ,file_upload_time) ");
-		sql.append(" VALUES ('" + fileId + "' ");
-		sql.append("        ,'" + fileType + "' ");
-		sql.append("        ,'" + fileName + "' ");
-		sql.append("        ,'" + filePath + "' ");
-		sql.append("        ,'" + fileExt + "' ");
+		sql.append(" VALUES ('" + fileModel.getFileId() + "' ");
+		sql.append("        ,'" + fileModel.getFileType() + "' ");
+		sql.append("        ,'" + fileModel.getFileName() + "' ");
+		sql.append("        ,'" + fileModel.getFilePath() + "' ");
+		sql.append("        ,'" + fileModel.getFileExtension() + "' ");
 		sql.append("        ,'" + new Timestamp(System.currentTimeMillis()) + "') ");
 
 		int excuseCount = jdbcTemplate.update(sql.toString());
 
 		if (excuseCount == 1) {
-			return fileId;
+			return true;
 		} else {
-			return null;
+			return false;
 		}
 	}
 
