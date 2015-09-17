@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2015-09-15 00:12:17
+Date: 2015-09-18 00:25:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,26 +20,26 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `b_gameinformation`;
 CREATE TABLE `b_gameinformation` (
-  `ID` int(50) NOT NULL AUTO_INCREMENT,
+  `ID` varchar(50) NOT NULL,
   `Datetime` datetime NOT NULL,
-  `EvaluationPeople` char(20) NOT NULL,
+  `EvaluationPeople` varchar(20) NOT NULL,
   `EvaluationPoint` float(10,0) NOT NULL,
-  `PublishManifestation` char(10) DEFAULT NULL,
-  `Classified_Evaluate` char(10) DEFAULT NULL,
-  `Evaluation_Potential_Grade` char(10) DEFAULT NULL,
-  `ManifestationExplain` varchar(80) NOT NULL,
-  `QualityGoods_cultivate` char(40) DEFAULT NULL,
-  `QualityGoods_combat` char(40) DEFAULT NULL,
-  `EvaluationReport` char(80) NOT NULL,
-  `CSV_name` char(80) NOT NULL,
-  `GameName` char(40) NOT NULL,
-  `Developer` char(40) NOT NULL,
-  `Publisher` char(40) NOT NULL,
-  `GameType` char(40) NOT NULL,
-  `GameTheme` char(40) NOT NULL COMMENT '游戏题材',
+  `PublishManifestation` varchar(10) DEFAULT NULL,
+  `Classified_Evaluate` varchar(10) DEFAULT NULL,
+  `Evaluation_Potential_Grade` varchar(10) DEFAULT NULL,
+  `ManifestationExplain` varchar(255) NOT NULL,
+  `QualityGoods_cultivate` varchar(255) DEFAULT NULL,
+  `QualityGoods_combat` varchar(255) DEFAULT NULL,
+  `EvaluationReport` varchar(50) NOT NULL,
+  `CSV_name` varchar(50) NOT NULL,
+  `GameName` varchar(40) NOT NULL,
+  `Developer` varchar(40) NOT NULL,
+  `Publisher` varchar(40) NOT NULL,
+  `GameType` varchar(40) NOT NULL,
+  `GameTheme` varchar(40) NOT NULL COMMENT '游戏题材',
   `IsAuthorization` tinyint(1) DEFAULT NULL,
   `InstallationSize` float(10,0) NOT NULL,
-  `Platform` char(20) NOT NULL,
+  `Platform` varchar(20) NOT NULL,
   `Completeness` int(10) NOT NULL,
   `GameClassify` int(1) NOT NULL,
   `Scene` int(1) NOT NULL,
@@ -102,14 +102,14 @@ INSERT INTO `c_attribute` VALUES ('03', 'out_test_type_1', '对外测试类型1'
 INSERT INTO `c_attribute` VALUES ('04', 'out_test_type_1', '对外测试类型1', '2', '不删档', '2');
 INSERT INTO `c_attribute` VALUES ('05', 'out_test_type_2', '对外测试类型2', '1', '付费', '1');
 INSERT INTO `c_attribute` VALUES ('06', 'out_test_type_2', '对外测试类型2', '2', '不付费', '2');
-INSERT INTO `c_attribute` VALUES ('07', 'pay_type', '付费方式', '1', 'SDK', '0');
-INSERT INTO `c_attribute` VALUES ('08', 'pay_type', '付费方式', '2', '短代', '1');
-INSERT INTO `c_attribute` VALUES ('09', 'pay_type', '付费方式', '3', '第三方', '2');
+INSERT INTO `c_attribute` VALUES ('07', 'pay_type', '付费方式', '1', 'SDK', '1');
+INSERT INTO `c_attribute` VALUES ('08', 'pay_type', '付费方式', '2', '短代', '2');
+INSERT INTO `c_attribute` VALUES ('09', 'pay_type', '付费方式', '3', '第三方', '3');
 INSERT INTO `c_attribute` VALUES ('11', 'favorable_type', '付费优惠类型', '1', '多倍', '0');
 INSERT INTO `c_attribute` VALUES ('12', 'favorable_type', '付费优惠类型', '2', '百分比', '1');
 INSERT INTO `c_attribute` VALUES ('13', 'retest_status', '复测情况', '1', '首测', '0');
 INSERT INTO `c_attribute` VALUES ('14', 'retest_status', '复测情况', '2', '二测', '1');
-INSERT INTO `c_attribute` VALUES ('15', 'retest_status', '复测情况', '3', '三测', '2');
+INSERT INTO `c_attribute` VALUES ('15', 'retest_status', '复测情况', '3', '三测及以上', '2');
 INSERT INTO `c_attribute` VALUES ('16', 'painting_style_1', '绘画', '1', 'Q版', '0');
 INSERT INTO `c_attribute` VALUES ('17', 'painting_style_1', '绘画', '2', '写实', '1');
 INSERT INTO `c_attribute` VALUES ('18', 'painting_style_2', '风格', '1', '日韩', '0');
@@ -117,9 +117,9 @@ INSERT INTO `c_attribute` VALUES ('19', 'painting_style_2', '风格', '2', '欧�
 INSERT INTO `c_attribute` VALUES ('20', 'painting_style_2', '风格', '3', '中国风', '2');
 INSERT INTO `c_attribute` VALUES ('21', 'platform_type', '平台', '1', 'Android', '0');
 INSERT INTO `c_attribute` VALUES ('22', 'platform_type', '平台', '2', 'IOS', '1');
-INSERT INTO `c_attribute` VALUES ('23', 'evaluate_mode', '评测模式', '1', '独代', '0');
-INSERT INTO `c_attribute` VALUES ('24', 'evaluate_mode', '评测模式', '2', '联运', '1');
-INSERT INTO `c_attribute` VALUES ('25', 'evaluate_mode', '评测模式', '3', '其他', '2');
+INSERT INTO `c_attribute` VALUES ('23', 'evaluate_mode', '评测模式', '1', '独代', '1');
+INSERT INTO `c_attribute` VALUES ('24', 'evaluate_mode', '评测模式', '2', '联运', '2');
+INSERT INTO `c_attribute` VALUES ('25', 'evaluate_mode', '评测模式', '3', '其他', '3');
 INSERT INTO `c_attribute` VALUES ('26', 'show_person_type', '人物', '1', '2D', '0');
 INSERT INTO `c_attribute` VALUES ('27', 'show_person_type', '人物', '2', '3D', '1');
 INSERT INTO `c_attribute` VALUES ('28', 'game_type', '单机or网游', '1', '单机', '0');
@@ -143,6 +143,11 @@ INSERT INTO `c_attribute` VALUES ('47', 'evaluation_potential_grade', '潜力等
 INSERT INTO `c_attribute` VALUES ('48', 'evaluation_potential_grade', '潜力等级', '4', 'A+', 'A+');
 INSERT INTO `c_attribute` VALUES ('49', 'is_authorization', '是否IP授权', '1', '是', '1');
 INSERT INTO `c_attribute` VALUES ('50', 'is_authorization', '是否IP授权', '2', '否', '0');
+INSERT INTO `c_attribute` VALUES ('51', 'online_level', '上线表现级别', '0', '', '');
+INSERT INTO `c_attribute` VALUES ('52', 'evaluation_potential_grade', '潜力等级', '0', '', '');
+INSERT INTO `c_attribute` VALUES ('53', 'evaluate_mode', '评测模式', '4', '未知', '');
+INSERT INTO `c_attribute` VALUES ('54', 'pay_type', '付费方式', '4', '未知', '');
+INSERT INTO `c_attribute` VALUES ('55', 'favorable_type', '付费优惠类型', '3', '未知', '');
 
 -- ----------------------------
 -- Table structure for c_user
