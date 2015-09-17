@@ -20,7 +20,7 @@ public interface FileReportDao {
 	 * @param fileModel 文件数据 
 	 * @return
 	 */
-	public boolean doCreateUploadFileRecord(UploadFileModel fileModel);
+	public boolean doCreateFileRecord(UploadFileModel fileModel);
 
 	/**
 	 *

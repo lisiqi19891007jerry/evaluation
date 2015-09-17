@@ -146,6 +146,12 @@ function doSaveDataAction() {
 		return false;
 	}
 
+	// 上线表现评价说明
+	if ($("#manifestationExplain").val().length > 25) {
+		showMessage("输入的上线表现评价说明超过25个字符，请重新输入！");
+		return false;
+	}
+
 	// 参考竞品养成方面
 	if ($("#qualityGoods_cultivate").val().length > 20) {
 		showMessage("输入的参考竞品养成方面超过20个字符，请重新输入！");
@@ -170,20 +176,6 @@ function doSaveDataAction() {
 		$("#openPayValue").val('1');
 	} else {
 		$("#openPayValue").val('2');
-	}
-
-	// 评测报告
-	if ($("#testReport").val() != '') {
-		$("#isUploadTestReport").val('true')
-	} else {
-		$("#isUploadTestReport").val('false')
-	}
-
-	// 10分钟人工试玩
-	if ($("#playReport").val() != '') {
-		$("#isUploadPlayReport").val('true')
-	} else {
-		$("#isUploadPlayReport").val('false')
 	}
 
 	document.getElementById("createForm").submit();

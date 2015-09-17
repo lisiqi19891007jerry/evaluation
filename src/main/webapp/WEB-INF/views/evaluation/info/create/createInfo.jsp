@@ -59,8 +59,6 @@ $(document).ready(function() {
 <input type="hidden" id="returnValue" name="returnValue" value="${returnValue}" />
 <input type="hidden" id="recordValue" name="recordValue" />
 <input type="hidden" id="openPayValue" name="openPayValue" />
-<input type="hidden" id="isUploadTestReport" name="isUploadTestReport" />
-<input type="hidden" id="isUploadPlayReport" name="isUploadPlayReport" />
 
 <!-- 游戏信息内容设置 -->
 <div class="container-content">
@@ -201,7 +199,7 @@ $(document).ready(function() {
 						<span class="info"><i class="mei">*</i>包体大小:</span>
 					</td>
 					<td class="td2">
-						<input type="text" id="packageSize" name="packageSize" class="packageText" />
+						<input type="text" id="packageSize" name="packageSize" class="packageText" />MB
 					</td>
 					<!-- 付费方式 -->
 					<td class="td3">
@@ -209,8 +207,7 @@ $(document).ready(function() {
 					</td>
 					<td class="td4">
 						<c:forEach var="pay_type" items="${attributeMap.pay_type.attributeValueList}" varStatus="status">
-							<input type="radio" name="pay_type" value="${pay_type.attributeValue}"
-								<c:if test="${pay_type.attributeValue eq 0}">checked="checked"</c:if> />${pay_type.attributeName}
+							<input type="radio" name="pay_type" value="${pay_type.attributeValue}" />${pay_type.attributeName}
 						</c:forEach>
 					</td>
 				</tr>
@@ -239,12 +236,12 @@ $(document).ready(function() {
 			<div class="comment">
 				&nbsp;&nbsp;&nbsp;
 				<span class="info">评测报告:</span>
-				<input type="file" class="report1" style="width: 400px;" id="testReport" name="report" />
+				<input type="file" class="report1" style="width: 400px;" id="testReport" name="testReport" />
 			</div>
 
 			<div class="tenTry">
 				<span class="info">10分钟人工试玩:</span>
-				<input type="file" class="report2" style="width: 400px;" id="playReport" name="report" />
+				<input type="file" class="report2" style="width: 400px;" id="playReport" name="playReport" />
 			</div>
 
 			<!-- 
@@ -374,7 +371,7 @@ $(document).ready(function() {
 				</tr>
 				<tr>
 					<td class="td3">
-						<span class="info"><i class="mei">*</i>参考竞品养成方面:</span>
+						<span class="info">参考竞品养成方面:</span>
 					</td>
 					<td class="td4">
 						<textarea id="qualityGoods_cultivate" name="qualityGoods_cultivate" rows="1" cols="20"></textarea>
@@ -382,7 +379,7 @@ $(document).ready(function() {
 				</tr>
 				<tr>
 					<td class="td3">
-						<span class="info"><i class="mei">*</i>参考战斗养成方面:</span>
+						<span class="info">参考战斗养成方面:</span>
 					</td>
 					<td class="td4">
 						<textarea id="qualityGoods_combat" name="qualityGoods_combat" rows="1" cols="20"></textarea>

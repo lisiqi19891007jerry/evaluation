@@ -23,7 +23,7 @@ public class FileReportDaoImpl implements FileReportDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	public boolean doCreateUploadFileRecord(UploadFileModel fileModel) {
+	public boolean doCreateFileRecord(UploadFileModel fileModel) {
 
 		StringBuffer sql = new StringBuffer();
 
