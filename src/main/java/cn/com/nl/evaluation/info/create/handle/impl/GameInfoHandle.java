@@ -3,9 +3,9 @@ package cn.com.nl.evaluation.info.create.handle.impl;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.com.nl.evaluation.info.create.dao.CreateInfoDao;
+import cn.com.nl.evaluation.info.create.dao.impl.CreateInfoDaoImpl;
 import cn.com.nl.evaluation.info.create.handle.AbstractGameHandle;
 import cn.com.nl.evaluation.info.create.model.FileInfoModel;
 
@@ -18,9 +18,6 @@ import cn.com.nl.evaluation.info.create.model.FileInfoModel;
  * @Version V1.0
  */
 public class GameInfoHandle extends AbstractGameHandle {
-
-	@Autowired
-	private CreateInfoDao createInfodao;
 
 	public String doFilter(Object... args) {
 
@@ -43,6 +40,8 @@ public class GameInfoHandle extends AbstractGameHandle {
 		} else {
 			parameterMap.put("csvFileId", "");
 		}
+
+		CreateInfoDao createInfodao = new CreateInfoDaoImpl();
 
 		boolean isAddInfoOK = createInfodao.createEvaluationInfo(parameterMap);
 

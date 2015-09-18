@@ -6,10 +6,10 @@ import java.nio.file.Paths;
 import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
 import cn.com.nl.evaluation.info.create.dao.FileReportDao;
+import cn.com.nl.evaluation.info.create.dao.impl.FileReportDaoImpl;
 import cn.com.nl.evaluation.info.create.model.FileInfoModel;
 import cn.com.nl.evaluation.info.create.model.UploadFileModel;
 import cn.com.nl.framework.tools.DateUtil;
@@ -17,9 +17,6 @@ import cn.com.nl.framework.tools.PropertiesFileUtil;
 import cn.com.nl.framework.tools.SequenceUtil;
 
 public class FileOperationHelper {
-
-	@Autowired
-	private FileReportDao fileReportDao;
 
 	private static final String CONFIG_FILE_PATH = "D:/Github/evaluation/src/main/resources/file/file.properties";
 
@@ -67,6 +64,8 @@ public class FileOperationHelper {
 					UploadFileModel model = createFileModel(fileType, filePath);
 
 					fileModel.setFileId(model.getFileId());
+
+					FileReportDao fileReportDao = new FileReportDaoImpl();
 
 					if (fileReportDao.doCreateFileRecord(model)) {
 						file.transferTo(new File(filePath));
@@ -164,6 +163,9 @@ public class FileOperationHelper {
 
 		// 删除数据库记录
 		if (StringUtils.isNotBlank(fileModel.getFileId())) {
+
+			FileReportDao fileReportDao = new FileReportDaoImpl();
+
 			fileReportDao.doDeleteFileRecord(fileModel.getFileId());
 		}
 	}
