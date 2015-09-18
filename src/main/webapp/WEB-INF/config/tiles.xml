@@ -13,9 +13,7 @@
 		<put-attribute name="javascript" value="/WEB-INF/views/framework/javascript.jsp" />
 		<put-attribute name="common_header" value="/WEB-INF/views/framework/common_header.jsp" />
 		<put-attribute name="header" value="/WEB-INF/views/framework/header.jsp" />
-		<put-attribute name="iScroll_s" value="/WEB-INF/views/framework/iScroll_s.jsp" />
 		<put-attribute name="body" value="" />
-		<put-attribute name="iScroll_e" value="/WEB-INF/views/framework/iScroll_e.jsp" />
 	</definition>
 
 	<!-- 登录界面  -->
@@ -23,25 +21,19 @@
 		<put-attribute name="title" value="用户登录" />
 		<put-attribute name="common_header" value="" />
 		<put-attribute name="header" value="" />
-		<put-attribute name="iScroll_s" value="" />
 		<put-attribute name="body" value="/WEB-INF/views/evaluation/login/login.jsp" />
-		<put-attribute name="iScroll_e" value="" />
 	</definition>
 
 	<!-- 用户管理界面  -->
 	<definition name="userview" extends="baseLayout">
 		<put-attribute name="title" value="用户管理" />
-		<put-attribute name="iScroll_s" value="" />
 		<put-attribute name="body" value="/WEB-INF/views/evaluation/user/setManager.jsp" />
-		<put-attribute name="iScroll_e" value="" />
 	</definition>
 
 	<!-- 游戏信息登记界面  -->
 	<definition name="createInfo" extends="baseLayout">
 		<put-attribute name="title" value="游戏信息登记" />
-		<put-attribute name="iScroll_s" value="" />
 		<put-attribute name="body" value="/WEB-INF/views/evaluation/info/create/createInfo.jsp" />
-		<put-attribute name="iScroll_e" value="" />
 	</definition>
 
 	<!-- 游戏信息查询界面  -->

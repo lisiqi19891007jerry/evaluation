@@ -22,10 +22,8 @@
 
 			<tiles:insertAttribute name="header" />
 
-			<div class="main-wrapper">
-				<tiles:insertAttribute name="iScroll_s" />
+			<div class="main-wrapper" style="overflow:scroll;">
 				<tiles:insertAttribute name="body" />
-				<tiles:insertAttribute name="iScroll_e" />
 			</div>
 		</div>
 	</body>
