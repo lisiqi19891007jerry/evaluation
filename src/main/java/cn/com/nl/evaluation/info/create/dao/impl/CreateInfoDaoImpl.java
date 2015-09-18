@@ -24,7 +24,7 @@ public class CreateInfoDaoImpl implements CreateInfoDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	public boolean createEvaluationInfo(Map<String, String> argMap) {
+	public boolean createEvaluationInfo(Map<String, Object> argMap) {
 
 		StringBuffer sql = new StringBuffer();
 
@@ -62,40 +62,46 @@ public class CreateInfoDaoImpl implements CreateInfoDao {
 		sql.append("                               ,EvaluationModel");
 		sql.append("                               ,Retestcondition )");
 		sql.append(" VALUES ('" + SequenceUtil.getSequenceStr() + "' ");
-		sql.append("        ,'" + DateUtil.createTimestamp(argMap.get("evaluation_date"), DateUtil.SIMPLE_DATE_FORMAT) + "' ");
-		sql.append("        ,'" + argMap.get("evaluation_person") + "' ");
-		sql.append("        ," + argMap.get("score") + " ");
-		sql.append("        ,'" + argMap.get("online_level") + "' ");
-		sql.append("        ,'" + argMap.get("evaluation_level") + "' ");
-		sql.append("        ,'" + argMap.get("evaluation_potential_grade") + "' ");
-		sql.append("        ,'" + argMap.get("manifestationExplain") + "' ");
-		sql.append("        ,'" + argMap.get("qualityGoods_cultivate") + "' ");
-		sql.append("        ,'" + argMap.get("qualityGoods_combat") + "' ");
-		sql.append("        ,'" + argMap.get("evaluationReportId") + "' ");
-		sql.append("        ,'" + argMap.get("csvFileId") + "' ");
-		sql.append("        ,'" + argMap.get("in_game_name") + "' ");
-		sql.append("        ,'" + argMap.get("developName") + "' ");
-		sql.append("        ,'" + argMap.get("sendName") + "' ");
-		sql.append("        ,'" + argMap.get("in_game_type") + "' ");
-		sql.append("        ,'" + argMap.get("in_game_theme") + "' ");
-		sql.append("        ," + argMap.get("is_authorization") + " ");
-		sql.append("        ," + argMap.get("packageSize") + " ");
-		sql.append("        ,'" + argMap.get("platform_type") + "' ");
-		sql.append("        ," + argMap.get("gameDegree") + " ");
-		sql.append("        ," + argMap.get("game_type") + " ");
-		sql.append("        ," + argMap.get("scene") + " ");
-		sql.append("        ," + argMap.get("show_person_type") + " ");
-		sql.append("        ," + argMap.get("painting_style_1") + " ");
-		sql.append("        ," + argMap.get("painting_style_2") + " ");
-		sql.append("        ," + argMap.get("playing_method") + " ");
-		sql.append("        ," + argMap.get("record") + " ");
-		sql.append("        ," + argMap.get("openPay") + " ");
-		sql.append("        ," + argMap.get("pay_type") + " ");
-		sql.append("        ," + argMap.get("favorable_type") + " ");
-		sql.append("        ," + argMap.get("evaluate_mode") + " ");
-		sql.append("        ," + argMap.get("retest_status") + ") ");
+		sql.append("        ,'" + DateUtil.createTimestamp(argMap.get("evaluation_date") + "", DateUtil.SIMPLE_DATE_FORMAT) + "' ");
+		sql.append("        ,'" + argMap.get("tester") + "" + "' ");
+		sql.append("        ," + argMap.get("score") + "" + " ");
+		sql.append("        ,'" + argMap.get("online_level") + "" + "' ");
+		sql.append("        ,'" + argMap.get("evaluation_level") + "" + "' ");
+		sql.append("        ,'" + argMap.get("evaluation_potential_grade") + "" + "' ");
+		sql.append("        ,'" + argMap.get("manifestationExplain") + "" + "' ");
+		sql.append("        ,'" + argMap.get("qualityGoods_cultivate") + "" + "' ");
+		sql.append("        ,'" + argMap.get("qualityGoods_combat") + "" + "' ");
+		sql.append("        ,'" + argMap.get("evaluationReportId") + "" + "' ");
+		sql.append("        ,'" + argMap.get("csvFileId") + "" + "' ");
+		sql.append("        ,'" + argMap.get("in_game_name") + "" + "' ");
+		sql.append("        ,'" + argMap.get("developName") + "" + "' ");
+		sql.append("        ,'" + argMap.get("sendName") + "" + "' ");
+		sql.append("        ,'" + argMap.get("in_game_type") + "" + "' ");
+		sql.append("        ,'" + argMap.get("in_game_theme") + "" + "' ");
+		sql.append("        ,'" + argMap.get("is_authorization") + "" + "' ");
+		sql.append("        ," + argMap.get("packageSize") + "" + " ");
+		sql.append("        ,'" + argMap.get("platform_type") + "" + "' ");
+		sql.append("        ," + argMap.get("gameDegree") + "" + " ");
+		sql.append("        ,'" + argMap.get("game_type") + "" + "' ");
+		sql.append("        ,'" + argMap.get("scene") + "" + "' ");
+		sql.append("        ,'" + argMap.get("show_person_type") + "" + "' ");
+		sql.append("        ,'" + argMap.get("painting_style_1") + "" + "' ");
+		sql.append("        ,'" + argMap.get("painting_style_2") + "" + "' ");
+		sql.append("        ,'" + argMap.get("playing_method") + "" + "' ");
+		sql.append("        ,'" + argMap.get("recordValue") + "" + "' ");
+		sql.append("        ,'" + argMap.get("openPayValue") + "" + "' ");
+		sql.append("        ,'" + argMap.get("pay_type") + "" + "' ");
+		sql.append("        ,'" + argMap.get("favorable_type") + "" + "' ");
+		sql.append("        ,'" + argMap.get("evaluate_mode") + "" + "' ");
+		sql.append("        ,'" + argMap.get("retest_status") + "" + "') ");
 
-		int excuseCount = jdbcTemplate.update(sql.toString());
+		int excuseCount = -1;
+
+		try {
+			excuseCount = jdbcTemplate.update(sql.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		if (excuseCount == 1) {
 			return true;

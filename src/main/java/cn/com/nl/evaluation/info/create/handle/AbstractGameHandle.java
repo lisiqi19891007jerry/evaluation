@@ -15,7 +15,7 @@ public abstract class AbstractGameHandle implements IGameHandle {
 
 	private IGameHandle nextGameHandle;
 
-	protected FileOperationHelper helper = FileOperationHelper.getInstance();
+	private FileOperationHelper helper;
 
 	public IGameHandle getNextGameHandle() {
 		return nextGameHandle;
@@ -23,5 +23,13 @@ public abstract class AbstractGameHandle implements IGameHandle {
 
 	public void setNextGameHandle(IGameHandle nextGameHandle) {
 		this.nextGameHandle = nextGameHandle;
+	}
+
+	public FileOperationHelper getHelper() {
+		return helper;
+	}
+
+	public void setHelper(FileOperationHelper helper) {
+		this.helper = helper;
 	}
 }

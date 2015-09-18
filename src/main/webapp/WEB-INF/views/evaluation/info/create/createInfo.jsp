@@ -56,14 +56,14 @@ $(document).ready(function() {
 	</div>
 </div>
 
-<input type="hidden" id="returnValue" name="returnValue" value="${returnValue}" />
-<input type="hidden" id="recordValue" name="recordValue" />
-<input type="hidden" id="openPayValue" name="openPayValue" />
-
 <!-- 游戏信息内容设置 -->
 <div class="container-content">
 
 	<form id="createForm" method="post" action="createInfo/create.html" enctype="multipart/form-data">
+
+	<input type="hidden" id="returnValue" name="returnValue" value="${returnValue}" />
+	<input type="hidden" id="recordValue" name="recordValue" />
+	<input type="hidden" id="openPayValue" name="openPayValue" />
 
 	<div class="tab_content" id="tab1" style="display: block; ">
 		<div class="form-horizontal">
@@ -366,7 +366,7 @@ $(document).ready(function() {
 						<span class="info">上线表现评价说明:</span>
 					</td>
 					<td class="td4">
-						<textarea id="manifestationExplain" name="manifestationExplain" rows="1" cols="20"></textarea>
+						<textarea id="manifestationExplain" name="manifestationExplain" rows="5" cols="20"></textarea>
 					</td>
 				</tr>
 				<tr>
@@ -374,7 +374,7 @@ $(document).ready(function() {
 						<span class="info">参考竞品养成方面:</span>
 					</td>
 					<td class="td4">
-						<textarea id="qualityGoods_cultivate" name="qualityGoods_cultivate" rows="1" cols="20"></textarea>
+						<textarea id="qualityGoods_cultivate" name="qualityGoods_cultivate" rows="2" cols="20"></textarea>
 					</td>
 				</tr>
 				<tr>
@@ -382,7 +382,7 @@ $(document).ready(function() {
 						<span class="info">参考战斗养成方面:</span>
 					</td>
 					<td class="td4">
-						<textarea id="qualityGoods_combat" name="qualityGoods_combat" rows="1" cols="20"></textarea>
+						<textarea id="qualityGoods_combat" name="qualityGoods_combat" rows="2" cols="20"></textarea>
 					</td>
 				</tr>
 			</table>

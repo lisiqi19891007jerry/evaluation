@@ -1,5 +1,9 @@
 package cn.com.nl.evaluation.info.create.handle.impl;
 
+import java.util.Map;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import cn.com.nl.evaluation.info.create.handle.AbstractGameHandle;
@@ -12,23 +16,28 @@ import cn.com.nl.evaluation.info.create.model.FileInfoModel;
  * @Date 2015年9月17日 下午10:14:29
  * @Version V1.0
  */
+@Scope("prototype")
+@Component
 public class GameTestReportHandle extends AbstractGameHandle {
 
 	public static final String TEST_PATH_TYPE = "testReportStorePath";
 
 	public static final String TEST_FILE_TYPE = "test";
 
-	public String doFilter(Object... args) {
+	public String doFilter(Map<String, Object> argMap) {
 
-		FileInfoModel fileModel = helper.uploadReportFile(TEST_PATH_TYPE
-														 ,TEST_FILE_TYPE
-														 ,(MultipartFile) args[0]);
+		FileInfoModel fileModel = getHelper().uploadReportFile(TEST_PATH_TYPE
+															  ,TEST_FILE_TYPE
+															  ,(MultipartFile) argMap.get("testReport"));
 
 		if (fileModel.getDoSuccess()) {
-			return getNextGameHandle().doFilter(args[0], args[1], args[2], fileModel);
+
+			argMap.put("testModel", fileModel);
+
+			return getNextGameHandle().doFilter(argMap);
 		} else {
 
-			helper.destroyUploadFile(fileModel);
+			getHelper().destroyUploadFile(fileModel);
 
 			return "评测报告文件上传失败！";
 		}

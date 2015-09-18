@@ -40,7 +40,13 @@ public class FileReportDaoImpl implements FileReportDao {
 		sql.append("        ,'" + fileModel.getFileExtension() + "' ");
 		sql.append("        ,'" + new Timestamp(System.currentTimeMillis()) + "') ");
 
-		int excuseCount = jdbcTemplate.update(sql.toString());
+		int excuseCount = -1;
+
+		try {
+			excuseCount = jdbcTemplate.update(sql.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		if (excuseCount == 1) {
 			return true;

@@ -19,5 +19,5 @@ public interface CreateInfoDao {
 	 * @param screenParameterMap 画面传入参数
 	 * @return
 	 */
-	public boolean createEvaluationInfo(Map<String, String> screenParameterMap);
+	public boolean createEvaluationInfo(Map<String, Object> screenParameterMap);
 }

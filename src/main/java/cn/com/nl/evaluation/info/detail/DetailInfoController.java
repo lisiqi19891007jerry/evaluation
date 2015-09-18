@@ -49,6 +49,7 @@ public class DetailInfoController extends BasicController {
 		// 设置数据在界面中的显示格式
 		setScreenDataFormate(detailInfoMap);
 
+		model.addAttribute("gameInfoID", gameInfoID);
 		model.addAttribute("attributeMap", attributeMap);
 		model.addAttribute("detailInfoMap", detailInfoMap);
 

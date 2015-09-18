@@ -1,5 +1,9 @@
 package cn.com.nl.evaluation.info.create.handle.impl;
 
+import java.util.Map;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import cn.com.nl.evaluation.info.create.handle.AbstractGameHandle;
@@ -12,24 +16,29 @@ import cn.com.nl.evaluation.info.create.model.FileInfoModel;
  * @Date 2015年9月17日 下午11:55:35
  * @Version V1.0
  */
+@Scope("prototype")
+@Component
 public class GamePlayReportHandle extends AbstractGameHandle {
 
 	public static final String PLAY_PATH_TYPE = "tenPlayReportStorePath";
 
 	public static final String PLAY_FILE_TYPE = "play";
 
-	public String doFilter(Object... args) {
+	public String doFilter(Map<String, Object> argMap) {
 
-		FileInfoModel fileModel = helper.uploadReportFile(PLAY_PATH_TYPE
-														 ,PLAY_FILE_TYPE
-														 ,(MultipartFile) args[1]);
+		FileInfoModel fileModel = getHelper().uploadReportFile(PLAY_PATH_TYPE
+															  ,PLAY_FILE_TYPE
+															  ,(MultipartFile) argMap.get("playReport"));
 
 		if (fileModel.getDoSuccess()) {
-			return getNextGameHandle().doFilter(args[0], args[1], args[2], args[3], fileModel);
+
+			argMap.put("playModel", fileModel);
+
+			return getNextGameHandle().doFilter(argMap);
 		} else {
 
-			helper.destroyUploadFile(fileModel);
-			helper.destroyUploadFile((FileInfoModel) args[3]);
+			getHelper().destroyUploadFile(fileModel);
+			getHelper().destroyUploadFile((FileInfoModel) argMap.get("testModel"));
 
 			return "10分钟人工试玩文件上传失败！";
 		}

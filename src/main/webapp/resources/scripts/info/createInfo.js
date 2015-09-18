@@ -165,14 +165,14 @@ function doSaveDataAction() {
 	}
 
 	// 删档
-	if($("#record").attr("checked") == true) {
+	if($("#record").is(':checked') == true) {
 		$("#recordValue").val('1');
 	} else {
 		$("#recordValue").val('2');
 	}
 
 	// 付费
-	if($("#openPay").attr("checked") == true) {
+	if($("#openPay").is(':checked') == true) {
 		$("#openPayValue").val('1');
 	} else {
 		$("#openPayValue").val('2');

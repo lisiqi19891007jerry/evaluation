@@ -32,4 +32,15 @@ public class DetailInfoDaoImpl implements DetailInfoDao {
 
 		return jdbcTemplate.queryForMap(sql.toString());
 	}
+
+	public Map<String, Object> doSelectFileIndo(String fileId) {
+
+		StringBuffer sql = new StringBuffer();
+
+		sql.append(" SELECT * ");
+		sql.append("   FROM b_upload_file ");
+		sql.append("  WHERE file_id = '" + fileId + "' ");
+
+		return jdbcTemplate.queryForMap(sql.toString());
+	}
 }

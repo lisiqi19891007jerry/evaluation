@@ -21,4 +21,13 @@ public interface DetailInfoDao {
 	 * @return
 	 */
 	public Map<String, Object> doSelectDetilGameInfo(String id);
+
+	/**
+	 *
+	 * 查询文件信息
+	 *
+	 * @param fileId 文件存放ID
+	 * @return
+	 */
+	public Map<String, Object> doSelectFileIndo(String fileId);
 }

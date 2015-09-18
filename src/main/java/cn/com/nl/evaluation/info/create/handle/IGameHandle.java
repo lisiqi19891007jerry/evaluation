@@ -1,5 +1,9 @@
 package cn.com.nl.evaluation.info.create.handle;
 
+import java.util.Map;
+
+import cn.com.nl.evaluation.info.create.FileOperationHelper;
+
 
 /**
  * @Title IGameHandle.java
@@ -18,7 +22,7 @@ public interface IGameHandle {
 	 * @param args 操作参数
 	 * @return 文件信息列表
 	 */
-	public String doFilter(Object... args);
+	public String doFilter(Map<String, Object> argMap);
 
 	/**
 	 * 取得下一个操作执行者
@@ -29,4 +33,8 @@ public interface IGameHandle {
 	 * 设置下一环节操作执行者
 	 */
 	public void setNextGameHandle(IGameHandle nextGameHandle);
+
+	public FileOperationHelper getHelper();
+
+	public void setHelper(FileOperationHelper helper);
 }
