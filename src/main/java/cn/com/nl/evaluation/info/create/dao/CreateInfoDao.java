@@ -6,7 +6,6 @@ import java.util.Map;
  * @Title CreateInfoDao.java
  * @Package cn.com.nl.evaluation.info.create.dao
  * @Description 创建评测信息数据库操作接口
- * @Author Li Siqi
  * @Date 2015年8月29日 下午12:39:16
  * @Version V1.0
  */

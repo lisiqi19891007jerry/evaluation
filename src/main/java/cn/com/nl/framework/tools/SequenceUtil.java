@@ -8,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
  * @Title SequenceUtil.java
  * @Package cn.com.nl.framework.tools
  * @Description 取得UUID工具类
- * @Author Li Siqi
  * @Date 2015年8月18日 下午10:49:44
  * @Version V1.0
  */

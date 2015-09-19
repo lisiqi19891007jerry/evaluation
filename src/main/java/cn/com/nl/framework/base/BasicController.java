@@ -18,7 +18,6 @@ import cn.com.nl.framework.tools.MessageUtils;
  * @Title BasicController.java
  * @Package cn.com.nl.framework.base
  * @Description 基础的Controller类
- * @Author Li Siqi
  * @Date 2015年7月10日 下午10:28:11
  * @Version V1.0
  */

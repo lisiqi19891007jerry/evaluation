@@ -12,7 +12,6 @@ import cn.com.nl.evaluation.info.create.model.FileInfoModel;
  * @Title GameInfoHandle.java
  * @Package cn.com.nl.evaluation.info.create.handle.impl
  * @Description 
- * @Author Li Siqi
  * @Date 2015年9月18日 上午12:09:08
  * @Version V1.0
  */

@@ -7,7 +7,6 @@ import java.util.Map;
  * @Title QueryInfoDao.java
  * @Package cn.com.nl.evaluation.info.query.dao
  * @Description 游戏评测信息查询接口
- * @Author Li Siqi
  * @Date 2015年9月12日 下午5:47:58
  * @Version V1.0
  */

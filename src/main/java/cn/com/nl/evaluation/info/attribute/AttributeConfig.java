@@ -17,7 +17,6 @@ import cn.com.nl.framework.tools.ListSortUtil;
  * @Title AttributeConfig.java
  * @Package cn.com.nl.framework.config
  * @Description 缓存游戏评测元素信息类
- * @Author Liu Jing
  * @Date 2015年8月16日 下午4:37:36
  * @Version V1.0
  */

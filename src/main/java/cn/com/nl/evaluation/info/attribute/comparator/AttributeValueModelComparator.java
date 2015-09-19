@@ -7,8 +7,7 @@ import cn.com.nl.evaluation.info.attribute.model.AttributeValueModel;
 /**
  * @Title AttributeValueModelComparator.java
  * @Package cn.com.nl.framework.tools
- * @Description 
- * @Author Li Siqi
+ * @Description AttributeValueModel比较实现类
  * @Date 2015年8月19日 下午7:41:43
  * @Version V1.0
  */

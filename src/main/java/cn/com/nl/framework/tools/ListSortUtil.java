@@ -10,7 +10,6 @@ import cn.com.nl.evaluation.info.attribute.model.AttributeValueModel;
  * @Title ListSortUtil.java
  * @Package cn.com.nl.framework.tools
  * @Description 
- * @Author Li Siqi
  * @Date 2015年8月19日 下午7:35:58
  * @Version V1.0
  */

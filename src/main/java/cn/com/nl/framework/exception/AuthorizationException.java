@@ -4,7 +4,6 @@ package cn.com.nl.framework.exception;
  * @Title AuthorizationException.java
  * @Package cn.com.nl.framework.exception
  * @Description 用例登录验证异常
- * @Author Li Siqi
  * @Date 2015年8月29日 下午12:11:21
  * @Version V1.0
  */

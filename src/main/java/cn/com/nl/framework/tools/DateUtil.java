@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
  * @Title DateUtil.java
  * @Package cn.com.nl.framework.tools
  * @Description 日期操作工具类
- * @Author Li Siqi
  * @Date 2015年9月13日 下午10:15:49
  * @Version V1.0
  */

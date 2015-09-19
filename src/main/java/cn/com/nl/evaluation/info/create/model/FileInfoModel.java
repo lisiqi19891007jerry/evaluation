@@ -4,7 +4,6 @@ package cn.com.nl.evaluation.info.create.model;
  * @Title FileInfoModel.java
  * @Package cn.com.nl.evaluation.info.create.model
  * @Description 上传成功文件信息
- * @Author Li Siqi
  * @Date 2015年9月15日 下午10:14:09
  * @Version V1.0
  */

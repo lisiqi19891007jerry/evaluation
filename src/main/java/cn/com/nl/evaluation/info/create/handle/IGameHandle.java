@@ -9,7 +9,6 @@ import cn.com.nl.evaluation.info.create.FileOperationHelper;
  * @Title IGameHandle.java
  * @Package cn.com.nl.evaluation.info.create.handle
  * @Description 游戏信息操作接口
- * @Author Li Siqi
  * @Date 2015年9月17日 下午10:02:32
  * @Version V1.0
  */

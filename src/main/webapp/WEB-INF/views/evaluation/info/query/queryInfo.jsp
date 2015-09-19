@@ -74,7 +74,10 @@ function doQueryAction() {
 	document.getElementById("queryForm").submit();
 }
 
-function doShowDetailInfoAction() {
+function doShowDetailInfoAction(gameInfoID) {
+
+	$('#gameInfoID').val(gameInfoID);
+
 	document.getElementById("queryForm").action = "detailInfo.html";
 	document.getElementById("queryForm").submit();
 }
@@ -305,6 +308,8 @@ function doShowDetailInfoAction() {
 				</table>
 			</div>
 
+		<input type="hidden" id="gameInfoID" name="gameInfoID" />
+
 		<div class="tab_content" id="tab1" style="display: block; ">
 			<div class="row-fluid">
 				<table id="example" class="table table-hover table-first" >
@@ -331,8 +336,7 @@ function doShowDetailInfoAction() {
 							<tr>
 								<td>${status.index + 1}</td>
 								<td>
-									<a href="javascript:doShowDetailInfoAction()">${info.GameName}</a>
-									<input type="hidden" id="gameInfoID" name="gameInfoID" value="${info.ID}" />
+									<a href="javascript:doShowDetailInfoAction('${info.ID}')">${info.GameName}</a>
 								</td>
 								<td>${info.GameType}</td>
 								<td>${info.GameTheme}</td>

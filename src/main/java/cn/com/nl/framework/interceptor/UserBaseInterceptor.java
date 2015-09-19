@@ -15,7 +15,6 @@ import cn.com.nl.framework.base.BasicController;
  * @Title PanBI.java
  * @Package cn.com.nl.framework.interceptor
  * @Description 用户基本操作准备拦截器
- * @Author Li Siqi
  * @Date 2015年7月10日 下午11:18:40
  * @Version V1.0
  */

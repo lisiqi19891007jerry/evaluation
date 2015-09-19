@@ -6,7 +6,6 @@ import java.util.Map;
  * @Title DetailInfoDao.java
  * @Package cn.com.nl.evaluation.info.detail.dao
  * @Description 游戏评测信息明细查询接口
- * @Author Li Siqi
  * @Date 2015年9月12日 下午5:47:58
  * @Version V1.0
  */

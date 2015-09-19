@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
  * @Title MessageUtils.java
  * @Package cn.com.nl.framework.tools
  * @Description 信息操作工具类
- * @Author Li Siqi
  * @Date 2015年7月10日 下午11:51:16
  * @Version V1.0
  */

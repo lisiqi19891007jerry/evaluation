@@ -12,7 +12,6 @@ import cn.com.nl.evaluation.info.detail.dao.DetailInfoDao;
  * @Title DetailInfoDaoImpl.java
  * @Package cn.com.nl.evaluation.info.detail.dao.impl
  * @Description 游戏评测信息明细查询接口实现
- * @Author Li Siqi
  * @Date 2015年9月12日 下午5:48:23
  * @Version V1.0
  */

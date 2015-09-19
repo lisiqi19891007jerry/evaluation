@@ -6,7 +6,6 @@ import java.util.List;
  * @Title AttributeModel.java
  * @Package cn.com.nl.framework.model
  * @Description 记录游戏评测元素信息类
- * @Author Liu Jing
  * @Date 2015年8月16日 下午4:01:01
  * @Version V1.0
  */

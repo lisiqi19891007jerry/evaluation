@@ -4,7 +4,6 @@ package cn.com.nl.evaluation.info.create.model;
  * @Title UploadFileModel.java
  * @Package cn.com.nl.evaluation.info.create.model
  * @Description 与数据库表b_upload_file对应的实体类
- * @Author Li Siqi
  * @Date 2015年9月17日 下午10:39:53
  * @Version V1.0
  */

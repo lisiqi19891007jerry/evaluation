@@ -7,7 +7,6 @@ import cn.com.nl.evaluation.info.create.handle.IGameHandle;
  * @Title AbstractGameHandle.java
  * @Package cn.com.nl.evaluation.info.create
  * @Description 游戏信息上传抽象类，实现公共方法
- * @Author Li Siqi
  * @Date 2015年9月17日 下午10:11:44
  * @Version V1.0
  */

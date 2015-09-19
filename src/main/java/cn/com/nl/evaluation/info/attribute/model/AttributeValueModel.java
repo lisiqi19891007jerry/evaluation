@@ -4,7 +4,6 @@ package cn.com.nl.evaluation.info.attribute.model;
  * @Title AttributeValueModel.java
  * @Package cn.com.nl.framework.model
  * @Description 
- * @Author Liu Jing
  * @Date 2015年8月18日 下午7:57:05
  * @Version V1.0
  */
