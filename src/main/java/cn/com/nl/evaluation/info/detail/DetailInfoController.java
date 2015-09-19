@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.nl.evaluation.info.attribute.AttributeConfig;
@@ -39,14 +38,15 @@ public class DetailInfoController extends BasicController {
 	 * @return
 	 */
 	@RequestMapping(value = "/detailInfo")
-	public ModelAndView doShowDetailInfo(ModelMap model
-										,@RequestParam(value = "gameInfoID", required = false) String gameInfoID) {
+	public ModelAndView doShowDetailInfo(ModelMap model) {
 
 		// 取得话单显示项数据
 		Map<String, AttributeModel> attributeMap = AttributeConfig.getInstance(attributeDao).getAttributemap();
 
+		Map<String, String> parameterMap = getScreenParameterMap();
+
 		// 取得游戏评测详细信息
-		Map<String, Object> detailInfoMap = detailInfoDao.doSelectDetilGameInfo(gameInfoID);
+		Map<String, Object> detailInfoMap = detailInfoDao.doSelectDetilGameInfo(parameterMap.get("gameInfoID"));
 
 		if (detailInfoMap != null && detailInfoMap.size() > 0) {
 
@@ -83,7 +83,7 @@ public class DetailInfoController extends BasicController {
 			}
 		}
 
-		model.addAttribute("gameInfoID", gameInfoID);
+		model.addAttribute("parameterMap", parameterMap);
 		model.addAttribute("attributeMap", attributeMap);
 		model.addAttribute("detailInfoMap", detailInfoMap);
 

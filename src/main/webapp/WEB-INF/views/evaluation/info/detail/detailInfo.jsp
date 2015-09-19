@@ -8,6 +8,9 @@
 <link rel="stylesheet" type="text/css" href="resources/style/info/bootstrap-custom.css" />
 
 <script>
+function doGoBackAction() {
+	document.getElementById("backForm").submit();
+}
 function doDownloadFileAction(fileID) {
 	doRedriect('detailInfo/download.html?fileID=' + fileID);
 }
@@ -27,6 +30,10 @@ function doDownloadFileAction(fileID) {
          </div>
 	</div>
 </div> 
+
+<form id="backForm" action="queryInfo/query.html" method="post">
+
+<input type="button" class="btn radius btn-primary btn-small" value="返回" onclick="doGoBackAction();"/>
 
 <div class="container-content">
 	<div class="m_detail">
@@ -181,3 +188,27 @@ function doDownloadFileAction(fileID) {
 		</tr>
 	</table>
 </div>
+
+<!-- 返回查询条件 -->
+<input type="hidden" id="painting_style_1" name="painting_style_1" value="${parameterMap.painting_style_1}" />
+<input type="hidden" id="painting_style_2" name="painting_style_2" value="${parameterMap.painting_style_2}" />
+<input type="hidden" id="scene" name="scene" value="${parameterMap.scene}" />
+<input type="hidden" id="show_person_type" name="show_person_type" value="${parameterMap.show_person_type}" />
+<input type="hidden" id="in_game_name" name="in_game_name" value="${parameterMap.in_game_name}" />
+
+<input type="hidden" id="platform_type" name="platform_type" value="${parameterMap.platform_type}" />
+<input type="hidden" id="game_type" name="game_type" value="${parameterMap.game_type}" />
+<input type="hidden" id="in_game_type" name="in_game_type" value="${parameterMap.in_game_type}" />
+<input type="hidden" id="evaluation_person" name="evaluation_person" value="${parameterMap.evaluation_person}" />
+<input type="hidden" id="evaluation_date_start" name="evaluation_date_start" value="${parameterMap.evaluation_date_start}" />
+
+<input type="hidden" id="evaluation_date_end" name="evaluation_date_end" value="${parameterMap.evaluation_date_end}" />
+<input type="hidden" id="in_game_theme" name="in_game_theme" value="${parameterMap.in_game_theme}" />
+<input type="hidden" id="evaluation_level" name="evaluation_level" value="${parameterMap.evaluation_level}" />
+<input type="hidden" id="online_level" name="online_level" value="${parameterMap.online_level}" />
+<input type="hidden" id="in_game_publisher" name="in_game_publisher" value="${parameterMap.in_game_publisher}" />
+
+<input type="hidden" id="testScore_start" name="testScore_start" value="${parameterMap.testScore_start}" />
+<input type="hidden" id="testScore_end" name="testScore_end" value="${parameterMap.testScore_end}" />
+<input type="hidden" id="in_game_reference" name="in_game_reference" value="${parameterMap.in_game_reference}" />
+</form>
