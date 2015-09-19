@@ -19,26 +19,6 @@
 <script type="text/javascript">
 function doQueryAction() {
 
-	if ($('input:radio[name="painting_style_1"]:checked').val() == null) {
-		showMessage("请选择画风中的绘画类型！");
-		return false;
-	}
-
-	if ($('input:radio[name="painting_style_2"]:checked').val() == null) {
-		showMessage("请选择画风中的风格类型！");
-		return false;
-	}
-
-	if ($('input:radio[name="scene"]:checked').val() == null) {
-		showMessage("请选择画面纬度中的场景类型！");
-		return false;
-	}
-
-	if ($('input:radio[name="show_person_type"]:checked').val() == null) {
-		showMessage("请选择画面纬度中的人物类型！");
-		return false;
-	}
-
 	var evaluation_date_start = $('#evaluation_date_start').val();
 	var evaluation_date_end   = $('#evaluation_date_end').val();
 
@@ -62,11 +42,6 @@ function doQueryAction() {
 			showMessage("测评日期的截至时间小于起始时间，请重新选择！");
 			return false;
 		}
-	}
-
-	if ($('#evaluation_level').val() == null) {
-		showMessage("请选择查询的测评评级！");
-		return false;
 	}
 
 	var testScore_start = $('#testScore_start').val();
@@ -99,10 +74,7 @@ function doQueryAction() {
 }
 
 function doShowDetailInfoAction(gameInfoID) {
-
-	var url = 'detailInfo.html?gameInfoID=' + gameInfoID;
-
-	doRedriect(url);
+	doRedriect('detailInfo.html?gameInfoID=' + gameInfoID);
 }
 </script>
 
@@ -131,23 +103,27 @@ function doShowDetailInfoAction(gameInfoID) {
 					<tr class="row1">
 						<td class="td1">
 							<span class="info1">
-								画风<i class="mei">*</i><strong>：</strong>
+								画风<strong>：</strong>
 							</span>
+							<!-- 绘画 -->
 							<strong>①</strong>
 							<span class="sence">
-								绘画<i class="mei">*</i><strong>：</strong>
+								${attributeMap.painting_style_1.attributeShowName}<strong>：</strong>
 							</span>
 							<c:forEach var="painting_style_1" items="${attributeMap.painting_style_1.attributeValueList}" varStatus="status">
-								<input type="radio" name="painting_style_1" value="${painting_style_1.attributeValue}" />${painting_style_1.attributeName}
+								<input type="radio" name="painting_style_1" value="${painting_style_1.attributeValue}"
+									<c:if test="${painting_style_1.attributeValue eq parameterMap.painting_style_1}">checked="checked"</c:if> />${painting_style_1.attributeName}
 							</c:forEach>
 							<br />
 							<span class="twostyle" >
+								<!-- 风格 -->
 								<strong>②</strong>
 								<span class="people">
-									风格<i class="mei">*</i><strong>：</strong>
+									${attributeMap.painting_style_2.attributeShowName}<strong>：</strong>
 								</span>
 								<c:forEach var="painting_style_2" items="${attributeMap.painting_style_2.attributeValueList}" varStatus="status">
-									<input type="radio" name="painting_style_2" value="${painting_style_2.attributeValue}" />${painting_style_2.attributeName}
+									<input type="radio" name="painting_style_2" value="${painting_style_2.attributeValue}"
+										<c:if test="${painting_style_2.attributeValue eq parameterMap.painting_style_2}">checked="checked"</c:if> />${painting_style_2.attributeName}
 								</c:forEach>
 							</span>
 						</td>
@@ -155,27 +131,31 @@ function doShowDetailInfoAction(gameInfoID) {
 							<span class="info">
 								画面纬度<strong>：</strong>
 							</span>
+							<!-- 场景 -->
 							<strong>①</strong>
 							<span class="sence">
-								${attributeMap.scene.attributeShowName}<i class="mei">*</i><strong>：</strong>
+								${attributeMap.scene.attributeShowName}<strong>：</strong>
 							</span>
 							<c:forEach var="scene" items="${attributeMap.scene.attributeValueList}" varStatus="status">
-								<input type="radio" name="scene" value="${scene.attributeValue}" />${scene.attributeName}&nbsp;
+								<input type="radio" name="scene" value="${scene.attributeValue}"
+									<c:if test="${scene.attributeValue eq parameterMap.scene}">checked="checked"</c:if> />${scene.attributeName}&nbsp;
 							</c:forEach>
 							<br />
 							<span class="twopeople">
+								<!-- 人物 -->
 								<strong>②</strong>
 								<span class="people">
-									${attributeMap.show_person_type.attributeShowName}<i class="mei">*</i><strong>：</strong>
+									${attributeMap.show_person_type.attributeShowName}<strong>：</strong>
 								</span>
 								<c:forEach var="show_person_type" items="${attributeMap.show_person_type.attributeValueList}" varStatus="status">
-									<input type="radio" name="show_person_type" value="${show_person_type.attributeValue}" />${show_person_type.attributeName}&nbsp;
+									<input type="radio" name="show_person_type" value="${show_person_type.attributeValue}"
+										<c:if test="${show_person_type.attributeValue eq parameterMap.show_person_type}">checked="checked"</c:if> />${show_person_type.attributeName}&nbsp;
 								</c:forEach>
 							</span>
 						</td>
 						<td class="td11">
 							<span class="info">游戏名</span>
-							<input id="in_game_name" name="in_game_name" class="userSelect" type="text" style="color:#a0a0a0;font-size:12px;" value="${in_game_name}"
+							<input id="in_game_name" name="in_game_name" class="userSelect" type="text" style="color:#a0a0a0;font-size:12px;" value="${parameterMap.in_game_name}"
 								onfocus="if (value =='请输入关键字'){this.style.color='#000000';value =''}"
 								onblur="if (value ==''){this.style.color='#a0a0a0'}" />
 						</td>
@@ -188,7 +168,8 @@ function doShowDetailInfoAction(gameInfoID) {
 								${attributeMap.platform_type.attributeShowName}<strong>：</strong>
 							</span>
 							<c:forEach var="platform_type" items="${attributeMap.platform_type.attributeValueList}" varStatus="status">
-								<input type="radio" name="platform_type" value="${platform_type.attributeValue}" />${platform_type.attributeName}&nbsp;
+								<input type="radio" name="platform_type" value="${platform_type.attributeValue}"
+									<c:if test="${platform_type.attributeValue eq parameterMap.platform_type}">checked="checked"</c:if> />${platform_type.attributeName}&nbsp;
 							</c:forEach>
 						</td>
 						<td class="td2">
@@ -202,7 +183,7 @@ function doShowDetailInfoAction(gameInfoID) {
 						</td>
 						<td class="td11">
 							<span class="info">游戏类型</span>
-							<input id="in_game_type" name="in_game_type" class="userSelect" type="text" style="color:#a0a0a0;font-size:12px;" value="${in_game_type}"
+							<input id="in_game_type" name="in_game_type" class="userSelect" type="text" style="color:#a0a0a0;font-size:12px;" value="${parameterMap.in_game_type}"
 								onfocus="if (value =='请输入关键字'){this.style.color='#000000';value =''}"
 								onblur="if (value ==''){this.style.color='#a0a0a0'}" />
 						</td>
@@ -214,19 +195,21 @@ function doShowDetailInfoAction(gameInfoID) {
 							<span class="info">
 								${attributeMap.evaluation_person.attributeShowName}<strong>：</strong>
 							</span>
-							<select id="evaluation_person" name="evaluation_person" class="selText1" >
-								<c:forEach var="evaluation_person" items="${attributeMap.evaluation_person.attributeValueList}" varStatus="status">
-									<option value="${evaluation_person.attributeValue}">${evaluation_person.attributeName}</option>
+							<select id="evaluation_person" name="evaluation_person" class="selText1">
+								<option value="" selected="selected"></option>
+	 							<c:forEach var="evaluation_person" items="${userList}" varStatus="status">
+									<option value="${evaluation_person.account}"
+										<c:if test="${evaluation_person.account eq parameterMap.evaluation_person}">selected="selected"</c:if>>${evaluation_person.username}</option>
 								</c:forEach>
-							</select>
+	 						</select>
 						</td>
 						<td class="td2">
 							<span class="info">
 								测评日期<strong>：</strong>
 							</span>
-							<input type="text" id="evaluation_date_start" name="evaluation_date_start" class="testText" readonly="readonly" />
+							<input type="text" id="evaluation_date_start" name="evaluation_date_start" class="testText" readonly="readonly" value="${parameterMap.evaluation_date_start}"/>
 							至
-							<input type="text" id="evaluation_date_end" name="evaluation_date_end" class="testText" readonly="readonly" />
+							<input type="text" id="evaluation_date_end" name="evaluation_date_end" class="testText" readonly="readonly" value="${parameterMap.evaluation_date_end}"/>
 							<div id="selected"></div>
 							<script>
 								var picker = new Pikaday(
@@ -255,7 +238,7 @@ function doShowDetailInfoAction(gameInfoID) {
 						</td>
 						<td class="td11">
 							<span class="info">游戏题材</span>
-							<input id="in_game_theme" name="in_game_theme" class="userSelect" type="text" style="color:#a0a0a0;font-size:12px;" value="${in_game_theme}"
+							<input id="in_game_theme" name="in_game_theme" class="userSelect" type="text" style="color:#a0a0a0;font-size:12px;" value="${parameterMap.in_game_theme}"
 								onfocus="if (value =='请输入关键字'){this.style.color='#000000';value =''}"
 								onblur="if (value ==''){this.style.color='#a0a0a0'}" />
 						</td>
@@ -265,11 +248,13 @@ function doShowDetailInfoAction(gameInfoID) {
 					<tr class="row4">
 						<td class="td1">
 							<span class="info">
-								${attributeMap.evaluation_level.attributeShowName}<i class="mei">*</i><strong>：</strong>
+								${attributeMap.evaluation_level.attributeShowName}<strong>：</strong>
 							</span>
 							<select id="evaluation_level" name="evaluation_level" class="selText1">
+								<option value="" selected="selected"></option>
 								<c:forEach var="evaluation_level" items="${attributeMap.evaluation_level.attributeValueList}" varStatus="status">
-									<option value="${evaluation_level.attributeValue}">${evaluation_level.attributeName}</option>
+									<option value="${evaluation_level.attributeValue}"
+										<c:if test="${evaluation_level.attributeValue eq parameterMap.evaluation_level}">selected="selected"</c:if>>${evaluation_level.attributeName}</option>
 								</c:forEach>
 							</select>
 						</td>
@@ -279,13 +264,14 @@ function doShowDetailInfoAction(gameInfoID) {
 							</span>
 							<select id="online_level" name="online_level" class="selText1">
 								<c:forEach var="online_level" items="${attributeMap.online_level.attributeValueList}" varStatus="status">
-									<option value="${online_level.attributeValue}">${online_level.attributeName}</option>
+									<option value="${online_level.attributeValue}"
+										<c:if test="${online_level.attributeValue eq parameterMap.online_level}">selected="selected"</c:if>>${online_level.attributeName}</option>
 								</c:forEach>
 							</select>
 						</td>
 						<td class="td11">
 							<span class="info">发行商或研发商</span>
-							<input id="in_game_publisher" name="in_game_publisher" class="userSelect" type="text" style="color:#a0a0a0;font-size:12px;" value="${in_game_publisher}"
+							<input id="in_game_publisher" name="in_game_publisher" class="userSelect" type="text" style="color:#a0a0a0;font-size:12px;" value="${parameterMap.in_game_publisher}"
 								onfocus="if (value =='请输入关键字'){this.style.color='#000000';value =''}"
 								onblur="if (value ==''){this.style.color='#a0a0a0'}" />
 						</td>
@@ -295,14 +281,14 @@ function doShowDetailInfoAction(gameInfoID) {
 					<tr class="row5">
 						<td class="td1">
 							测评分<strong>：</strong>
-							<input type="text" id="testScore_start" name="testScore_start" class="testS" size="5" maxlength="5" />
+							<input type="text" id="testScore_start" name="testScore_start" class="testS" size="5" maxlength="5" value="${parameterMap.testScore_start}" />
 							至
-							<input type="text" id="testScore_end" name="testScore_end" class="testS" size="5" maxlength="5" />
+							<input type="text" id="testScore_end" name="testScore_end" class="testS" size="5" maxlength="5" value="${parameterMap.testScore_end}" />
 						</td>
 						<td class="td2"></td>
 						<td class="td11">
 							<span class="info">参考竞品或战斗养成</span>
-							<input id="in_game_reference" name="in_game_reference" class="userSelect" type="text" style="color:#a0a0a0;font-size:12px;" value="${in_game_reference}"
+							<input id="in_game_reference" name="in_game_reference" class="userSelect" type="text" style="color:#a0a0a0;font-size:12px;" value="${parameterMap.in_game_reference}"
 								onfocus="if (value =='请输入关键字'){this.style.color='#000000';value =''}"
 								onblur="if (value ==''){this.style.color='#a0a0a0'}" />
 						</td>
@@ -348,17 +334,23 @@ function doShowDetailInfoAction(gameInfoID) {
 								</td>
 								<td>${info.GameType}</td>
 								<td>${info.GameTheme}</td>
-								<td>${info.InstallationSize}</td>
+								<td>${info.InstallationSize} MB</td>
 								<td>${info.Platform}</td>
 								<td>${info.GameClassify}</td>
 								<td>${info.EvaluationModel}</td>
 								<td>${info.Datetime}</td>
-								<td>${info.EvaluationPeople}</td>
+								<td>${info.username}</td>
 								<td>${info.EvaluationPoint}</td>
 								<td>${info.Classified_Evaluate}</td>
 								<td>${info.Evaluation_Potential_Grade}</td>
 							</tr>
 						</c:forEach>
+
+						<c:if test="${empty gameInfoList}">
+							<tr>
+								<td colspan="13">没有评测信息记录</td>
+							</tr>
+						</c:if>
 					</tbody>
 				</table>
 

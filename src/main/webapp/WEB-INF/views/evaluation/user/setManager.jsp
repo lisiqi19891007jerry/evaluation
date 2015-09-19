@@ -20,14 +20,7 @@ $(document).ready(function() {
 });
 
 function doQueryUserAction() {
-/* 
-	var username = $("#userText").val();
 
-	if (username == '') {
-		alert("请输出查询条件（用户名），支持模糊查询。")
-		return;
-	}
- */
 	var url = 'user.html?username=' + username;
 
 	doRedriect(url);

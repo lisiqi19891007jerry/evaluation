@@ -29,107 +29,137 @@ public class QueryInfoDaoImpl implements QueryInfoDao {
 		StringBuffer sql = new StringBuffer();
 
 		sql.append(" SELECT * ");
-		sql.append("   FROM b_gameinformation ");
-		sql.append("  WHERE Painting_style_1    = " + parameterMap.get("painting_style_1"));
-		sql.append("    AND Painting_style_2    = " + parameterMap.get("painting_style_2"));
-		sql.append("    AND Scene               = " + parameterMap.get("sence"));
-		sql.append("    AND Show_person_type    = " + parameterMap.get("show_person_type"));
-		sql.append("    AND Classified_Evaluate = '" + parameterMap.get("evaluation_level") + "' ");
+		sql.append("   FROM b_gameinformation AS info");
+		sql.append("   LEFT JOIN c_user AS user ON info.EvaluationPeople = user.account");
+		sql.append("  WHERE 1 = 1");
+
+		// 绘画
+		String paintingStyle1 = parameterMap.get("painting_style_1");
+
+		if (StringUtils.isNotBlank(paintingStyle1)) {
+			sql.append(" AND Painting_style_1 = '" + paintingStyle1 + "' ");
+		}
+
+		// 风格
+		String paintingStyle2 = parameterMap.get("painting_style_2");
+
+		if (StringUtils.isNotBlank(paintingStyle2)) {
+			sql.append(" AND Painting_style_2 = '" + paintingStyle2 + "' ");
+		}
+
+		// 场景
+		String sence = parameterMap.get("sence");
+
+		if (StringUtils.isNotBlank(sence)) {
+			sql.append(" AND Scene = '" + sence + "' ");
+		}
+
+		// 人物
+		String showPersonType = parameterMap.get("show_person_type");
+
+		if (StringUtils.isNotBlank(showPersonType)) {
+			sql.append(" AND Show_person_type = '" + showPersonType + "' ");
+		}
 
 		// 游戏名
 		String gameName = parameterMap.get("in_game_name");
 
 		if (StringUtils.isNotBlank(gameName)) {
-			sql.append("    AND GameName LIKE '%" + gameName + "%' ");
+			sql.append(" AND GameName LIKE '%" + gameName + "%' ");
 		}
 
 		// 平台
 		String platformType = parameterMap.get("platform_type");
 
 		if (StringUtils.isNotBlank(platformType)) {
-			sql.append("    AND Platform = '" + platformType + "' ");
+			sql.append(" AND Platform = '" + platformType + "' ");
 		}
 
 		// 单机or网游
 		String gameType = parameterMap.get("game_type");
 
 		if (StringUtils.isNotBlank(gameType)) {
-			sql.append("    AND GameClassify = " + gameType + " ");
+			sql.append(" AND GameClassify = '" + gameType + "' ");
 		}
 
 		// 游戏类型
 		String inGameType = parameterMap.get("in_game_type");
 
 		if (StringUtils.isNotBlank(inGameType)) {
-			sql.append("    AND GameType LIKE '%" + inGameType + "%' ");
+			sql.append(" AND GameType LIKE '%" + inGameType + "%' ");
 		}
 
 		// 测评人
 		String evaluationPerson = parameterMap.get("evaluation_person");
 
 		if (StringUtils.isNotBlank(evaluationPerson)) {
-			sql.append("    AND EvaluationPeople = '" + evaluationPerson + "' ");
+			sql.append(" AND EvaluationPeople = '" + evaluationPerson + "' ");
 		}
 
 		// 测评日期-开始
 		String evaluationDateStart = parameterMap.get("evaluation_date_start");
 
 		if (StringUtils.isNotBlank(evaluationDateStart)) {
-			sql.append("    AND Datetime >= '" + evaluationDateStart + "' ");
+			sql.append(" AND Datetime >= '" + evaluationDateStart + "' ");
 		}
 
 		// 测评日期-结束
 		String evaluationDateEnd = parameterMap.get("evaluation_date_end");
 
 		if (StringUtils.isNotBlank(evaluationDateEnd)) {
-			sql.append("    AND Datetime <= '" + evaluationDateEnd + "' ");
+			sql.append(" AND Datetime <= '" + evaluationDateEnd + "' ");
 		}
 
 		// 游戏题材
 		String inGameTheme = parameterMap.get("in_game_theme");
 
 		if (StringUtils.isNotBlank(inGameTheme)) {
-			sql.append("    AND Datetime LIKE '%" + inGameTheme + "%' ");
+			sql.append(" AND Datetime LIKE '%" + inGameTheme + "%' ");
+		}
+
+		// 测评评级
+		String evaluationLevel = parameterMap.get("evaluation_level");
+
+		if (StringUtils.isNotBlank(evaluationLevel)) {
+			sql.append(" AND Classified_Evaluate = '" + evaluationLevel + "' ");
 		}
 
 		// 上线表现级别
 		String onlineLevel = parameterMap.get("online_level");
 
 		if (StringUtils.isNotBlank(onlineLevel)) {
-			sql.append("    AND PublishManifestation = '" + onlineLevel + "' ");
+			sql.append(" AND PublishManifestation = '" + onlineLevel + "' ");
 		}
 
 		// 发行商或研发商
 		String inGamePublisher = parameterMap.get("in_game_publisher");
 
 		if (StringUtils.isNotBlank(inGamePublisher)) {
-			sql.append("    AND PublishManifestation LIKE '%" + inGamePublisher + "%' ");
+			sql.append(" AND PublishManifestation LIKE '%" + inGamePublisher + "%' ");
 		}
 
 		// 测评分-开始
 		String testScoreStart = parameterMap.get("testScore_start");
 
 		if (StringUtils.isNotBlank(testScoreStart)) {
-			sql.append("    AND EvaluationPoint >=" + testScoreStart + " ");
+			sql.append(" AND EvaluationPoint >=" + testScoreStart + " ");
 		}
 
 		// 测评分-结束
 		String testScoreEnd = parameterMap.get("testScore_end");
 
 		if (StringUtils.isNotBlank(testScoreEnd)) {
-			sql.append("    AND EvaluationPoint <=" + testScoreEnd + " ");
+			sql.append(" AND EvaluationPoint <=" + testScoreEnd + " ");
 		}
 
 		// 参考竞品或战斗养成
 		String inGameReference = parameterMap.get("in_game_reference");
 
 		if (StringUtils.isNotBlank(inGameReference)) {
-			sql.append("    AND EvaluationPoint LIKE '%" + inGameReference + "%' ");
+			sql.append(" AND EvaluationPoint LIKE '%" + inGameReference + "%' ");
 		}
 
-		sql.append("  ORDER BY Datetime DESC ");
-
-		System.out.println(sql.toString());
+		sql.append(" ORDER BY Datetime DESC ");
 
 		return jdbcTemplate.queryForList(sql.toString());
 	}

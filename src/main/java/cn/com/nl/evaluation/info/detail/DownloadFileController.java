@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpHeaders;
@@ -34,7 +35,7 @@ public class DownloadFileController extends BasicController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/detail/download")
+	@RequestMapping(value = "/detailInfo/download")
 	public ResponseEntity<byte[]> doShowDetailInfo(ModelMap model
 												  ,@RequestParam(value = "fileID", required = false) String fileID) {
 
@@ -45,7 +46,7 @@ public class DownloadFileController extends BasicController {
 		String fileName = (String) fileInfoMap.get("file_name");
 		String fileExt  = (String) fileInfoMap.get("file_extension");
 
-		fileName = fileName + "." + fileExt;
+		fileName = StringUtils.substring(fileName, 15) + "." + fileExt;
 
 		try {
 			fileName = new String(fileName.getBytes("UTF-8"), "iso-8859-1");
