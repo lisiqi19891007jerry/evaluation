@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2015-09-18 00:25:34
+Date: 2015-09-19 15:34:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,7 +23,7 @@ CREATE TABLE `b_gameinformation` (
   `ID` varchar(50) NOT NULL,
   `Datetime` datetime NOT NULL,
   `EvaluationPeople` varchar(20) NOT NULL,
-  `EvaluationPoint` float(10,0) NOT NULL,
+  `EvaluationPoint` float(20,10) NOT NULL,
   `PublishManifestation` varchar(10) DEFAULT NULL,
   `Classified_Evaluate` varchar(10) DEFAULT NULL,
   `Evaluation_Potential_Grade` varchar(10) DEFAULT NULL,
@@ -37,28 +37,38 @@ CREATE TABLE `b_gameinformation` (
   `Publisher` varchar(40) NOT NULL,
   `GameType` varchar(40) NOT NULL,
   `GameTheme` varchar(40) NOT NULL COMMENT '游戏题材',
-  `IsAuthorization` tinyint(1) DEFAULT NULL,
-  `InstallationSize` float(10,0) NOT NULL,
+  `IsAuthorization` varchar(1) DEFAULT NULL,
+  `InstallationSize` float(20,10) NOT NULL,
   `Platform` varchar(20) NOT NULL,
-  `Completeness` int(10) NOT NULL,
-  `GameClassify` int(1) NOT NULL,
-  `Scene` int(1) NOT NULL,
-  `Show_person_type` int(1) NOT NULL,
-  `Painting_style_1` int(1) NOT NULL,
-  `Painting_style_2` int(1) NOT NULL,
-  `DegreeOfPlay` int(10) NOT NULL,
-  `Out_test_type_1` int(1) NOT NULL,
-  `Out_test_type_2` int(1) NOT NULL,
-  `Paytype` int(10) NOT NULL,
-  `Privilege` int(10) NOT NULL,
-  `EvaluationModel` int(10) NOT NULL,
-  `Retestcondition` int(10) NOT NULL,
+  `Completeness` float(20,10) NOT NULL,
+  `GameClassify` varchar(1) NOT NULL,
+  `Scene` varchar(1) NOT NULL,
+  `Show_person_type` varchar(1) NOT NULL,
+  `Painting_style_1` varchar(1) NOT NULL,
+  `Painting_style_2` varchar(1) NOT NULL,
+  `DegreeOfPlay` varchar(10) NOT NULL,
+  `Out_test_type_1` varchar(1) NOT NULL,
+  `Out_test_type_2` varchar(1) NOT NULL,
+  `Paytype` varchar(10) NOT NULL,
+  `Privilege` varchar(10) NOT NULL,
+  `EvaluationModel` varchar(10) NOT NULL,
+  `Retestcondition` varchar(10) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_gameinformation
 -- ----------------------------
+INSERT INTO `b_gameinformation` VALUES ('05f8f69511d0', '2015-09-20 00:00:00', '222', '0.0099999998', 'A+', 'B+', 'A+', '上线表现特殊字符@#%……&×（）&……', '参考竞品特殊字符@#%……&×（）&……', '参考战斗特殊字符@#%……&×（）&……', 'dec653c42892', '3cc7eafe1083', '1_特殊字符！@#￥%……&×/n  他', '研发商1', '发行商1', '游戏类型', '游戏题材', '1', '99.9899978638', '0', '100.0000000000', '0', '0', '0', '0', '0', '0', '1', '1', '1', '0', '', '0');
+INSERT INTO `b_gameinformation` VALUES ('164f9525d0ec', '2015-09-17 00:00:00', '444', '3.0000000000', 'B+', 'A', 'B', '上线表现评价说明', '参考竞品养成方面', '参考战斗养成方面', '', 'd4e110e7992e', '游戏名', '研发商', '发行商', '游戏类型', '游戏题材', '1', '1.0000000000', '0', '2.0000000000', '0', '0', '0', '1', '0', '2', '1', '1', '1', '1', '2', '2');
+INSERT INTO `b_gameinformation` VALUES ('1df5a36ef434', '2015-09-19 00:00:00', '111', '1.0000000000', '', 'B', '', '', '', '', '', '', '只填全部必填信息', '', '', '游戏类型', '游戏题材', '1', '1.0000000000', '0', '100.0000000000', '0', '0', '0', '0', '0', '0', '2', '2', '', '', '1', '0');
+INSERT INTO `b_gameinformation` VALUES ('38b86cb077fd', '2015-09-19 00:00:00', '111', '3.0000000000', '', 'A+', '', '', '', '', '', '', '必填信息+评测报告', '', '', '游戏类型', '游戏题材', '0', '1.0000000000', '0', '100.0000000000', '0', '1', '1', '1', '2', '2', '2', '2', '', '', '', '0');
+INSERT INTO `b_gameinformation` VALUES ('3c641cf93b54', '2015-09-19 00:00:00', '547773', '3.0000000000', '', 'B', '', '', '', '', 'c3376f082852', '', '必填信息+评测报告', '', '', '游戏类型', '游戏题材', '1', '1.0000000000', '0', '100.0000000000', '2', '1', '1', '1', '2', '2', '2', '2', '', '', '', '0');
+INSERT INTO `b_gameinformation` VALUES ('53532cacd1f6', '2015-09-19 00:00:00', '111', '3.0000000000', '', 'B', '', '', '', '', 'b2666f88982c', 'e4fd375f3b61', '非管理员新增的', '', '', '游戏类型', '游戏题材', '0', '1.0000000000', '0', '100.0000000000', '0', '0', '0', '1', '1', '0', '2', '2', '', '', '', '0');
+INSERT INTO `b_gameinformation` VALUES ('a17f0ec63b75', '2015-09-19 00:00:00', '547773', '123.0000000000', '', 'B+', '', '', '', '', '', '', '必填信息+评测报告', '', '', '游戏类型', '游戏题材', '0', '123.0000000000', '1', '100.0000000000', '1', '1', '1', '1', '1', '1', '2', '2', '', '', '', '0');
+INSERT INTO `b_gameinformation` VALUES ('af4a89ebb471', '2015-09-18 00:00:00', '111', '99.9899978638', 'A+', 'A+', 'A+', '', '', '', '', '', 'test001', '', '', '游戏类型1', '游戏题材1', '1', '111.0100021362', '0', '100.0000000000', '0', '1', '1', '1', '1', '1', '1', '1', '2', '1', '1', '0');
+INSERT INTO `b_gameinformation` VALUES ('effed78b6c0a', '2015-09-20 00:00:00', '111', '0.0099999998', '', 'B', '', '', '', '', '', '', '游戏名称长---很长很长，不够长啦啦', '', '', '游戏类型会有多少个字呢？一般情况下', '游戏题材会有多少个字呢？一般情况下就这', '1', '1.0000000000', '0', '100.0000000000', '0', '0', '1', '1', '0', '0', '2', '2', '', '', '', '0');
+INSERT INTO `b_gameinformation` VALUES ('ff92c39cf7c5', '2015-09-01 00:00:00', '444', '999.0000000000', '', 'A+', '', '', '', '', '', '', '游戏名', '', '', '游戏类型', '游戏题材', '0', '123.0000000000', '1', '100.0000000000', '1', '1', '1', '1', '1', '1', '2', '2', '', '', '', '1');
 
 -- ----------------------------
 -- Table structure for b_upload_file
@@ -77,7 +87,12 @@ CREATE TABLE `b_upload_file` (
 -- ----------------------------
 -- Records of b_upload_file
 -- ----------------------------
-INSERT INTO `b_upload_file` VALUES ('57d514542090', 'test', '20150915001125_员工自带电脑申请表', 'E:/test/test//201509/20150915001125_员工自带电脑申请表.doc', 'doc', '2015-09-15 00:11:25');
+INSERT INTO `b_upload_file` VALUES ('3cc7eafe1083', 'play', '20150919152353_员工自带电脑申请表', 'E:/test/play//201509/20150919152353_员工自带电脑申请表.doc', 'doc', '2015-09-19 15:23:54');
+INSERT INTO `b_upload_file` VALUES ('b2666f88982c', 'test', '20150919130910_员工自带电脑申请表', 'E:/test/test//201509/20150919130910_员工自带电脑申请表.doc', 'doc', '2015-09-19 13:09:11');
+INSERT INTO `b_upload_file` VALUES ('c3376f082852', 'test', '20150919125427_融合计费_集成测试（手动）测试情况截图', 'E:/test/test//201509/20150919125427_融合计费_集成测试（手动）测试情况截图.xlsx', 'xlsx', '2015-09-19 12:54:27');
+INSERT INTO `b_upload_file` VALUES ('d4e110e7992e', 'play', '20150919022345_融合计费_集成测试（手动）测试情况截图', 'E:/test/play//201509/20150919022345_融合计费_集成测试（手动）测试情况截图.xlsx', 'xlsx', '2015-09-19 02:23:45');
+INSERT INTO `b_upload_file` VALUES ('dec653c42892', 'test', '20150919152353_员工自带电脑申请表', 'E:/test/test//201509/20150919152353_员工自带电脑申请表.doc', 'doc', '2015-09-19 15:23:53');
+INSERT INTO `b_upload_file` VALUES ('e4fd375f3b61', 'play', '20150919130910_融合计费_集成测试用例大纲', 'E:/test/play//201509/20150919130910_融合计费_集成测试用例大纲.xlsx', 'xlsx', '2015-09-19 13:09:11');
 
 -- ----------------------------
 -- Table structure for c_attribute
@@ -169,7 +184,8 @@ CREATE TABLE `c_user` (
 -- Records of c_user
 -- ----------------------------
 INSERT INTO `c_user` VALUES ('0dd7bfcf1bf3', '444', '202cb962ac59075b964b07152d234b70', '李四', '1', '1', '2015-08-25 00:22:23', '2015-08-25 01:25:41');
-INSERT INTO `c_user` VALUES ('3366584bdf8a', '555', '6074c6aa3488f3c2dddff2a7ca821aab', '王五', '1', '0', '2015-08-25 00:24:31', '2015-08-25 01:24:56');
+INSERT INTO `c_user` VALUES ('3366584bdf8a', '555', '202cb962ac59075b964b07152d234b70', '王五', '1', '0', '2015-08-25 00:24:31', '2015-09-19 12:58:14');
+INSERT INTO `c_user` VALUES ('473556c89437', '547773', '202cb962ac59075b964b07152d234b70', 'lj', '1', '1', '2015-09-18 23:51:42', '2015-09-18 23:51:42');
 INSERT INTO `c_user` VALUES ('7adfa845c45c', '333', '81dc9bdb52d04dc20036dbd8313ed055', '张三', '0', '0', '2015-08-23 11:04:22', '2015-08-23 11:04:26');
 INSERT INTO `c_user` VALUES ('b71353591a85', '111', '698d51a19d8a121ce581499d7b701668', '赵一', '1', '1', '2015-08-25 00:13:32', '2015-08-29 13:44:31');
 INSERT INTO `c_user` VALUES ('c79e8683b224', '222', 'bcbe3365e6ac95ea2c0343a2395834dd', '钱二', '1', '1', '2015-08-25 00:17:38', '2015-08-25 01:25:16');
