@@ -309,7 +309,8 @@ $(document).ready(function() {
 	 				<td class="td4">
 	 					<select id="tester" name="tester">
 	 						<c:forEach var="tester" items="${userList}" varStatus="status">
-								<option value="${tester.account}">${tester.username}</option>
+								<option value="${tester.account}"
+									<c:if test="${tester.account eq account}">selected="selected"</c:if>>${tester.username}</option>
 							</c:forEach>
 	 					</select>
 	 				</td>

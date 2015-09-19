@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.nl.evaluation.info.attribute.AttributeConfig;
 import cn.com.nl.evaluation.info.attribute.dao.AttributeDao;
-import cn.com.nl.evaluation.info.attribute.model.AttributeModel;
 import cn.com.nl.evaluation.login.dao.LoginDao;
 import cn.com.nl.framework.base.BasicController;
 import cn.com.nl.framework.constant.SystemConstant;
@@ -71,10 +70,7 @@ public class LoginController extends BasicController {
 				// 将登录成功用户信息保存到session中
 				saveUserMessage(userInfoMap);
 
-				// 取得话单显示项数据
-				Map<String, AttributeModel> attributeMap = AttributeConfig.getInstance(attributeDao).getAttributemap();
-
-				model.addAttribute("attributeMap", attributeMap);
+				setScreenShowData(model);
 
 				return new ModelAndView("createInfo", model);
 			} else {
@@ -104,5 +100,23 @@ public class LoginController extends BasicController {
 
 		// 保存用户权限（0=普通用户；1=管理员）到session
 		setAttributeToSession(SystemConstant.IS_ADMIN_USER, (Integer) userInfoMap.get("userright"));
+	}
+
+	private void setScreenShowData(ModelMap model) {
+
+		List<Map<String, Object>> userList = attributeDao.doSelectUserList();
+
+		if (userList != null && userList.size() > 0) {
+
+			for (Map<String, Object> user : userList) {
+				if (getAttributeFromSession(SystemConstant.LOGON_USERNAME).equals(user.get("username"))) {
+					model.addAttribute("account", user.get("account"));
+					break;
+				}
+			}
+		}
+
+		model.addAttribute("userList", userList);
+		model.addAttribute("attributeMap", AttributeConfig.getInstance(attributeDao).getAttributemap());
 	}
 }

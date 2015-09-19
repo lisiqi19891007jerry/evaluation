@@ -2,6 +2,7 @@ package cn.com.nl.evaluation.info.create;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import cn.com.nl.evaluation.info.create.handle.impl.GameInfoHandle;
 import cn.com.nl.evaluation.info.create.handle.impl.GamePlayReportHandle;
 import cn.com.nl.evaluation.info.create.handle.impl.GameTestReportHandle;
 import cn.com.nl.framework.base.BasicController;
+import cn.com.nl.framework.constant.SystemConstant;
 
 @Scope("prototype")
 @Controller
@@ -46,7 +48,19 @@ public class CreateInfoController extends BasicController {
 	@RequestMapping(value = "/createInfo")
 	public ModelAndView doShowCreateInfo(ModelMap model) {
 
-		model.addAttribute("userList", attributeDao.doSelectUserList());
+		List<Map<String, Object>> userList = attributeDao.doSelectUserList();
+
+		if (userList != null && userList.size() > 0) {
+
+			for (Map<String, Object> user : userList) {
+				if (getAttributeFromSession(SystemConstant.LOGON_USERNAME).equals(user.get("username"))) {
+					model.addAttribute("account", user.get("account"));
+					break;
+				}
+			}
+		}
+
+		model.addAttribute("userList", userList);
 		model.addAttribute("attributeMap", AttributeConfig.getInstance(attributeDao).getAttributemap());
 
 		return new ModelAndView("createInfo", model);
@@ -64,17 +78,13 @@ public class CreateInfoController extends BasicController {
 									,@RequestParam(value = "testReport", required = false) MultipartFile testReport
 									,@RequestParam(value = "playReport", required = false) MultipartFile playReport) {
 
-		// 设置话单显示所需参数
-		model.addAttribute("userList", attributeDao.doSelectUserList());
-		model.addAttribute("attributeMap", AttributeConfig.getInstance(attributeDao).getAttributemap());
-
 		IGameHandle handle = createGameInfoHandle();
 
 		String returnValue = handle.doFilter(createArgMap(testReport, playReport, getScreenParameterMap()));
 
 		model.addAttribute("returnValue", returnValue);
 
-		return new ModelAndView("createInfo", model);
+		return doShowCreateInfo(model);
 	}
 
 	private IGameHandle createGameInfoHandle() {

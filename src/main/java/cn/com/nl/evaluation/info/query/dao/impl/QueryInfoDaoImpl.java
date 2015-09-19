@@ -48,10 +48,10 @@ public class QueryInfoDaoImpl implements QueryInfoDao {
 		}
 
 		// 场景
-		String sence = parameterMap.get("sence");
+		String scene = parameterMap.get("scene");
 
-		if (StringUtils.isNotBlank(sence)) {
-			sql.append(" AND Scene = '" + sence + "' ");
+		if (StringUtils.isNotBlank(scene)) {
+			sql.append(" AND Scene = '" + scene + "' ");
 		}
 
 		// 人物
