@@ -11,13 +11,13 @@ import org.springframework.web.multipart.MultipartFile;
 import cn.com.nl.evaluation.info.create.dao.FileReportDao;
 import cn.com.nl.evaluation.info.create.model.FileInfoModel;
 import cn.com.nl.evaluation.info.create.model.UploadFileModel;
+import cn.com.nl.framework.base.BasicHepler;
 import cn.com.nl.framework.tools.DateUtil;
-import cn.com.nl.framework.tools.PropertiesFileUtil;
 import cn.com.nl.framework.tools.SequenceUtil;
 
-public class FileOperationHelper {
+public class FileOperationHelper extends BasicHepler {
 
-	private static final String CONFIG_FILE_PATH = "D:/Github/evaluation/src/main/resources/file/file.properties";
+	private static final String CONFIG_FILE_PATH = "/properties/file.properties";
 
 	private static FileOperationHelper helper = null;
 
@@ -103,7 +103,7 @@ public class FileOperationHelper {
 		try {
 
 			// 存放的路径为：定义的文件目录/yyyMM/yyyyMMddHHmmss_原始文件
-			filePathStr = PropertiesFileUtil.getProperties(CONFIG_FILE_PATH).getProperty(pathType)
+			filePathStr = getProperties(CONFIG_FILE_PATH).getProperty(pathType)
 						+ "/" + DateUtil.formatDate(new Date(), DateUtil.DATE_FORMAT_YM)
 						+ "/" + DateUtil.formatDate(new Date(), DateUtil.ALL_DATE_FORMAT) + "_" + originalFilename;
 
