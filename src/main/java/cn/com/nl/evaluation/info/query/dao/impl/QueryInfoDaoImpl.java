@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import cn.com.nl.evaluation.info.query.dao.QueryInfoDao;
+import cn.com.nl.framework.model.PageModel;
 
 /**
  * @Title QueryInfoDaoImpl.java
@@ -23,7 +24,8 @@ public class QueryInfoDaoImpl implements QueryInfoDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	public List<Map<String, Object>> doQueryGameInfo(Map<String, String> parameterMap) {
+	public List<Map<String, Object>> doQueryGameInfo(Map<String, String> parameterMap
+													,PageModel pageModel) {
 
 		StringBuffer sql = new StringBuffer();
 
@@ -31,6 +33,42 @@ public class QueryInfoDaoImpl implements QueryInfoDao {
 		sql.append("   FROM b_gameinformation AS info");
 		sql.append("   LEFT JOIN c_user AS user ON info.EvaluationPeople = user.account");
 		sql.append("  WHERE 1 = 1");
+
+		setQueryCondition(parameterMap, sql);
+
+		sql.append(" ORDER BY Datetime DESC ");
+		sql.append(" LIMIT " + pageModel.getCurrentRecordCount() + ", " + pageModel.getShowRecordCount());
+
+		return jdbcTemplate.queryForList(sql.toString());
+	}
+
+	public long getGameInfoCount(Map<String, String> parameterMap) {
+
+		StringBuffer sql = new StringBuffer();
+
+		sql.append(" SELECT COUNT(1) AS row_count");
+		sql.append("   FROM b_gameinformation AS info");
+		sql.append("   LEFT JOIN c_user AS user ON info.EvaluationPeople = user.account");
+		sql.append("  WHERE 1 = 1");
+
+		setQueryCondition(parameterMap, sql);
+
+		List<Map<String, Object>> list = jdbcTemplate.queryForList(sql.toString());
+
+		long count = 0l;
+
+		if (list != null && list.size() > 0) {
+			count = (Long) list.get(0).get("row_count");
+		}
+
+		return count;
+	}
+
+	/**
+	 * @param parameterMap
+	 * @param sql
+	 */
+	private void setQueryCondition(Map<String, String> parameterMap, StringBuffer sql) {
 
 		// 绘画
 		String paintingStyle1 = parameterMap.get("painting_style_1");
@@ -157,9 +195,5 @@ public class QueryInfoDaoImpl implements QueryInfoDao {
 		if (StringUtils.isNotBlank(inGameReference)) {
 			sql.append(" AND EvaluationPoint LIKE '%" + inGameReference + "%' ");
 		}
-
-		sql.append(" ORDER BY Datetime DESC ");
-
-		return jdbcTemplate.queryForList(sql.toString());
 	}
 }

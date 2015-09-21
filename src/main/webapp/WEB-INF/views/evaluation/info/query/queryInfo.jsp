@@ -81,6 +81,14 @@ function doShowDetailInfoAction(gameInfoID) {
 	document.getElementById("queryForm").action = "detailInfo.html";
 	document.getElementById("queryForm").submit();
 }
+
+function doGoPage(cPageCount) {
+
+	$('#cPageCount').val(cPageCount);
+
+	document.getElementById("queryForm").action = "queryInfo/query.html";
+	document.getElementById("queryForm").submit();
+}
 </script>
 
 <div class="container-fluid">
@@ -361,24 +369,24 @@ function doShowDetailInfoAction(gameInfoID) {
 				</table>
 
 				<!-- 分页标签 -->
-<!-- 
+				<c:if test="${not empty gameInfoList}">
 				<table>
 					<tr>
 						<td class="settd1">
-							当前第<strong>1</strong>页/共<strong>1</strong>页，共&nbsp;<strong>1</strong>&nbsp;条记录
+							当前第<strong>${pageModel.currentPageCount}</strong>页/共<strong>${pageModel.totalPage}</strong>页，共&nbsp;<strong>${pageModel.totalRecord}</strong>&nbsp;条记录
 						</td>
 						<td class="settd2">
 							<div class="pagination pagination-centered">
 								<ul>
-									<li><a href="#">&laquo;</a></li>
-									<li><a href="#">1</a></li>
-									<li><a href="#">&raquo;</a></li>
+									<li><a href="javascript:doGoPage('${pageModel.currentPageCount - 1}')">&laquo;</a></li>
+									<li><a href="javascript:doGoPage('${pageModel.currentPageCount + 1}')">&raquo;</a></li>
 								</ul>
 							</div>
 						</td>
 					</tr>
 				</table>
- -->
+				<input type="hidden" id="cPageCount" name="cPageCount" />
+				</c:if>
 			</div>
 		</div>
 		</form>

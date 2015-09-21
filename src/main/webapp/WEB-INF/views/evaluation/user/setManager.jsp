@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 function doQueryUserAction() {
 
-	var url = 'user.html?username=' + username;
+	var url = 'user.html?username=' + $('#userText').val();
 
 	doRedriect(url);
 }
@@ -108,6 +108,13 @@ function closeUpatePwdWindow(userID) {
 	$("#theme-popover-mask_" + userID).fadeOut(100);
 	$("#theme-popover_" + userID).slideUp(200);
 }
+
+function doGoPage(cPageCount) {
+
+	var url = 'user.html?username=' + $('#userText').val() + "&cPageCount=" + cPageCount;
+
+	doRedriect(url);
+}
 </script>
 
 <div class="container-fluid">
@@ -136,7 +143,7 @@ function closeUpatePwdWindow(userID) {
         <!-- 查询显示 区域-->
         <div class="add-theme" align="left">
             <span class="name">用户名：</span>
-            <input type="text" id="userText" name="userText" class="userSelect" />
+            <input type="text" id="userText" name="userText" class="userSelect" value="${username}"/>
             <input id="selBtn" class="btn radius btn-inverse btn-small" type="button" onclick="doQueryUserAction()" value="查询" />
             <input id="addBtn" class="btn radius btn-primary btn-small add-user" style="margin-left: 100px;" onclick="showAddUser()" type="button" value="添加" />
         </div>
@@ -240,31 +247,24 @@ function closeUpatePwdWindow(userID) {
                 </c:if>
             </table>
 
+            <c:if test="${not empty userList}">
             <!-- 分页显示 区域-->
-<!-- 
             <table>
                 <tr>
                     <td class="settd1">
-                        <i class="total">当前第<strong>1</strong>页/共<strong>1</strong>页，共&nbsp;<strong>1</strong>&nbsp;条记录</i>
+                        <i class="total">当前第<strong>${pageModel.currentPageCount}</strong>页/共<strong>${pageModel.totalPage}</strong>页，共&nbsp;<strong>${pageModel.totalRecord}</strong>&nbsp;条记录</i>
                     </td>
                     <td class="settd2">
                         <div class="pagination pagination-centered">
                             <ul>
-                                <li>
-                                    <a href="#">&laquo;</a>
-                                </li>
-                                <li>
-                                    <a href="#">1</a>
-                                </li>
-                                <li>
-                                    <a href="#">&raquo;</a>
-                                </li>
+                                <li><a href="javascript:doGoPage('${pageModel.currentPageCount - 1}')">&laquo;</a></li>
+                                <li><a href="javascript:doGoPage('${pageModel.currentPageCount + 1}')">&raquo;</a></li>
                             </ul>
                         </div>
                     </td>
                 </tr>
             </table>
- -->
+            </c:if>
         </div>
     </div>
 </div>

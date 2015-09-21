@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import cn.com.nl.evaluation.user.dao.UserDao;
+import cn.com.nl.framework.model.PageModel;
 import cn.com.nl.framework.tools.SequenceUtil;
 
 @Repository
@@ -17,7 +18,7 @@ public class UserDaoImpl implements UserDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	public List<Map<String, Object>> doSelectList(String username) {
+	public long doSelectCount(String username) {
 
 		StringBuffer sql = new StringBuffer();
 
@@ -25,10 +26,32 @@ public class UserDaoImpl implements UserDao {
 			username = "";
 		}
 
-		// 查询用户状态为可用的用户密码
+		sql.append(" SELECT COUNT(1) AS row_count FROM c_user");
+		sql.append("  WHERE userstatus != 0 AND username LIKE '%" + username + "%'");
+
+		List<Map<String, Object>> list = jdbcTemplate.queryForList(sql.toString());
+
+		long count = 0l;
+
+		if (list != null && list.size() > 0) {
+			count = (Long) list.get(0).get("row_count");
+		}
+
+		return count;
+	}
+
+	public List<Map<String, Object>> doSelectList(String username, PageModel pageModel) {
+
+		StringBuffer sql = new StringBuffer();
+
+		if (username == null) {
+			username = "";
+		}
+
 		sql.append(" SELECT user_id, account, username, userright, modifyDateTime FROM c_user");
 		sql.append("  WHERE userstatus != 0 AND username LIKE '%" + username + "%'");
 		sql.append("  ORDER BY account, username ");
+		sql.append("  LIMIT " + pageModel.getCurrentRecordCount() + ", " + pageModel.getShowRecordCount());
 
 		return jdbcTemplate.queryForList(sql.toString());
 	}

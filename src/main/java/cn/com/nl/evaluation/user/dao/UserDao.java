@@ -3,7 +3,18 @@ package cn.com.nl.evaluation.user.dao;
 import java.util.List;
 import java.util.Map;
 
+import cn.com.nl.framework.model.PageModel;
+
 public interface UserDao {
+
+	/**
+	 *
+	 * 取得查询用户记录数
+	 *
+	 * @param username
+	 * @return
+	 */
+	public long doSelectCount(String username);
 
 	/**
 	 *
@@ -11,9 +22,10 @@ public interface UserDao {
 	 * 查询当前所有的未删除用户，并存放账号、用户名字段
 	 *
 	 * @param username 查询参数
+	 * @param pageModel 分页参数
 	 * @return
 	 */
-	public List<Map<String, Object>> doSelectList(String username);
+	public List<Map<String, Object>> doSelectList(String username, PageModel pageModel);
 
 	/**
 	 * 修改单个用户的密码

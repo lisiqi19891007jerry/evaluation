@@ -9,56 +9,62 @@ package cn.com.nl.framework.model;
  */
 public class PageModel {
 
-	private int totalRecord; // 查询结果总记录数
-	private int totalPage; // 总显示页数
-	private int currentPageCount; // 当前显示页数
-	private int currentRecordCount; // 当前显示记录数
+	private long totalRecord; // 查询结果总记录数
+	private long totalPage; // 总显示页数
+	private long currentPageCount; // 当前显示页数
+	private long currentRecordCount; // 当前显示记录数
+
 	private int showRecordCount; // 一个页面需要显示的记录数
 
 	public PageModel() {
 
-		this.totalRecord = 0;
-		this.totalPage = 0;
+		this.totalRecord = 0l;
+		this.totalPage = 0l;
 		this.currentPageCount = 0;
 		this.currentRecordCount = 0;
 		this.showRecordCount = 0;
 	}
 
-	public PageModel(int tRecord, int cPageCount) {
+	public PageModel(long tRecord, long cPageCount) {
 		this.totalRecord = tRecord;
 		this.currentPageCount = cPageCount;
 	}
 
-	public int getTotalRecord() {
+	public long getTotalRecord() {
 		return totalRecord;
 	}
 
-	public void setTotalRecord(int totalRecord) {
+	public void setTotalRecord(long totalRecord) {
 		this.totalRecord = totalRecord;
 	}
 
-	public int getTotalPage() {
+	public long getTotalPage() {
+
+		if (totalRecord % showRecordCount == 0) {
+			totalPage = totalRecord/showRecordCount;
+		} else {
+			totalPage = totalRecord/showRecordCount + 1;
+		}
+
 		return totalPage;
 	}
 
-	public void setTotalPage(int totalPage) {
-		this.totalPage = totalPage;
-	}
+	public long getCurrentPageCount() {
 
-	public int getCurrentPageCount() {
+		if (currentPageCount < 1) {
+			currentPageCount = 1;
+		} else if (currentPageCount > getTotalPage()) {
+			currentPageCount = getTotalPage();
+		}
+
 		return currentPageCount;
 	}
 
-	public void setCurrentPageCount(int currentPageCount) {
-		this.currentPageCount = currentPageCount;
-	}
+	public long getCurrentRecordCount() {
 
-	public int getCurrentRecordCount() {
+		currentRecordCount = (getCurrentPageCount() - 1) * getShowRecordCount();
+
 		return currentRecordCount;
-	}
-
-	public void setCurrentRecordCount(int currentRecordCount) {
-		this.currentRecordCount = currentRecordCount;
 	}
 
 	public int getShowRecordCount() {

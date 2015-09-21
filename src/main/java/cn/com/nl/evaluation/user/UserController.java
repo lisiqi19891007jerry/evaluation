@@ -3,6 +3,7 @@ package cn.com.nl.evaluation.user;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -13,10 +14,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.nl.evaluation.user.dao.UserDao;
 import cn.com.nl.framework.base.BasicController;
+import cn.com.nl.framework.model.PageModel;
+import cn.com.nl.framework.tools.PropertiesFileUtil;
 
 @Scope("prototype")
 @Controller
 public class UserController extends BasicController {
+
+	private static final String PAGE_CONFIG_FILE = "/properties/page.properties";
 
 	@Autowired
 	private UserDao userDao;
@@ -29,17 +34,27 @@ public class UserController extends BasicController {
 	 */
 	@RequestMapping(value = "/user")
 	public ModelAndView doShowUserView(ModelMap model
-									  ,@RequestParam(value = "username", required = false) String username) {
+									  ,@RequestParam(value = "username", required = false) String username
+									  ,@RequestParam(value = "cPageCount", required = false) String cPageCount) {
 
-		List<Map<String, Object>> userList = userDao.doSelectList(username);
+		List<Map<String, Object>> userList = null;
 
-		if (userList != null && userList.size() > 0) {
-			for (Map<String, Object> dataMap : userList) {
-				dataMap.put("userright", setUserRight(dataMap));
+		PageModel pageModel = createPageModel(username, cPageCount);
+
+		if (pageModel != null) {
+
+			userList = userDao.doSelectList(username, pageModel);
+
+			if (userList != null && userList.size() > 0) {
+				for (Map<String, Object> dataMap : userList) {
+					dataMap.put("userright", setUserRight(dataMap));
+				}
 			}
 		}
 
-		model.addAttribute("userList", userList); // 直接把查询出来的数据传到画面
+		model.addAttribute("username", username);
+		model.addAttribute("pageModel", pageModel);
+		model.addAttribute("userList", userList);
 
 		return new ModelAndView("userview", model);
 	}
@@ -64,7 +79,7 @@ public class UserController extends BasicController {
 
 		model.addAttribute("returnValue", returnValue);
 
-		return doShowUserView(model, "");
+		return doShowUserView(model, null, null);
 	}
 
 	/**
@@ -88,7 +103,7 @@ public class UserController extends BasicController {
 
 		model.addAttribute("returnValue", returnValue);
 
-		return doShowUserView(model, "");
+		return doShowUserView(model, null, null);
 	}
 
 	/**
@@ -113,7 +128,36 @@ public class UserController extends BasicController {
 
 		model.addAttribute("returnValue", returnValue);
 
-		return doShowUserView(model, "");
+		return doShowUserView(model, null, null);
+	}
+
+	/**
+	 * @param username
+	 * @param cPageCount
+	 * @return
+	 */
+	private PageModel createPageModel(String username, String cPageCount) {
+
+		long queryCount = userDao.doSelectCount(username);
+
+		PageModel pageModel = null;
+
+		if (queryCount > 0) {
+
+			long pageCount = 1l;
+
+			if (StringUtils.isNotBlank(cPageCount)) {
+				pageCount = Long.parseLong(cPageCount);
+			}
+
+			pageModel = new PageModel(queryCount, pageCount);
+
+			String showCountStr = PropertiesFileUtil.getProperties(PAGE_CONFIG_FILE).get("showRecordCount") + "";
+
+			pageModel.setShowRecordCount(Integer.parseInt(showCountStr));
+		}
+
+		return pageModel;
 	}
 
 	/**

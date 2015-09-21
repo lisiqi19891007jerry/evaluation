@@ -18,11 +18,15 @@ import cn.com.nl.evaluation.info.attribute.model.AttributeModel;
 import cn.com.nl.evaluation.info.attribute.model.AttributeValueModel;
 import cn.com.nl.evaluation.info.query.dao.QueryInfoDao;
 import cn.com.nl.framework.base.BasicController;
+import cn.com.nl.framework.model.PageModel;
 import cn.com.nl.framework.tools.DateUtil;
+import cn.com.nl.framework.tools.PropertiesFileUtil;
 
 @Scope("prototype")
 @Controller
 public class QueryInfoController extends BasicController {
+
+	private static final String PAGE_CONFIG_FILE = "/properties/page.properties";
 
 	@Autowired
 	private QueryInfoDao queryInfoDao;
@@ -56,28 +60,69 @@ public class QueryInfoController extends BasicController {
 	@RequestMapping(value = "/queryInfo/query")
 	public ModelAndView doQueryInfo(ModelMap model) {
 
+		List<Map<String, Object>> gameInfoList = null;
+
 		Map<String, String> parameterMap = getScreenParameterMap();
 
-		List<Map<String, Object>> gameInfoList = queryInfoDao.doQueryGameInfo(parameterMap);
+		PageModel pageModel = createPageModel(parameterMap);
 
-		if (gameInfoList != null && gameInfoList.size() > 0) {
+		if (pageModel != null) {
 
-			for (Map<String, Object> gameInfo : gameInfoList) {
+			gameInfoList = queryInfoDao.doQueryGameInfo(parameterMap, pageModel);
 
-				setDataShowFormat("Platform", "platform_type", gameInfo);
-				setDataShowFormat("GameClassify", "game_type", gameInfo);
-				setDataShowFormat("EvaluationModel", "evaluate_mode", gameInfo);
+			if (gameInfoList != null && gameInfoList.size() > 0) {
 
-				Timestamp dateTime = (Timestamp) gameInfo.get("Datetime");
+				for (Map<String, Object> gameInfo : gameInfoList) {
 
-				gameInfo.put("Datetime", DateUtil.formatDate(dateTime, DateUtil.SIMPLE_DATE_FORMAT));
+					setDataShowFormat("Platform", "platform_type", gameInfo);
+					setDataShowFormat("GameClassify", "game_type", gameInfo);
+					setDataShowFormat("EvaluationModel", "evaluate_mode", gameInfo);
+
+					Timestamp dateTime = (Timestamp) gameInfo.get("Datetime");
+
+					gameInfo.put("Datetime", DateUtil.formatDate(dateTime, DateUtil.SIMPLE_DATE_FORMAT));
+				}
 			}
 		}
 
+		model.addAttribute("pageModel", pageModel);
 		model.addAttribute("parameterMap", parameterMap);
 		model.addAttribute("gameInfoList", gameInfoList);
 
 		return doShowQueryInfo(model);
+	}
+
+	/**
+	 *
+	 * 创建分页数据
+	 *
+	 * @param parameterMap
+	 * @return
+	 */
+	private PageModel createPageModel(Map<String, String> parameterMap) {
+
+		long queryCount = queryInfoDao.getGameInfoCount(parameterMap);
+
+		PageModel pageModel = null;
+
+		if (queryCount > 0) {
+
+			long pageCount = 1l;
+
+			String cPageCount = parameterMap.get("cPageCount");
+
+			if (StringUtils.isNotBlank(cPageCount)) {
+				pageCount = Long.parseLong(cPageCount);
+			}
+
+			pageModel = new PageModel(queryCount, pageCount);
+
+			String showCountStr = PropertiesFileUtil.getProperties(PAGE_CONFIG_FILE).get("showRecordCount") + "";
+
+			pageModel.setShowRecordCount(Integer.parseInt(showCountStr));
+		}
+
+		return pageModel;
 	}
 
 	/**
