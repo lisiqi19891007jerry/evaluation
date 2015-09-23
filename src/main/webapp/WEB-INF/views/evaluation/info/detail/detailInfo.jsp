@@ -40,7 +40,7 @@ function doDownloadFileAction(fileID) {
 		<h2 class="head">
 			<span>游戏信息</span>
 		</h2>
-		<table  class="table_m1" id="table_z">
+		<table class="table_m1" id="table_z">
 			<tbody>
 
 				<!-- 第一行数据 -->
@@ -142,28 +142,8 @@ function doDownloadFileAction(fileID) {
 				<!-- 上线表现级别 -->
 				<td>${attributeMap.online_level.attributeShowName}：<span id="onlineG">${detailInfoMap.PublishManifestation}</span>
 			</tr>
-			<tr style="padding：4px 0px;line-height: 24px;">
-				<td colspan="4">
-					评测报告：<span>${detailInfoMap.test_file_name}</span>
-					<c:if test="${not empty detailInfoMap.EvaluationReport}">
-						<span class="upJian">
-							<button class="btn" onclick="doDownloadFileAction('${detailInfoMap.EvaluationReport}')"><i class="icon-arrow-down"></i>下载</button>
-						</span>
-					</c:if>
-				</td>
-			</tr>
-			<tr style="padding：4px 0px;line-height: 24px;">
-				<td colspan="4">
-					10分钟人工试玩：<span>${detailInfoMap.play_file_name}</span>
-					<c:if test="${not empty detailInfoMap.CSV_name}">
-						<span class="upJian">
-							<button class="btn" onclick="doDownloadFileAction('${detailInfoMap.CSV_name}')"><i class="icon-arrow-down"></i>下载</button>
-						</span>
-					</c:if>
-				</td>
-			</tr>
-  		</tbody>
-  	</table>
+		</tbody>
+	</table>
 </div>
 
 <div class="m_detail2">
@@ -212,3 +192,26 @@ function doDownloadFileAction(fileID) {
 <input type="hidden" id="testScore_end" name="testScore_end" value="${parameterMap.testScore_end}" />
 <input type="hidden" id="in_game_reference" name="in_game_reference" value="${parameterMap.in_game_reference}" />
 </form>
+
+<table class="table_m2">
+	<tr style="padding：4px 0px;line-height: 24px;">
+		<td colspan="4">
+			评测报告：<span>${detailInfoMap.test_file_name}</span>
+			<c:if test="${not empty detailInfoMap.EvaluationReport}">
+				<span class="upJian">
+					<button class="btn" onclick="doDownloadFileAction('${detailInfoMap.EvaluationReport}')"><i class="icon-arrow-down"></i>下载</button>
+				</span>
+			</c:if>
+		</td>
+	</tr>
+	<tr style="padding：4px 0px;line-height: 24px;">
+		<td colspan="4">
+			10分钟人工试玩：<span>${detailInfoMap.play_file_name}</span>
+			<c:if test="${not empty detailInfoMap.CSV_name}">
+				<span class="upJian">
+					<button class="btn" onclick="doDownloadFileAction('${detailInfoMap.CSV_name}')"><i class="icon-arrow-down"></i>下载</button>
+				</span>
+			</c:if>
+		</td>
+	</tr>
+</table>

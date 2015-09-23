@@ -1,5 +1,6 @@
 package cn.com.nl.evaluation.info.create.dao.impl;
 
+import java.sql.Timestamp;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +60,8 @@ public class CreateInfoDaoImpl implements CreateInfoDao {
 		sql.append("                               ,Paytype");
 		sql.append("                               ,Privilege");
 		sql.append("                               ,EvaluationModel");
-		sql.append("                               ,Retestcondition )");
+		sql.append("                               ,Retestcondition");
+		sql.append("                               ,createDateTime )");
 		sql.append(" VALUES ('" + SequenceUtil.getSequenceStr() + "' ");
 		sql.append("        ,'" + DateUtil.createTimestamp(argMap.get("evaluation_date") + "", DateUtil.SIMPLE_DATE_FORMAT) + "' ");
 		sql.append("        ,'" + argMap.get("tester") + "" + "' ");
@@ -92,7 +94,8 @@ public class CreateInfoDaoImpl implements CreateInfoDao {
 		sql.append("        ,'" + argMap.get("pay_type") + "" + "' ");
 		sql.append("        ,'" + argMap.get("favorable_type") + "" + "' ");
 		sql.append("        ,'" + argMap.get("evaluate_mode") + "" + "' ");
-		sql.append("        ,'" + argMap.get("retest_status") + "" + "') ");
+		sql.append("        ,'" + argMap.get("retest_status") + "" + "' ");
+		sql.append("        ,'" + new Timestamp(System.currentTimeMillis()) + "') ");
 
 		int excuseCount = -1;
 

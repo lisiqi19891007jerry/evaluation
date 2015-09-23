@@ -36,7 +36,7 @@ public class QueryInfoDaoImpl implements QueryInfoDao {
 
 		setQueryCondition(parameterMap, sql);
 
-		sql.append(" ORDER BY Datetime DESC ");
+		sql.append(" ORDER BY info.createDateTime DESC");
 		sql.append(" LIMIT " + pageModel.getCurrentRecordCount() + ", " + pageModel.getShowRecordCount());
 
 		return jdbcTemplate.queryForList(sql.toString());
@@ -151,7 +151,7 @@ public class QueryInfoDaoImpl implements QueryInfoDao {
 		String inGameTheme = parameterMap.get("in_game_theme");
 
 		if (StringUtils.isNotBlank(inGameTheme)) {
-			sql.append(" AND Datetime LIKE '%" + inGameTheme + "%' ");
+			sql.append(" AND GameTheme LIKE '%" + inGameTheme + "%' ");
 		}
 
 		// 测评评级
@@ -172,7 +172,7 @@ public class QueryInfoDaoImpl implements QueryInfoDao {
 		String inGamePublisher = parameterMap.get("in_game_publisher");
 
 		if (StringUtils.isNotBlank(inGamePublisher)) {
-			sql.append(" AND PublishManifestation LIKE '%" + inGamePublisher + "%' ");
+			sql.append(" AND (Developer LIKE '%" + inGamePublisher + "%' OR Publisher LIKE '%" + inGamePublisher + "%') ");
 		}
 
 		// 测评分-开始
@@ -193,7 +193,7 @@ public class QueryInfoDaoImpl implements QueryInfoDao {
 		String inGameReference = parameterMap.get("in_game_reference");
 
 		if (StringUtils.isNotBlank(inGameReference)) {
-			sql.append(" AND EvaluationPoint LIKE '%" + inGameReference + "%' ");
+			sql.append(" AND (QualityGoods_cultivate LIKE '%" + inGameReference + "%' OR QualityGoods_combat LIKE '%" + inGameReference + "%') ");
 		}
 	}
 }
