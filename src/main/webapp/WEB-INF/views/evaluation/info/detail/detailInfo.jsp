@@ -33,13 +33,16 @@ function doDownloadFileAction(fileID) {
 
 <form id="backForm" action="queryInfo/query.html" method="post">
 
+<input type="button" class="btn radius btn-primary btn-small" style="margin-top: 20px; margin-left: 50px;" value="返回" onclick="doGoBackAction();"/>
+<c:if test="${'0' ne sessionScope['IS_ADMIN_USER'] }">
+	<input type="button" class="btn radius btn-primary btn-small" style="margin-top: 20px; margin-left: 50px;" value="保存修改" />
+</c:if>
+
 <div class="container-content">
-	<br/>
 	<div class="m_detail">
 		<h2 class="head">
 			<span>游戏信息</span>
 		</h2>
-
 		<table class="table_m1" id="table_z">
 			<tbody>
 
@@ -74,17 +77,17 @@ function doDownloadFileAction(fileID) {
 						画面纬度：
 						<!-- 场景 -->
 						<strong>①</strong>
-     					<span class="sence">${attributeMap.scene.attributeShowName}：<span class="sence">${detailInfoMap.Scene}</span></span>&nbsp;&nbsp;&nbsp;
+     					<span class="sence">${attributeMap.scene.attributeShowName}:<span class="sence">${detailInfoMap.Scene}</span></span>&nbsp;&nbsp;&nbsp;
      					<!-- 人物 -->
      					<strong>②</strong>
-     					<span class="people">${attributeMap.show_person_type.attributeShowName}：<span class="sence">${detailInfoMap.Show_person_type}</span></span>
+     					<span class="people">${attributeMap.show_person_type.attributeShowName}:<span class="sence">${detailInfoMap.Show_person_type}</span></span>
      				</td>
      				<td>
      					本次对外测试类型：
 						<strong>①</strong>
-     					<span class="sence">是否删档：<span class="sence">${detailInfoMap.Out_test_type_1}</span></span>&nbsp;&nbsp;&nbsp;
+     					<span class="sence">是否删档:<span class="sence">${detailInfoMap.Out_test_type_1}</span></span>&nbsp;&nbsp;&nbsp;
      					<strong>②</strong>
-     					<span class="people">是否付费：<span class="sence">${detailInfoMap.Out_test_type_2}</span></span>
+     					<span class="people">是否付费:<span class="sence">${detailInfoMap.Out_test_type_2}</span></span>
      				</td>
     			</tr>
 
@@ -95,10 +98,10 @@ function doDownloadFileAction(fileID) {
      				<td>画风：
      					<!-- 绘画 -->
      					<strong>①</strong>
-     					<span class="paint">${attributeMap.painting_style_1.attributeShowName}：<span class="paint">${detailInfoMap.Painting_style_1}</span></span>&nbsp;&nbsp;&nbsp;
+     					<span class="paint">${attributeMap.painting_style_1.attributeShowName}:<span class="paint">${detailInfoMap.Painting_style_1}</span></span>&nbsp;&nbsp;&nbsp;
      					<!-- 风格 -->
      					<strong>②</strong>
-     					<span class="style">${attributeMap.painting_style_2.attributeShowName}：<span class="style">${detailInfoMap.Painting_style_2}</span></span>
+     					<span class="style">${attributeMap.painting_style_2.attributeShowName}:<span class="style">${detailInfoMap.Painting_style_2}</span></span>
      				</td>
      				<!-- 付费方式 -->
      				<td>
@@ -111,13 +114,13 @@ function doDownloadFileAction(fileID) {
      				<td>${attributeMap.platform_type.attributeShowName}：<span id="platform">${detailInfoMap.Platform}</span></td>
      				<td>游戏完成度：<span id="gameDegree">${detailInfoMap.Completeness}</span>%</td>
      				<!-- 付费优惠类型 -->
-     				<td>${attributeMap.favorable_type.attributeShowName}：<span id="payType">${detailInfoMap.Privilege}</span></td>
+     				<td>${attributeMap.favorable_type.attributeShowName}:<span id="payType">${detailInfoMap.Privilege}</span></td>
      			</tr>
     		</tbody>
     	</table>
     </div>
-</div>	
-<br/>
+</div>
+
 <div class="m_detail2">
 	<h2 class="head">
 		<span>评测信息</span>
@@ -142,55 +145,35 @@ function doDownloadFileAction(fileID) {
 				<!-- 上线表现级别 -->
 				<td>${attributeMap.online_level.attributeShowName}：<span id="onlineG">${detailInfoMap.PublishManifestation}</span>
 			</tr>
-			<tr style="padding：4px 0px;line-height: 30px;">
-				<td class="tabel01_c">上线表现评价说明：
-					<span style="background-color:rgb(243,243,244);">${detailInfoMap.ManifestationExplain}
-					</span>
-				</td>
-			</tr>
-			<tr style="padding：4px 0px;line-height: 30px;">
-				<td class="tabel01_c">参考竞品养成方面：
-					<span  style="background-color:rgb(243,243,244);">${detailInfoMap.QualityGoods_cultivate}
-					</span>
-				</td>
-			</tr>
-			<tr style="padding：4px 0px;line-height: 30px;">
-				<td class="tabel01_c">参考战斗养成方面：
-					<span style="background-color:rgb(243,243,244);">${detailInfoMap.QualityGoods_combat}
-					</span>
-				</td>
-			</tr>
 		</tbody>
 	</table>
 </div>
-<br/>
-<div class="m_detail3">
-	<h2 class="head">
-		<span>下载</span>
-	</h2>
-	<table class="table_m3">
+
+<div class="m_detail2">
+	<table class="table_m2">
 		<tr style="padding：4px 0px;line-height: 24px;">
-			<td colspan="4">
-				评测报告：<span>${detailInfoMap.test_file_name}</span>
-				<c:if test="${not empty detailInfoMap.EvaluationReport}">
-					<span class="upJian">
-						&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn radius btn-small" onclick="doDownloadFileAction('${detailInfoMap.EvaluationReport}')"><i class="icon-arrow-down"></i>下载</button>
-					</span>
-				</c:if>
+			<td class="tabel01_c">上线表现评价说明：
+				<textarea class="k-textbox valid" cols="30" readonly="readonly" rows="5" style="background-color:rgb(243,243,244);">${detailInfoMap.ManifestationExplain}
+				</textarea>
 			</td>
 		</tr>
 		<tr style="padding：4px 0px;line-height: 24px;">
-			<td colspan="4">
-				10分钟人工试玩：<span >${detailInfoMap.play_file_name}</span>
-				<c:if test="${not empty detailInfoMap.CSV_name}">
-					<span class="upJian">
-						&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn" onclick="doDownloadFileAction('${detailInfoMap.CSV_name}')"><i class="icon-arrow-down"></i>下载</button>
-					</span>
-				</c:if>
+			<td class="tabel01_c">参考竞品养成方面：
+				<textarea class="k-textbox valid" cols="30" readonly="readonly" rows="2" style="background-color:rgb(243,243,244);">${detailInfoMap.QualityGoods_cultivate}
+				</textarea>
+			</td>
+		</tr>
+		<tr style="padding：4px 0px;line-height: 24px;">
+			<td class="tabel01_c">参考战斗养成方面：
+				<textarea class="k-textbox valid" cols="30" readonly="readonly" rows="2" style="background-color:rgb(243,243,244);">${detailInfoMap.QualityGoods_combat}
+				</textarea>
 			</td>
 		</tr>
 	</table>
 </div>
+
+<input type="hidden" id="gameInfo_id" name="gameInfo_id" value="${detailInfoMap.ID}" />
+
 <!-- 返回查询条件 -->
 <input type="hidden" id="painting_style_1" name="painting_style_1" value="${parameterMap.painting_style_1}" />
 <input type="hidden" id="painting_style_2" name="painting_style_2" value="${parameterMap.painting_style_2}" />
@@ -213,9 +196,27 @@ function doDownloadFileAction(fileID) {
 <input type="hidden" id="testScore_start" name="testScore_start" value="${parameterMap.testScore_start}" />
 <input type="hidden" id="testScore_end" name="testScore_end" value="${parameterMap.testScore_end}" />
 <input type="hidden" id="in_game_reference" name="in_game_reference" value="${parameterMap.in_game_reference}" />
-<br/>
-<div class="backBTn">
-	<input type="button" class="btn radius btn-primary btn-small" value="返 回" onclick="doGoBackAction();"/>
-</div>
 </form>
 
+<table class="table_m2">
+	<tr style="padding：4px 0px;line-height: 24px;">
+		<td colspan="4">
+			评测报告：<span>${detailInfoMap.test_file_name}</span>
+			<c:if test="${not empty detailInfoMap.EvaluationReport}">
+				<span class="upJian">
+					<button class="btn" onclick="doDownloadFileAction('${detailInfoMap.EvaluationReport}')"><i class="icon-arrow-down"></i>下载</button>
+				</span>
+			</c:if>
+		</td>
+	</tr>
+	<tr style="padding：4px 0px;line-height: 24px;">
+		<td colspan="4">
+			10分钟人工试玩：<span>${detailInfoMap.play_file_name}</span>
+			<c:if test="${not empty detailInfoMap.CSV_name}">
+				<span class="upJian">
+					<button class="btn" onclick="doDownloadFileAction('${detailInfoMap.CSV_name}')"><i class="icon-arrow-down"></i>下载</button>
+				</span>
+			</c:if>
+		</td>
+	</tr>
+</table>
