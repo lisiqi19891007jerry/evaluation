@@ -1,0 +1,362 @@
+/** 清除内外边距 **/
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, /* text formatting elements 文本格式元素 */
+form, fieldset, legend, button, input, textarea, /* form elements 表单元素 */
+th, td /* table elements 表格元素 */ { margin: 0; padding: 0; }
+
+/** 设置默认字体 **/
+body,
+button, input, select, textarea /* for ie */ { font: 12px/1.5 tahoma, arial,"microsoft yahei", simsun, sans-serif; }
+
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+
+address, cite, dfn, em, var { font-style: normal; }
+
+/* 将斜体扶正 */
+code, kbd, pre, samp { font-family: courier new, courier, monospace; }
+
+/* 统一等宽字体 */
+small { font-size: 12px; }
+
+/* 小于 12px 的中文很难阅读，让 small 正常化 */
+
+/** 重置列表元素 **/
+ul, ol { list-style: none; }
+
+/** 重置文本格式元素 **/
+a { text-decoration: none; }
+
+a:hover { text-decoration: underline; }
+
+sup { vertical-align: text-top; }
+
+/* 重置，减少对行高的影响 */
+sub { vertical-align: text-bottom; }
+
+/** 重置表单元素 **/
+legend { color: #000; }
+
+/* for ie6 */
+fieldset, img { border: 0; }
+
+/* img 搭车：让链接里的 img 无边框 */
+button, input, select, textarea { font-size: 100%; }
+
+/* 使得表单元素在 ie 下能继承字体大小 */
+/* 注：optgroup 无法扶正 */
+
+/** 重置表格元素 **/
+table { border-collapse: collapse; border-spacing: 0; }
+
+/* 重置 HTML5 元素 */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section,
+summary, time, mark, audio, video { display: block; margin: 0; padding: 0; }
+
+mark { background: #ff0; }
+
+.clearfix:after { visibility: hidden; display: block; content: ""; clear: both; font-size: 0; height: 0; }
+
+.clearfix { zoom: 1; }
+
+@head-color: #2a2d34;
+@menu-border: #1D1F24;
+@menu-span-border: #404249;
+@menu-hover-bg: #fff;
+@menu-hover-color: #333;
+@menu-item-hover-bg: #F0F0F0;
+@menu-item-hover-color: #F0F0F0;
+@circle-bg: #f60;
+@circle-color: #fff;
+@nav-color: #848D98;
+@nav-active-bg: #10AEB8;
+@nav-item-color: #8B9299;
+@nav-item-color-hover: #fff;
+@nav-item-bg: #2A2D34;
+@nav-s-list-bg: #0B9BA4;
+@nav-s-list-color: #B6E0E4;
+@on-off-hover-bg: #1A1C21;
+@on-off-tip-bg: #0D0E10;
+@on-off-tip-color: #fff;
+@menu-item-active : #10aeb8;
+html { overflow: hidden; }
+
+body { background: #353942; overflow: hidden; }
+
+.full-ico, .messages-ico, .menu-hd i, .centre-ico, .project-ico, .trainee-ico, .portal-ico, .config-ico, .resource-ico,
+ .incoming-ico, .stat-ico, .notice-ico, .platform-ico, .pstat-ico, .log-ico, .admin-ico, .menu-ico, .role-ico, .promotion-ico, .service-ico, 
+.cert-ico, .nav-on-off i { background: url("../images/backend.png") no-repeat; }
+
+.main { z-index: 1; position: absolute; top: 50px; right: 0; bottom: 0; left: 0; }
+
+.menu-border { border-width: 0 1px; border-color: @menu-border; border-style: solid; }
+
+.menu-span-border { border-width: 0 1px; border-color: @menu-span-border; border-style: solid; }
+
+.header { z-index: 5; position: absolute; left: 0; right: 0; height: 50px; background: @head-color; *zoom: 1;
+  .logo { float: left; width: 199px; height: 35px; padding: 15px 0 0; text-align: center; }
+  .menu { position: relative; float: left; display: inline; margin: 0 -2px 0 0; *zoom: 1;
+    .menu-hd { position: relative; height: 50px; .menu-border; line-height: 50px; color: #fff; cursor: pointer;
+      span { display: block; max-width: 275px; height: 50px; padding: 0 15px; .menu-span-border; font-size: 14px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+      i { position: absolute; bottom: 4px; right: 6px; display: block; width: 6px; height: 6px; font-size: 0; background-position: 0 -45px; }
+    }
+    .menu-hd-next {
+      i {  width:4px; height:8px; background-position:0 -140px; }
+    }
+    &.menu-hover {
+      .menu-hd { background: @menu-hover-bg; color: @menu-hover-color; }
+      i {  width:6px; height:6px; background-position: 0 -45px; }
+    }
+  }
+  .hd-l { position: absolute; top: 0; left: 0; width: 900px; }
+  .hd-r { z-index: 10; position: relative; float: right; display: inline; }
+  .hd-r-col { position: relative; float: left; display: inline; margin: 0 0 0 -2px; height: 50px; line-height: 50px; .menu-border; color: #fff; font-size: 14px; overflow: hidden;
+    a { color: #fff; }
+    &:hover { text-decoration: none; }
+    span { display: block; height: 50px; padding: 0 20px; .menu-span-border; *zoom: 1; }
+    .r { position: absolute; top: 6px; right: 10px; }
+  }
+  a.hd-r-col { cursor: pointer; }
+  .full-ico, .messages-ico { float: left; width: 16px; height: 14px; margin: 18px 0 0; }
+  .messages-ico { background-position: 0 -20px; }
+  .r { display: block; width: 16px; height: 16px; font: 400 12px/16px simsun; text-align: center; background: @circle-bg; color: @circle-color; -webkit-border-radius: 50%; -moz-border-radius: 50%; -o-border-radius: 50%; border-radius: 50%; }
+}
+.menu-box { z-index: 100; position: absolute; top: 50px; right: 0; bottom: 0; left: 0; background: #fff;
+  .menu-filter { z-index: 10; position: relative; padding: 20px 0 0; font-size: 14px; border-bottom: 1px solid #ddd;
+    .menu-filter-l { float: left; width: 120px; padding: 0 0 0 20px; color: #000; font-weight: 700; }
+    .menu-filter-r { overflow: hidden;
+      li { float: left; width: 130px; height: 21px; padding: 0 15px 15px 0; line-height: 21px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        &.active {
+          a { color: @menu-item-active; font-weight: 700; }
+        }
+      }
+      a { color: #666;
+        &:hover { color: @menu-item-active; text-decoration: none; }
+      }
+    }
+    .menu-switch { position: absolute; bottom: -1px; right: 40px; display: block; width: 28px; height: 19px; text-align: center; background: #f7f7f7; border-width: 1px 1px 0; border-color: #DFDFDF; border-style: solid;
+      i { float: left; width: 0; height: 0; margin: 6px 0 0 10px; line-height: 0; border-width: 0 4px 4px; border-color: transparent transparent #9d9d9d; border-style: dashed dashed solid; }
+    }
+  }
+  .menu-items { position: absolute; top: 0; right: 0; bottom: 0; left: 0; padding: 15px 25px 25px; overflow: auto; background: #f7f7f7; }
+  .menu-item {
+    .menu-item-hd { padding: 10px; font-size: 12px; font-weight: 700; color: #666; }
+    .menu-item-bd { overflow: hidden;
+      li { float: left; width: 23%; margin: 0 2% 0 0; font-size: 14px;
+        a { display: block; height: 34px; line-height: 34px; color: #7E7E7E; text-indent: 10px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+          &:hover { text-decoration: none; background: #e4e4e4; color: @menu-item-active; }
+        }
+        &.active {
+          a { background: #e4e4e4; color: @menu-item-active; }
+        }
+      }
+    }
+  }
+}
+.menu-box-off {
+  .menu-filter { padding: 0; border: 0 none;
+    .menu-switch { bottom: -20px; border-width: 0 1px 1px;
+      i { border-width: 4px 4px 0; border-color: #9d9d9d transparent transparent; border-style: solid dashed dashed; }
+    }
+  }
+  .menu-filter-l, .menu-filter-r { display: none; }
+  .menu-items { top: 0 !important; background: #fff; }
+}
+
+.nav { z-index: 101; position: absolute; top: 0; bottom: 50px; width: 200px; min-height: 300px;  font-size: 14px;
+  .item { cursor: pointer;
+    .item-hd { position: relative; display: block; height: 50px; line-height: 50px; color: @nav-color;
+      &:hover { text-decoration: none; }
+      i { margin: 18px 10px 0 48px; }
+    }
+    .arrow { position: absolute; bottom: -6px; left: 50px; display: none; }
+  }
+  .item:hover, .item-active { background: @nav-active-bg;
+    .item-hd { color: #fff; }
+
+    .centre-ico { background-position: -66px 0; }
+    .trainee-ico { background-position: -66px -40px; }
+    .project-ico { background-position: -66px -20px; }
+    .config-ico { background-position: -66px -60px; }
+    .portal-ico { background-position: -66px -80px; }
+    .resource-ico { background-position: -66px -100px; }
+    .incoming-ico { background-position: -66px -120px; }
+    .stat-ico { background-position: -66px -140px; }
+    .notice-ico { background-position: -66px -160px; }
+    .platform-ico { background-position: -66px -180px; }
+    .pstat-ico { background-position: -66px -200px; }
+    .log-ico { background-position: -66px -220px; }
+    .admin-ico { background-position: -66px -240px; }
+    .menu-ico { background-position: -66px -260px; }
+    .role-ico { background-position: -66px -280px; }
+    .promotion-ico { background-position: -66px -300px; }
+    .service-ico { background-position: -66px -320px; }
+    .cert-ico { background-position: -66px -340px; }
+  }
+  .item-active {
+    .arrow { display: block; }
+    .item-bd {
+      ul { display: list-item; }
+    }
+  }
+
+  .item-not-child {
+    .arrow { display: none; }
+  }
+
+  .item-bd {
+    ul { display: none; padding: 10px 0 10px 75px; background: @nav-item-bg; }
+    a { display: block; height: 30px; line-height: 30px; text-align: left; color: @nav-item-color; white-space:nowrap;
+      &:hover { color: @nav-item-color-hover; text-decoration: none; }
+    }
+    li {
+      &.active a { font-weight: 700; color: @nav-item-color-hover;
+        .item-not-child {
+          .arrow { display: none; }
+        }
+      }
+    }
+  }
+}
+.main-wrapper { position: absolute; top: 0; left: 200px; right: 0; bottom: 0; background: #fff; overflow: hidden; padding-bottom: 0;
+  iframe { position: absolute; width: 100%; height: 100%; }
+}
+.arrow { display: block; width: 0; height: 0; line-height: 0; border-width: 6px 6px 0; border-style: solid dashed dashed; border-color: @nav-active-bg transparent transparent; }
+
+.nav-on-off { position: absolute; bottom: 0; left: 150px; display: block; width: 50px; height: 50px;
+  i { float: left; width: 12px; height: 12px; margin: 18px 0 0 18px; background-position: 0 -80px; }
+  &:hover { text-decoration: none; background: @on-off-hover-bg;
+    .on-off-tip { display: block; -webkit-animation: shake .6s ease-in-out .3s; -moz-animation: shake .6s ease-in-out .3s; -o-animation: shake .6s ease-in-out .3s; -ms-animation: shake .6s ease-in-out .3s; -animation: shake .6s ease-in-out .3s; }
+    .on-off-ico { background-position: 0 -120px; }
+  }
+}
+
+.on-off-tip { position: absolute; top: -45px; left: 5px; display: none; width: 40px; height: 30px; line-height: 30px; text-align: center; background: @on-off-tip-bg; color: @on-off-tip-color;
+  ins { position: absolute; bottom: -5px; left: 50%; display: block; width: 0; height: 0; line-height: 0; margin: 0 0 0 -6px; border-width: 6px 6px 0; border-style: solid dashed dashed; border-color: @on-off-tip-bg transparent transparent; text-decoration: none; }
+}
+
+@media screen and (max-height: 700px),screen and (max-width: 1009px) {
+  .nav { width: 50px;
+    .item {
+      .item-hd {
+        span { display: none; }
+        i { margin: 18px 0 0 18px; }
+      }
+      .item-bd { position: relative; height: 0; }
+      &:hover {
+        .item-bd { display: block;
+          ul { display: list-item!important; }
+        }
+      }
+    }
+    .item-active {
+      .item-bd { display: none; }
+    }
+    .item-active, .item:hover {
+      .arrow { display: none; }
+    }
+    .item-bd {
+      ul { position: absolute; left: 50px; top: -50px; padding-left: 0; white-space: nowrap; background: @nav-s-list-bg; }
+      a { padding: 0 20px; color: @nav-s-list-color; text-indent: 0;
+        &:hover { color: #fff; }
+      }
+    }
+  }
+  .nav-on-off { left: 0; display: none;
+    .on-off-ico { background-position: 0 -60px; }
+    &:hover {
+      .on-off-ico { background-position: 0 -100px; }
+    }
+  }
+  .main-wrapper { left: 50px; }
+}
+
+.main-s {
+  .nav { width: 50px;
+    .item {
+      .item-hd {
+        span { display: none; }
+        i { margin: 18px 0 0 18px; }
+      }
+      .item-bd { position: relative; height: 0; }
+      &:hover {
+        .item-bd { display: block;
+          ul { display: list-item!important; }
+        }
+      }
+    }
+    .item-active {
+      .item-bd { display: none; }
+    }
+    .item-active, .item:hover {
+      .arrow { display: none; }
+    }
+    .item-bd {
+      ul { position: absolute; left: 50px; top: -50px; padding-left: 0; white-space: nowrap; background: @nav-s-list-bg; }
+      a { padding: 0 20px; color: @nav-s-list-color; text-indent: 0;
+        &:hover { color: #fff; }
+      }
+    }
+  }
+  .nav-on-off { left: 0;
+    .on-off-ico { background-position: 0 -60px; }
+    &:hover {
+      .on-off-ico { background-position: 0 -100px; }
+    }
+  }
+  .main-wrapper { left: 50px; }
+}
+
+.main-s-disabled {
+  .nav-on-off { display:none; }
+}
+
+@-webkit-keyframes shake {
+  0%, 20%, 40%, 46%, 80%, 100% { top: -45px; }
+  10%, 50%, 90% { top: -43px; }
+  30%, 70% { top: -47px; }
+}
+
+@-moz-keyframes shake {
+  0%, 20%, 40%, 46%, 80%, 100% { top: -45px; }
+  10%, 50%, 90% { top: -43px; }
+  30%, 70% { top: -47px; }
+}
+
+@-o-keyframes shake {
+  0%, 20%, 40%, 46%, 80%, 100% { top: -45px; }
+  10%, 50%, 90% { top: -43px; }
+  30%, 70% { top: -47px; }
+}
+
+@-ms-keyframes shake {
+  0%, 20%, 40%, 46%, 80%, 100% { top: -45px; }
+  10%, 50%, 90% { top: -43px; }
+  30%, 70% { top: -47px; }
+}
+
+@keyframes shake {
+  0%, 20%, 40%, 46%, 80%, 100% { top: -45px; }
+  10%, 50%, 90% { top: -43px; }
+  30%, 70% { top: -47px; }
+}
+
+.centre-ico, .project-ico, .trainee-ico, .portal-ico, .resource-ico, .incoming-ico, .stat-ico, .notice-ico, .config-ico, .platform-ico, .pstat-ico, .log-ico, .admin-ico, .menu-ico, .role-ico, .promotion-ico, .service-ico, .cert-ico { float: left; display: inline; width: 16px; height: 16px; vertical-align: middle; }
+.centre-ico { background-position: -40px 0; }
+.trainee-ico { background-position: -40px -40px; }
+.project-ico { background-position: -40px -20px; }
+.config-ico { background-position: -40px -60px; }
+.portal-ico { background-position: -40px -80px; }
+.resource-ico { background-position: -40px -100px; }
+.incoming-ico { background-position: -40px -120px; }
+.stat-ico { background-position: -40px -140px; }
+.notice-ico { background-position: -40px -160px; }
+.platform-ico { background-position: -40px -180px; }
+.pstat-ico { background-position: -40px -200px; }
+.log-ico { background-position: -40px -220px; }
+.admin-ico { background-position: -40px -240px; }
+.menu-ico { background-position: -40px -260px; }
+.role-ico { background-position: -40px -280px; }
+.promotion-ico { background-position: -40px -300px; }
+.service-ico { background-position: -40px -320px; }
+.cert-ico { background-position: -40px -340px; }

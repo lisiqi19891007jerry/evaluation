@@ -191,8 +191,7 @@ body {
 	font-size: 12px;
 	line-height: 20px;
 	color: #333;
-	background-color: #fff;
-	background: #fafafa;
+	background-color: #fff
 }
 
 a {
@@ -1055,9 +1054,9 @@ input[type="file"], input[type="image"], input[type="submit"], input[type="reset
 }
 
 select, input[type="file"] {
-	height: 30px;
+	height: 25px;
 	*margin-top: 4px;
-	line-height: 30px
+	line-height: 20px
 }
 
 select {
@@ -1258,7 +1257,6 @@ input.span1, textarea.span1, .uneditable-input.span1 {
 input[disabled], select[disabled], textarea[disabled], input[readonly],
 	select[readonly], textarea[readonly] {
 	cursor: not-allowed;
-	background-color: #eee
 }
 
 input[type="radio"][disabled], input[type="checkbox"][disabled], input[type="radio"][readonly],
@@ -1511,7 +1509,11 @@ input:focus:invalid:focus, textarea:focus:invalid:focus, select:focus:invalid:fo
 	-moz-border-radius: 0;
 	border-radius: 0
 }
-
+.selc{
+	padding-left:120px;
+	margin-top:10px;
+	margin-bottom:15px;
+}
 .input-append .active, .input-prepend .active {
 	background-color: #a9dba9;
 	border-color: #46a546
@@ -1732,19 +1734,25 @@ legend+.control-group {
 }
 
 table {
-	width: 90%;
+	max-width: 92%;
 	background-color: transparent;
 	border-collapse: collapse;
 	border-spacing: 0;
+	
+}
+.row-fluid table{
+	table-layout:fixed;
 }
 
+.row-fluid td{
+	word-wrap:break-word;
+}
 .table {
 	width: 100%;
 	magin-bottom: 20px
 }
 
 .table th, .table td {
-	padding: 8px;
 	line-height: 20px;
 	text-align: center;
 	vertical-align: top;
@@ -5773,8 +5781,7 @@ to {
 }
 
 .tab_content {
-	padding-left: 50px;
-	width: 90%;
+	padding-left: 100px;
 }
 
 .add-theme {
@@ -5825,7 +5832,7 @@ td{
 	padding-top:5px;
 	padding-bottom:5px;
 }
-td.td1 {text-align:left;padding-left:80px;}
+td.td1 {text-align:left;padding-left:120px;}
 td.td2 {text-align:left;padding-left:40px;}
 td.td3 {text-align:left;padding-left:70px;}
 td.td4 {text-align:left;padding-left:255px;}
@@ -5834,10 +5841,10 @@ td.td22{text-align:left;padding-left:150px;}
 td.td5{text-align:left;padding-left:245px;}
 td.td6{text-align:left;padding-left:168px;}
 .twopeople{
-	padding-left:79px;
+	padding-left:5px;	
 }
 .twostyle{
-	padding-left: 49px;
+	padding-left:5px;
 }
 	
 .testText{
@@ -5858,12 +5865,71 @@ td.td6{text-align:left;padding-left:168px;}
 	margin-bottom:8px;
 }
 .selText1{
-	width:120px;
+	width:80px;
 }
 .testS{
-	width:40px;
+	width:30px;
 }
 .tdtext,.tdtext2,.tdtext3,.tdtext4,.tdtext5{
 	text-align:left;
-	padding-left:
-}	
+}
+
+/*编号*/		
+.nameTh1{
+	width:5%;
+}
+
+/*游戏名*/	
+.nameTh2{
+	width:13%
+	
+}
+/*游戏类型*/	
+.nameTh3{
+	width:13%
+}
+/*游戏题材*/	
+.nameTh4{
+	width:13%
+}
+/*包体大小*/	
+.nameTh5{
+ 	width:6%;
+}
+/*平台*/	
+.nameTh6{
+	width:5%
+}
+/*单机or网游*/	
+.nameTh7{
+ 	width:8%
+}
+/*评测模式*/	
+.nameTh8{
+ 	width:5%
+}
+/*评测日期*/	
+.nameTh9{
+ 	width:8%
+}
+/*测评人*/	
+.nameTh10{
+ 	width:5%
+}
+/*测评分*/	
+.nameTh11{
+ 	width:5%
+}
+/*测评评级*/	
+.nameTh12{
+ 	width:5%
+}
+/*潜力评级*/	
+.nameTh13{
+ 	width:5%
+}
+
+
+	
+	
+	

@@ -8,6 +8,8 @@
 <link rel="stylesheet" media="all" href="resources/style/user/setManager.css" />
 <link rel="stylesheet" media="all" href="resources/style/user/adduserManager.css" />
 <link rel="stylesheet" media="all" href="resources/style/user/editSetManager.css" />
+<link rel="stylesheet" media="all" href="resources/style/user/setButton.css" />
+
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -157,11 +159,11 @@ function doGoPage(cPageCount) {
             <div class="add-form dform">
                 <form id="addUser" name="addUser" class="add-sign" action="user/createUser.html" method="post">
                     <ol>
-                        <li>
-                            <span>账号：</span><input class="ipt" type="text" name="account" id="account"/>
+                    	<li>
+                            <span>用户名：</span><input class="ipt" type="text"  name="username" id="username"/>
                         </li>
                         <li>
-                            <span>用户名：</span><input class="ipt" type="text"  name="username" id="username"/>
+                            <span>账号：</span><input class="ipt" type="text" name="account" id="account"/>
                         </li>
                         <li>
                             <span>密码：</span><input class="ipt" type="password" name="pwd" id="pwd"/>
@@ -174,7 +176,7 @@ function doGoPage(cPageCount) {
                             </select>
                         </li>
                         <li>
-                            <input id="saveBtn" name="saveBtn" class="btn btn-primary" type="button" value=" 保存 " onclick="doCreateUserAction();"/>
+                            <input id="saveBtn" name="saveBtn" class="btn radius btn-success btn-small" type="button" value="保存" onclick="doCreateUserAction();"/>
                         </li>
                     </ol>
                 </form>
@@ -216,7 +218,7 @@ function doGoPage(cPageCount) {
                                         <a href="javascript:closeUpatePwdWindow('${user.user_id}')" title="关闭" class="close">×</a>
                                         <h3>重置密码</h3>
                                     </div>
-                                    <div class="theme-popbod dform">
+                                    <div class="theme-popbod dform2">
                                         <ol>
                                             <li>
                                                 <span>设新密码：</span>
@@ -227,7 +229,7 @@ function doGoPage(cPageCount) {
                                                 <input class="ipt" type="password" id="newpwd2_${user.user_id}" name="newpwd2_${user.user_id}"/>
                                             </li>
                                             <li>
-                                                <input class="btn btn-primary" type="button" onclick="doUpatePwdAction('${user.user_id}')" value=" 保存 "/>
+                                                <input class="btn radius btn-success btn-small" type="button" onclick="doUpatePwdAction('${user.user_id}')" value=" 保存 "/>
                                             </li>
                                         </ol>
                                     </div>

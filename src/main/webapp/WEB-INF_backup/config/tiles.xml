@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<!-- 通用布局 -->
+	<definition name="baseLayout" template="/WEB-INF/views/framework/simpleLayout.jsp">
+		<put-attribute name="basepath" value="/WEB-INF/views/framework/basepath.jsp" />
+		<put-attribute name="meta" value="/WEB-INF/views/framework/meta.jsp" />
+		<put-attribute name="title" value="文件管理系统" />
+		<put-attribute name="css" value="/WEB-INF/views/framework/css.jsp" />
+		<put-attribute name="javascript" value="/WEB-INF/views/framework/javascript.jsp" />
+		<put-attribute name="common_header" value="/WEB-INF/views/framework/common_header.jsp" />
+		<put-attribute name="header" value="/WEB-INF/views/framework/header.jsp" />
+		<put-attribute name="body" value="" />
+	</definition>
+
+	<!-- 登录界面  -->
+	<definition name="loginview" extends="baseLayout">
+		<put-attribute name="title" value="用户登录" />
+		<put-attribute name="common_header" value="" />
+		<put-attribute name="header" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/evaluation/login/login.jsp" />
+	</definition>
+
+	<!-- 用户管理界面  -->
+	<definition name="userview" extends="baseLayout">
+		<put-attribute name="title" value="用户管理" />
+		<put-attribute name="body" value="/WEB-INF/views/evaluation/user/setManager.jsp" />
+	</definition>
+
+	<!-- 游戏信息登记界面  -->
+	<definition name="createInfo" extends="baseLayout">
+		<put-attribute name="title" value="游戏信息登记" />
+		<put-attribute name="body" value="/WEB-INF/views/evaluation/info/create/createInfo.jsp" />
+	</definition>
+
+	<!-- 游戏信息查询界面  -->
+	<definition name="queryInfo" extends="baseLayout">
+		<put-attribute name="title" value="游戏信息查询" />
+		<put-attribute name="body" value="/WEB-INF/views/evaluation/info/query/queryInfo.jsp" />
+	</definition>
+
+	<!-- 游戏明细信息显示界面  -->
+	<definition name="detailInfo" extends="baseLayout">
+		<put-attribute name="title" value="游戏明细信息" />
+		<put-attribute name="body" value="/WEB-INF/views/evaluation/info/detail/detailInfo.jsp" />
+	</definition>
+</tiles-definitions>

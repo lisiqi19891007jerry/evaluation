@@ -1,14 +1,10 @@
-*{
-	font-size: 14px;
-	letter-spacing: 1px;
-	vertical-align: middle;
-}
+
 body {
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
 	border: 0px solid #D4D0C8;
 	overflow: hidden;
-	background: #fafafa;
+	background:#e9fafc;
 }
 
 table {

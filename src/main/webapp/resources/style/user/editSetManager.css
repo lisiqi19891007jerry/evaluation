@@ -13,6 +13,9 @@ display:none
 ol, ul, menu {
 	list-style:none
 }
+.theme-popbod li{
+	padding-bottom:18px;
+}
 img {
 	border:0
 }
@@ -219,8 +222,8 @@ input.ui-edit {
 	top:50%;
 	left:50%;
 	width:380px;
-	height:220px;
-	margin:-180px 0 0 -330px;
+	height:235px;
+	margin:-100px 0 0 -330px;
 	border-radius:5px;
 	border:solid 2px #666;
 	background-color:#fff;
@@ -277,7 +280,11 @@ h3{
 	margin-right:6px
 }
 .dform {
-	padding:30px 20px 40px;
+	padding:80px 60px 40px;
+	text-align: center;
+}
+.dform2 {
+	padding:20px 60px 40px;
 	text-align: center;
 }
 .dform-login {

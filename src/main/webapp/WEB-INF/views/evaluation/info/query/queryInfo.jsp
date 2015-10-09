@@ -5,7 +5,6 @@
 
 <!-- 引入css -->
 <link rel="stylesheet" type="text/css" href="resources/style/info/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="resources/style/info/bootstrap-custom.css" />
 <link rel="stylesheet" type="text/css" href="resources/style/info/query.css" />
 <link rel="stylesheet" type="text/css" href="resources/style/info/query.min.css" />
 <link rel="stylesheet" type="text/css" href="resources/style/info/pikaday.css" />
@@ -116,8 +115,7 @@ function doGoPage(cPageCount) {
 					<tr class="row1">
 						<td class="td1">
 							<span class="info1">
-								画风<strong>：</strong>
-							</span>
+								画风<strong>：</strong></span>
 							<!-- 绘画 -->
 							<strong>①</strong>
 							<span class="sence">
@@ -127,7 +125,7 @@ function doGoPage(cPageCount) {
 								<input type="radio" name="painting_style_1" value="${painting_style_1.attributeValue}"
 									<c:if test="${painting_style_1.attributeValue eq parameterMap.painting_style_1}">checked="checked"</c:if> />${painting_style_1.attributeName}
 							</c:forEach>
-							<br />
+						
 							<span class="twostyle" >
 								<!-- 风格 -->
 								<strong>②</strong>
@@ -153,7 +151,7 @@ function doGoPage(cPageCount) {
 								<input type="radio" name="scene" value="${scene.attributeValue}"
 									<c:if test="${scene.attributeValue eq parameterMap.scene}">checked="checked"</c:if> />${scene.attributeName}&nbsp;
 							</c:forEach>
-							<br />
+						
 							<span class="twopeople">
 								<!-- 人物 -->
 								<strong>②</strong>
@@ -168,8 +166,7 @@ function doGoPage(cPageCount) {
 						</td>
 						<td class="td11">
 							<span class="info">游戏名</span>
-							<input id="in_game_name" name="in_game_name" class="userSelect"
-								type="text" style="color:#a0a0a0;font-size:12px;" value="${parameterMap.in_game_name}" />
+							<input id="in_game_name" name="in_game_name" class="userSelect" type="text" style="color:#000000;font-size:12px;" value="${parameterMap.in_game_name}"/>
 						</td>
 					</tr>
 
@@ -195,8 +192,8 @@ function doGoPage(cPageCount) {
 						</td>
 						<td class="td11">
 							<span class="info">游戏类型</span>
-							<input id="in_game_type" name="in_game_type" class="userSelect"
-								type="text" style="color:#a0a0a0;font-size:12px;" value="${parameterMap.in_game_type}" />
+							<input id="in_game_type" name="in_game_type" class="userSelect" type="text" style="color:#000000;font-size:12px;" value="${parameterMap.in_game_type}" />
+
 						</td>
 					</tr>
 
@@ -249,8 +246,9 @@ function doGoPage(cPageCount) {
 						</td>
 						<td class="td11">
 							<span class="info">游戏题材</span>
-							<input id="in_game_theme" name="in_game_theme" class="userSelect"
-								type="text" style="color:#a0a0a0;font-size:12px;" value="${parameterMap.in_game_theme}" />
+							<input id="in_game_theme" name="in_game_theme" class="userSelect" type="text" style="color:#a0a0a0;font-size:12px;" value="${parameterMap.in_game_theme}"
+								onfocus="if (value =='请输入关键字'){this.style.color='#000000';value =''}"
+								onblur="if (value ==''){this.style.color='#a0a0a0'}" />
 						</td>
 					</tr>
 
@@ -281,8 +279,9 @@ function doGoPage(cPageCount) {
 						</td>
 						<td class="td11">
 							<span class="info">发行商或研发商</span>
-							<input id="in_game_publisher" name="in_game_publisher" class="userSelect"
-								type="text" style="color:#a0a0a0;font-size:12px;" value="${parameterMap.in_game_publisher}" />
+							<input id="in_game_publisher" name="in_game_publisher" class="userSelect" type="text" style="color:#a0a0a0;font-size:12px;" value="${parameterMap.in_game_publisher}"
+								onfocus="if (value =='请输入关键字'){this.style.color='#000000';value =''}"
+								onblur="if (value ==''){this.style.color='#a0a0a0'}" />
 						</td>
 					</tr>
 
@@ -297,20 +296,17 @@ function doGoPage(cPageCount) {
 						<td class="td2"></td>
 						<td class="td11">
 							<span class="info">参考竞品或战斗养成</span>
-							<input id="in_game_reference" name="in_game_reference" class="userSelect"
-								type="text" style="color:#a0a0a0;font-size:12px;" value="${parameterMap.in_game_reference}" />
+							<input id="in_game_reference" name="in_game_reference" class="userSelect" type="text" style="color:#a0a0a0;font-size:12px;" value="${parameterMap.in_game_reference}"
+								onfocus="if (value =='请输入关键字'){this.style.color='#000000';value =''}"
+								onblur="if (value ==''){this.style.color='#a0a0a0'}" />
 						</td>
 					</tr>
-
-					<!-- 查询按钮 -->
-					<tr class="row5">
-						<td colspan="3" align="right">
-							<input type="button" class="btn radius btn-primary btn-small" value="查询" onclick="doQueryAction();"/>
-						</td>
-					</tr>
-				</table>
+				</table> 
 			</div>
-
+			<!-- 查询按钮 -->
+			<div class="selc">
+				<input type="button" class="btn radius btn-primary btn-small" value="查询" onclick="doQueryAction();"/>		
+			</div>
 		<input type="hidden" id="gameInfoID" name="gameInfoID" />
 
 		<div class="tab_content" id="tab1" style="display: block; ">
@@ -318,40 +314,40 @@ function doGoPage(cPageCount) {
 				<table id="example" class="table table-hover table-first" >
 					<thead>
 						<tr bgcolor="#efefed">
-							<th>编号</th>
-							<th>游戏名</th>
-							<th>游戏类型</th>
-							<th>游戏题材</th>
-							<th>包体大小</th>
-							<th>平台</th>
-							<th>单机or网游</th>
-							<th>评测模式</th>
-							<th>测评日期</th>
-							<th>测评人</th>
-							<th>测评分</th>
-							<th>测评评级</th>
-							<th>潜力评级</th>
+							<th class="nameTh1">编号</th>
+							<th class="nameTh2">游戏名</th>
+							<th class="nameTh3">游戏类型</th>
+							<th class="nameTh4">游戏题材</th>
+							<th class="nameTh5">包体大小</th>
+							<th class="nameTh6">平台</th>
+							<th class="nameTh7">单机or网游</th>
+							<th class="nameTh8">评测模式</th>
+							<th class="nameTh9">测评日期</th>
+							<th class="nameTh10">测评人</th>
+							<th class="nameTh11">测评分</th>
+							<th class="nameTh12">测评评级</th>
+							<th class="nameTh13">潜力评级</th>
 						</tr>
 					</thead>
 
 					<tbody>
 						<c:forEach var="info" items="${gameInfoList}" varStatus="status">
 							<tr>
-								<td>${status.index + 1}</td>
-								<td>
+								<td class="nameTd1">${status.index + 1}</td>
+								<td class="nameTd2">
 									<a href="javascript:doShowDetailInfoAction('${info.ID}')">${info.GameName}</a>
 								</td>
-								<td>${info.GameType}</td>
-								<td>${info.GameTheme}</td>
-								<td>${info.InstallationSize} MB</td>
-								<td>${info.Platform}</td>
-								<td>${info.GameClassify}</td>
-								<td>${info.EvaluationModel}</td>
-								<td>${info.Datetime}</td>
-								<td>${info.username}</td>
-								<td>${info.EvaluationPoint}</td>
-								<td>${info.Classified_Evaluate}</td>
-								<td>${info.Evaluation_Potential_Grade}</td>
+								<td class="nameTd3">${info.GameType}</td>
+								<td class="nameTd4">${info.GameTheme}</td>
+								<td class="nameTd5">${info.InstallationSize} MB</td>
+								<td class="nameTd6">${info.Platform}</td>
+								<td class="nameTd7">${info.GameClassify}</td>
+								<td class="nameTd8">${info.EvaluationModel}</td>
+								<td class="nameTd9">${info.Datetime}</td>
+								<td class="nameTd10">${info.username}</td>
+								<td class="nameTd11">${info.EvaluationPoint}</td>
+								<td class="nameTd12">${info.Classified_Evaluate}</td>
+								<td class="nameTd13">${info.Evaluation_Potential_Grade}</td>
 							</tr>
 						</c:forEach>
 
