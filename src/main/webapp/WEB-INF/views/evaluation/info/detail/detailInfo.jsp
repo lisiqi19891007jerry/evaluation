@@ -33,7 +33,10 @@ function doDownloadFileAction(fileID) {
 
 <form id="backForm" action="queryInfo/query.html" method="post">
 
-<input type="button" class="btn radius btn-primary btn-small" value="返回" onclick="doGoBackAction();"/>
+<input type="button" class="btn radius btn-primary btn-small" style="margin-top: 20px; margin-left: 50px;" value="返回" onclick="doGoBackAction();"/>
+<c:if test="${'0' ne sessionScope['IS_ADMIN_USER'] }">
+	<input type="button" class="btn radius btn-primary btn-small" style="margin-top: 20px; margin-left: 50px;" value="保存修改" />
+</c:if>
 
 <div class="container-content">
 	<div class="m_detail">
@@ -168,6 +171,8 @@ function doDownloadFileAction(fileID) {
 		</tr>
 	</table>
 </div>
+
+<input type="hidden" id="gameInfo_id" name="gameInfo_id" value="${detailInfoMap.ID}" />
 
 <!-- 返回查询条件 -->
 <input type="hidden" id="painting_style_1" name="painting_style_1" value="${parameterMap.painting_style_1}" />

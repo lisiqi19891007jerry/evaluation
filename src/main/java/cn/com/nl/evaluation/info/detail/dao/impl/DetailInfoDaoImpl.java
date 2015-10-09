@@ -61,6 +61,7 @@ public class DetailInfoDaoImpl implements DetailInfoDao {
 		sql.append("       ,username ");
 		sql.append("       ,CONCAT(test.file_name, '.', test.file_extension) AS test_file_name");
 		sql.append("       ,CONCAT(play.file_name, '.', play.file_extension) AS play_file_name");
+		sql.append("       ,modifyCount ");
 		sql.append("   FROM b_gameinformation AS info ");
 		sql.append("   LEFT JOIN c_user AS user ON info.EvaluationPeople = user.account");
 		sql.append("   LEFT JOIN b_upload_file AS test ON info.EvaluationReport = test.file_id");

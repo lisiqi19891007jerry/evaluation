@@ -61,7 +61,8 @@ public class CreateInfoDaoImpl implements CreateInfoDao {
 		sql.append("                               ,Privilege");
 		sql.append("                               ,EvaluationModel");
 		sql.append("                               ,Retestcondition");
-		sql.append("                               ,createDateTime )");
+		sql.append("                               ,createDateTime");
+		sql.append("                               ,modifyCount )");
 		sql.append(" VALUES ('" + SequenceUtil.getSequenceStr() + "' ");
 		sql.append("        ,'" + DateUtil.createTimestamp(argMap.get("evaluation_date") + "", DateUtil.SIMPLE_DATE_FORMAT) + "' ");
 		sql.append("        ,'" + argMap.get("tester") + "" + "' ");
@@ -95,7 +96,8 @@ public class CreateInfoDaoImpl implements CreateInfoDao {
 		sql.append("        ,'" + argMap.get("favorable_type") + "" + "' ");
 		sql.append("        ,'" + argMap.get("evaluate_mode") + "" + "' ");
 		sql.append("        ,'" + argMap.get("retest_status") + "" + "' ");
-		sql.append("        ,'" + new Timestamp(System.currentTimeMillis()) + "') ");
+		sql.append("        ,'" + new Timestamp(System.currentTimeMillis()) + "' ");
+		sql.append("        ,0) ");
 
 		int excuseCount = -1;
 
