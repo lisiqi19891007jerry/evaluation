@@ -1,6 +1,8 @@
 package cn.com.nl.evaluation.info.detail;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -47,6 +49,7 @@ public class DetailInfoController extends BasicController {
 
 		// 取得游戏评测详细信息
 		Map<String, Object> detailInfoMap = detailInfoDao.doSelectDetilGameInfo(parameterMap.get("gameInfoID"));
+		Map<String, Object> originalMap   = setOriginalMapData(detailInfoMap);
 
 		if (detailInfoMap != null && detailInfoMap.size() > 0) {
 
@@ -83,11 +86,39 @@ public class DetailInfoController extends BasicController {
 			}
 		}
 
+		model.addAttribute("userList", attributeDao.doSelectUserList());
 		model.addAttribute("parameterMap", parameterMap);
 		model.addAttribute("attributeMap", attributeMap);
+		model.addAttribute("originalMap", originalMap);
 		model.addAttribute("detailInfoMap", detailInfoMap);
 
 		return new ModelAndView("detailInfo", model);
+	}
+
+	/**
+	 * 
+	 * 保留查询结果数据的原始值
+	 * 
+	 * @param detailInfoMap
+	 * @return
+	 */
+	private Map<String, Object> setOriginalMapData(Map<String, Object> detailInfoMap) {
+
+		Map<String, Object> originalMap = new HashMap<String, Object>();
+
+		if (detailInfoMap != null && detailInfoMap.size() > 0) {
+
+			Iterator<Map.Entry<String, Object>> it = detailInfoMap.entrySet().iterator();
+
+			while (it.hasNext()) {
+
+				Map.Entry<String, Object> entry = (Map.Entry<String, Object>) it.next();
+
+				originalMap.put(entry.getKey(), entry.getValue());
+			}
+		}
+
+		return originalMap;
 	}
 
 	/**

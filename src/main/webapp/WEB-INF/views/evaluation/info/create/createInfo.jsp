@@ -186,8 +186,8 @@ $(document).ready(function() {
 						<span class="info">本次对外测试类型：</span>
 					</td>
 					<td class="td4">
-							<input type="checkbox" id="record" name="record" /> 删档&nbsp;
-							<input type="checkbox" id="openPay" name="openPay" /> 付费
+						<input type="checkbox" id="record" name="record" /> 删档&nbsp;
+						<input type="checkbox" id="openPay" name="openPay" /> 付费
 					</td>
 				</tr>
 				<tr class="row7">
