@@ -3,13 +3,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
+<!-- 引入javascript -->
+<script type="text/javascript" src="resources/scripts/info/updateInfo.js"></script>
+
 <!-- 引入css -->
 <link rel="stylesheet" type="text/css" href="resources/style/info/detailInfo.min.css"/>
 <link rel="stylesheet" type="text/css" href="resources/style/info/detailInfo.css" />
 
 <script>
 function doGoBackAction() {
-	document.getElementById("backForm").submit();
+	document.getElementById("detailForm").action = "queryInfo/query.html";
+	document.getElementById("detailForm").submit();
 }
 function doDownloadFileAction(fileID) {
 	doRedriect('detailInfo/download.html?fileID=' + fileID);
@@ -31,11 +35,13 @@ function doDownloadFileAction(fileID) {
 	</div>
 </div> 
 
-<form id="backForm" action="queryInfo/query.html" method="post">
+<form id="detailForm" method="post">
 
-<input type="button" class="btn radius btn-primary btn-small" style="margin-top: 20px; margin-left: 50px;" value="返回" onclick="doGoBackAction();"/>
+<input type="button" class="btn radius btn-primary btn-small"
+	style="margin-top: 20px; margin-left: 50px;" value="返回" onclick="doGoBackAction();"/>
 <c:if test="${'0' ne sessionScope['IS_ADMIN_USER'] }">
-	<input type="button" class="btn radius btn-primary btn-small" style="margin-top: 20px; margin-left: 50px;" value="保存修改" />
+	<input type="button" class="btn radius btn-primary btn-small"
+		style="margin-top: 20px; margin-left: 50px;" value="保存修改" onclick="doUpateDataAction();"/>
 </c:if>
 
 <div class="container-content">

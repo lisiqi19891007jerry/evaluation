@@ -57,7 +57,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public boolean doUpdatetUserPwd(String userID, String newPwd) {
-	
+
 		StringBuffer sql = new StringBuffer();
 
 		sql.append("UPDATE c_user SET password = '" + newPwd + "' ");

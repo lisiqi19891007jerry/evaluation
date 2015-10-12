@@ -19,6 +19,7 @@ import cn.com.nl.evaluation.info.attribute.dao.AttributeDao;
 import cn.com.nl.evaluation.info.attribute.model.AttributeModel;
 import cn.com.nl.evaluation.info.attribute.model.AttributeValueModel;
 import cn.com.nl.evaluation.info.detail.dao.DetailInfoDao;
+import cn.com.nl.evaluation.info.detail.dao.UpdateInfoDao;
 import cn.com.nl.framework.base.BasicController;
 import cn.com.nl.framework.tools.DateUtil;
 
@@ -28,6 +29,9 @@ public class DetailInfoController extends BasicController {
 
 	@Autowired
 	private DetailInfoDao detailInfoDao;
+
+	@Autowired
+	private UpdateInfoDao updateInfoDao;
 
 	@Autowired
 	private AttributeDao attributeDao;
@@ -147,5 +151,24 @@ public class DetailInfoController extends BasicController {
 				break;
 			}
 		}
+	}
+
+	/**
+	 *
+	 * 更新游戏评测信息
+	 *
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/updateInfo")
+	public ModelAndView doUpdateInfo(ModelMap model) {
+
+		Map<String, String> parameterMap = getScreenParameterMap();
+
+		String gameInfoId = parameterMap.get("gameInfoID");
+		int modifyCountFromScreen = Integer.parseInt(parameterMap.get("modifyCount"));
+
+		
+		return doShowDetailInfo(model);
 	}
 }
