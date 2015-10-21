@@ -60,6 +60,7 @@
 		<property name="exceptionMappings">
 			<props>
 				<prop key="cn.com.nl.framework.exception.AuthorizationException">forward:/login.html</prop>
+				<prop key="cn.com.nl.framework.exception.DownloadFileNotFoundException">forward:/file_not_found_exception.jsp</prop>
 			</props>
 		</property>
 	</bean>

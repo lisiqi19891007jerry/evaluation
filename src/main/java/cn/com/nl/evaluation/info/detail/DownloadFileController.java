@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import cn.com.nl.evaluation.info.detail.dao.DetailInfoDao;
 import cn.com.nl.framework.base.BasicController;
+import cn.com.nl.framework.exception.DownloadFileNotFoundException;
 
 @Scope("prototype")
 @Controller
@@ -34,12 +35,18 @@ public class DownloadFileController extends BasicController {
 	 *
 	 * @param model
 	 * @return
+	 * @throws DownloadFileNotFoundException 如果文件不存在的情况下，抛出异常
 	 */
 	@RequestMapping(value = "/detailInfo/download")
 	public ResponseEntity<byte[]> doShowDetailInfo(ModelMap model
-												  ,@RequestParam(value = "fileID", required = false) String fileID) {
+												  ,@RequestParam(value = "fileID", required = false) String fileID)
+												  throws DownloadFileNotFoundException {
 
-		Map<String, Object> fileInfoMap   = detailInfoDao.doSelectFileIndo(fileID);
+		Map<String, Object> fileInfoMap = detailInfoDao.doSelectFileIndo(fileID);
+
+		if (fileInfoMap == null || fileInfoMap.size() < 1) {
+			throw new DownloadFileNotFoundException("在数据表中查不到文件记录");
+		}
 
 		File file = new File((String) fileInfoMap.get("file_path"));
 
@@ -58,6 +65,10 @@ public class DownloadFileController extends BasicController {
 
 		headers.setContentDispositionFormData("attachment", fileName);
 		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+
+		if (file.exists()) {
+			throw new DownloadFileNotFoundException("《" + fileName + "》文件不存在！");
+		}
 
 		ResponseEntity<byte[]> entity = null;
 

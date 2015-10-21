@@ -20,10 +20,6 @@ import cn.com.nl.evaluation.info.create.model.FileInfoModel;
 @Component
 public class GamePlayReportHandle extends AbstractGameHandle {
 
-	public static final String PLAY_PATH_TYPE = "tenPlayReportStorePath";
-
-	public static final String PLAY_FILE_TYPE = "play";
-
 	public String doFilter(Map<String, Object> argMap) {
 
 		FileInfoModel fileModel = getHelper().uploadReportFile(PLAY_PATH_TYPE

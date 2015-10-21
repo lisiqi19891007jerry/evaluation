@@ -11,7 +11,7 @@ import cn.com.nl.evaluation.info.create.model.FileInfoModel;
 /**
  * @Title GameInfoHandle.java
  * @Package cn.com.nl.evaluation.info.create.handle.impl
- * @Description 
+ * @Description 游戏信息插入操作实现类
  * @Date 2015年9月18日 上午12:09:08
  * @Version V1.0
  */

@@ -165,10 +165,88 @@ public class DetailInfoController extends BasicController {
 
 		Map<String, String> parameterMap = getScreenParameterMap();
 
-		String gameInfoId = parameterMap.get("gameInfoID");
-		int modifyCountFromScreen = Integer.parseInt(parameterMap.get("modifyCount"));
+		String returnValue = "";
+		String gameInfoId  = StringUtils.trimToEmpty(parameterMap.get("gameInfoID"));
 
-		
+		int modifyCountFromScreen = Integer.parseInt(parameterMap.get("modifyCount"));
+		int modifyCountFromDb     = updateInfoDao.doSelectModifyCount(gameInfoId);
+
+		// 界面中的modifyCount小于数据库中存放的modifyCount时，标识数据库中的记录已经被更新
+		if (modifyCountFromScreen < modifyCountFromDb) {
+			returnValue = "记录已被更新，请重新检索后再试！";
+		} else {
+
+			boolean updateResult = updateInfoDao.doUpdateDetilGameInfo(reSetArgMap(parameterMap));
+
+			if (updateResult) {
+				returnValue = "记录数据更新操作完成！";
+			} else {
+				returnValue = "记录数据更新操作失败！";
+			}
+		}
+
+		model.addAttribute("returnValue", returnValue);
+
 		return doShowDetailInfo(model);
+	}
+
+	private Map<String, String> reSetArgMap(Map<String, String> argMap) {
+
+		// 研发商
+		if (StringUtils.isEmpty(argMap.get("upd_developName"))) {
+			argMap.put("upd_developName", "");
+		}
+
+		// 发行商
+		if (StringUtils.isEmpty(argMap.get("upd_sendName"))) {
+			argMap.put("upd_sendName", "");
+		}
+
+		// 游戏完成度
+		if (StringUtils.isEmpty(argMap.get("upd_gameDegree"))) {
+			argMap.put("upd_gameDegree", "100");
+		}
+
+		// 付费方式
+		if (StringUtils.isEmpty(argMap.get("upd_pay_type"))) {
+			argMap.put("upd_pay_type", "");
+		}
+
+		// 付费优惠类型
+		if (StringUtils.isEmpty(argMap.get("upd_favorable_type"))) {
+			argMap.put("upd_favorable_type", "");
+		}
+
+		// 评测模式
+		if (StringUtils.isEmpty(argMap.get("upd_evaluate_mode"))) {
+			argMap.put("upd_evaluate_mode", "");
+		}
+
+		// 潜力等级
+		if (StringUtils.isEmpty(argMap.get("upd_evaluation_potential_grade"))) {
+			argMap.put("upd_evaluation_potential_grade", "");
+		}
+
+		// 上线表现级别
+		if (StringUtils.isEmpty(argMap.get("upd_online_level"))) {
+			argMap.put("upd_online_level", "");
+		}
+
+		// 上线表现评价说明
+		if (StringUtils.isEmpty(argMap.get("upd_manifestationExplain"))) {
+			argMap.put("upd_manifestationExplain", "");
+		}
+
+		// 参考竞品养成方面
+		if (StringUtils.isEmpty(argMap.get("upd_qualityGoods_cultivate"))) {
+			argMap.put("upd_qualityGoods_cultivate", "");
+		}
+
+		// 参考战斗养成方面
+		if (StringUtils.isEmpty(argMap.get("upd_qualityGoods_combat"))) {
+			argMap.put("upd_qualityGoods_combat", "");
+		}
+
+		return argMap;
 	}
 }

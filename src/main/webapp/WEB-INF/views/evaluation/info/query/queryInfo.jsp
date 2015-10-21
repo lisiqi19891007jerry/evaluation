@@ -247,7 +247,7 @@ function doGoPage(cPageCount) {
 						<td class="td11">
 							<span class="info">游戏题材</span>
 							<input id="in_game_theme" name="in_game_theme" class="userSelect"
-								type="text" style="color:#a0a0a0;font-size:12px;" value="${parameterMap.in_game_theme}" />
+								type="text" style="font-size:12px;" value="${parameterMap.in_game_theme}" />
 						</td>
 					</tr>
 
@@ -279,7 +279,7 @@ function doGoPage(cPageCount) {
 						<td class="td11">
 							<span class="info">发行商或研发商</span>
 							<input id="in_game_publisher" name="in_game_publisher" class="userSelect"
-								type="text" style="color:#a0a0a0;font-size:12px;" value="${parameterMap.in_game_publisher}" />
+								type="text" style="font-size:12px;" value="${parameterMap.in_game_publisher}" />
 						</td>
 					</tr>
 
@@ -295,7 +295,7 @@ function doGoPage(cPageCount) {
 						<td class="td11">
 							<span class="info">参考竞品或战斗养成</span>
 							<input id="in_game_reference" name="in_game_reference" class="userSelect"
-								type="text" style="color:#a0a0a0;font-size:12px;" value="${parameterMap.in_game_reference}" />
+								type="text" style="font-size:12px;" value="${parameterMap.in_game_reference}" />
 						</td>
 					</tr>
 				</table> 

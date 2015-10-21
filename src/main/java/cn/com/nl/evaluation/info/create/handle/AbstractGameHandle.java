@@ -12,6 +12,12 @@ import cn.com.nl.evaluation.info.create.handle.IGameHandle;
  */
 public abstract class AbstractGameHandle implements IGameHandle {
 
+	public static final String TEST_PATH_TYPE = "testReportStorePath";
+	public static final String PLAY_PATH_TYPE = "tenPlayReportStorePath";
+
+	public static final String TEST_FILE_TYPE = "test";
+	public static final String PLAY_FILE_TYPE = "play";
+
 	private IGameHandle nextGameHandle;
 
 	private FileOperationHelper helper;

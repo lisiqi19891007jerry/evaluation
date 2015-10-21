@@ -18,7 +18,7 @@ public interface UpdateInfoDao {
 	 * @param gameInfoId 游戏信息ID
 	 * @return
 	 */
-	public long doSelectModifyCount(String gameInfoId);
+	public int doSelectModifyCount(String gameInfoId);
 
 	/**
 	 *
