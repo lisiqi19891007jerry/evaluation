@@ -35,9 +35,17 @@ function doLoginAction() {
 	itemEncrypt("pwd"); // 加密
 	document.getElementById("loginForm").submit();
 }
+
+function submitByEnter(event) {
+	var e = event || window.event;
+	var keyCode = e.keyCode || e.which;
+	if(keyCode == 13) {
+		doLoginAction();
+	}
+}
 </script>
 
-<form id="loginForm" action="loginProcess.html" method="post">
+<form id="loginForm" action="loginProcess.html" method="post" onkeydown="submitByEnter(event);">
 
 	<input type="hidden" id="returnValue" name="returnValue" value="${returnValue}" />
 

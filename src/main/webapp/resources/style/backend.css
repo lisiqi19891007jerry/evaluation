@@ -33,7 +33,7 @@ body{background:#e9fafc;overflow:hidden}
 	padding-top:5px;
 	padding-right:15px;
 	padding-bottom:5px;
-	padding-left:15px;
+	padding-left:50px;
 	font-size:24px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .header .menu .menu-hd i{position:absolute;bottom:4px;right:6px;display:block;
 	width:6px;height:6px;font-size:0;background-position:0 -45px}
@@ -47,9 +47,31 @@ body{background:#e9fafc;overflow:hidden}
 .header .hd-r-col a{color:#fff}
 .header .hd-r-col:hover{text-decoration:none}
 .header .hd-r-col span{font:14px/1.5 tahoma,arial,"microsoft yahei",simsun,sans-serif;
-		display:block;height:50px;padding:0 100px;*zoom:1;
+		display:block;height:50px;
+		padding-top:0px;
+		padding-right:400px;
+		padding-left:0px;
+		padding-bottom:0px;
+		*zoom:1;
 		margin-top:15px;
 		}
+.describe_comment{
+	width:500px;
+	height:100px;
+}
+.innovate_comment{
+	width:300px;
+	height:100px;	
+}
+.td7{
+	padding-top:5px;
+	padding-left:60px;
+}
+.td9{
+	padding-top:5px;
+	padding-left:48px;
+	align:right;
+}
 .header .hd-r-col .r{position:absolute;top:6px;right:10px}
 .header a.hd-r-col{cursor:pointer}
 .header .full-ico,.header .messages-ico{float:left;width:16px;height:14px;margin:18px 0 0}

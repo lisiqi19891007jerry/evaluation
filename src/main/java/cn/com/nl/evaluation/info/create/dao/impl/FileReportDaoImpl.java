@@ -27,12 +27,14 @@ public class FileReportDaoImpl implements FileReportDao {
 		StringBuffer sql = new StringBuffer();
 
 		sql.append(" INSERT INTO b_upload_file (file_id");
+		sql.append("                           ,game_id");
 		sql.append("                           ,file_type");
 		sql.append("                           ,file_name");
 		sql.append("                           ,file_path");
 		sql.append("                           ,file_extension");
 		sql.append("                           ,file_upload_time) ");
 		sql.append(" VALUES ('" + fileModel.getFileId() + "' ");
+		sql.append("        ,'" + fileModel.getGameId() + "' ");
 		sql.append("        ,'" + fileModel.getFileType() + "' ");
 		sql.append("        ,'" + fileModel.getFileName() + "' ");
 		sql.append("        ,'" + fileModel.getFilePath() + "' ");

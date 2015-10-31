@@ -12,11 +12,13 @@ import cn.com.nl.evaluation.info.create.handle.IGameHandle;
  */
 public abstract class AbstractGameHandle implements IGameHandle {
 
-	public static final String TEST_PATH_TYPE = "testReportStorePath";
-	public static final String PLAY_PATH_TYPE = "tenPlayReportStorePath";
+	public static final String ATTACH_PATH_TYPE = "attachmentStorePath";
+	public static final String ICON_PATH_TYPE   = "gameIconStorePath";
+	public static final String IMG_PATH_TYPE    = "gameImageStorePath";
 
-	public static final String TEST_FILE_TYPE = "test";
-	public static final String PLAY_FILE_TYPE = "play";
+	public static final String ATTACH_FILE_TYPE = "attachment";
+	public static final String ICON_FILE_TYPE   = "icon";
+	public static final String IMG_FILE_TYPE    = "img";
 
 	private IGameHandle nextGameHandle;
 

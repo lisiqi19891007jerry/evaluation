@@ -9,3 +9,9 @@
 <script type="text/javascript" src="resources/scripts/base/md5.js"></script>
 <script type="text/javascript" src="resources/scripts/base/main.js"></script>
 <script type="text/javascript" src="resources/scripts/base/check.js"></script>
+
+<script type="text/javascript">
+function doLoginoutAction() {
+	doRedriect('logoutProcess.html');
+}
+</script>

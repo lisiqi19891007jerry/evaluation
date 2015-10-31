@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import cn.com.nl.evaluation.info.create.dao.FileReportDao;
+import cn.com.nl.evaluation.info.create.handle.AbstractGameHandle;
 import cn.com.nl.evaluation.info.create.model.FileInfoModel;
 import cn.com.nl.evaluation.info.create.model.UploadFileModel;
 import cn.com.nl.framework.base.BasicHepler;
@@ -42,45 +43,65 @@ public class FileOperationHelper extends BasicHepler {
 	 *
 	 * @param pathType 存放文件类型
 	 * @param fileType 数据库保存文件类型
-	 * @param file 上传文件对象
+	 * @param gameId 游戏编号
+	 * @param gameName 游戏名称
+	 * @param file 上传文件对象列表
 	 * @return
 	 */
 	public FileInfoModel uploadReportFile(String pathType
 										 ,String fileType
+										 ,String gameId
+										 ,String gameName
 										 ,MultipartFile file) {
 
 		FileInfoModel fileModel = new FileInfoModel();
 
 		fileModel.setDoSuccess(false);
 
-		if (!file.isEmpty()) {
-
-			String filePath = createFilePath(file.getOriginalFilename(), pathType);
-
-			try {
-
-				if (StringUtils.isNotBlank(filePath)) {
-
-					fileModel.setFilePath(filePath);
-
-					UploadFileModel model = createFileModel(fileType, filePath);
-
-					fileModel.setFileId(model.getFileId());
-
-					if (fileReportDao.doCreateFileRecord(model)) {
-						file.transferTo(new File(filePath));
-						fileModel.setDoSuccess(true);
-					}
-				}
-			} catch (Exception e) {
-				destroyUploadFile(fileModel);
-				e.printStackTrace();
-			}
+		if (file != null && !file.isEmpty()) {
+			uploadMultipartFile(pathType
+							   ,fileType
+							   ,gameId
+							   ,gameName
+							   ,fileModel
+							   ,file);
 		} else {
 			fileModel.setDoSuccess(true);
 		}
 
 		return fileModel;
+	}
+
+	private void uploadMultipartFile(String pathType
+									,String fileType
+									,String gameId
+									,String gameName
+									,FileInfoModel fileModel
+									,MultipartFile file) {
+
+		String filePath = createFilePath(file.getOriginalFilename(), pathType, gameName);
+
+		try {
+
+			if (StringUtils.isNotBlank(filePath)) {
+
+				fileModel.setFilePath(filePath);
+
+				UploadFileModel model = createFileModel(fileType, filePath);
+
+				model.setGameId(gameId);
+
+				fileModel.setFileId(model.getFileId());
+
+				if (fileReportDao.doCreateFileRecord(model)) {
+					file.transferTo(new File(filePath));
+					fileModel.setDoSuccess(true);
+				}
+			}
+		} catch (Exception e) {
+			destroyUploadFile(fileModel);
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -89,22 +110,29 @@ public class FileOperationHelper extends BasicHepler {
 	 *
 	 * @param originalFilename 上传文件名
 	 * @param pathType 上传文件类型
+	 * @param gameName 游戏名称
 	 * @return
 	 */
-	private String createFilePath(String originalFilename, String pathType) {
+	private String createFilePath(String originalFilename, String pathType, String gameName) {
 
 		if (StringUtils.isBlank(pathType)
 		 || StringUtils.isBlank(originalFilename)) {
 			return null;
 		}
 
-		String filePathStr = null;
+		String otherFilePath = "";
+		String filePathStr   = null;
 
 		try {
+
+			if (AbstractGameHandle.IMG_PATH_TYPE.equals(pathType)) {
+				otherFilePath = "/" + DateUtil.formatDate(new Date(), DateUtil.DATE_FORMAT_MIN) + "_" + gameName;
+			}
 
 			// 存放的路径为：定义的文件目录/yyyMM/yyyyMMddHHmmss_原始文件
 			filePathStr = getProperties(CONFIG_FILE_PATH).getProperty(pathType)
 						+ "/" + DateUtil.formatDate(new Date(), DateUtil.DATE_FORMAT_YM)
+						+ otherFilePath
 						+ "/" + DateUtil.formatDate(new Date(), DateUtil.ALL_DATE_FORMAT) + "_" + originalFilename;
 
 			Files.createDirectories(Paths.get(filePathStr).getParent());

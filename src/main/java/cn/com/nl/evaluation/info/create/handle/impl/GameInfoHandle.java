@@ -1,5 +1,6 @@
 package cn.com.nl.evaluation.info.create.handle.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -21,29 +22,36 @@ public class GameInfoHandle extends AbstractGameHandle {
 
 		String result = "";
 
-		FileInfoModel testModel = (FileInfoModel) argMap.get("testModel");
-		FileInfoModel playModel = (FileInfoModel) argMap.get("playModel");
+		FileInfoModel attachModel = (FileInfoModel) argMap.get("attachModel");
+		FileInfoModel iconModel = (FileInfoModel) argMap.get("iconModel");
 
-		reSetArgMap(argMap, testModel, playModel);
+		@SuppressWarnings("unchecked")
+		List<FileInfoModel> infoModelList = (List<FileInfoModel>) argMap.get("imgModelList");
+
+		reSetArgMap(argMap, attachModel, iconModel);
 
 		CreateInfoDao dao = (CreateInfoDao) argMap.get("createInfoDao");
 
 		if (dao.createEvaluationInfo(argMap)) {
-			result = "新增评测信息操作成功！";
+			result = "新增游戏评测信息操作成功！";
 		} else {
 
-			getHelper().destroyUploadFile(testModel);
-			getHelper().destroyUploadFile(playModel);
+			getHelper().destroyUploadFile(attachModel);
+			getHelper().destroyUploadFile(iconModel);
 
-			result = "新增评测信息操作失败！";
+			for (FileInfoModel model : infoModelList) {
+				getHelper().destroyUploadFile(model);
+			}
+
+			result = "新增游戏评测信息操作失败！";
 		}
 
 		return result;
 	}
 
 	private void reSetArgMap(Map<String, Object> argMap
-							,FileInfoModel testModel
-							,FileInfoModel playModel) {
+							,FileInfoModel attachModel
+							,FileInfoModel iconModel) {
 
 		// 研发商
 		if (StringUtils.isEmpty((String) argMap.get("developName"))) {
@@ -55,43 +63,38 @@ public class GameInfoHandle extends AbstractGameHandle {
 			argMap.put("sendName", "");
 		}
 
-		// 评测报告
-		if (StringUtils.isNotBlank(testModel.getFileId())) {
-			argMap.put("evaluationReportId", testModel.getFileId());
-		} else {
-			argMap.put("evaluationReportId", "");
-		}
-
-		// 10分钟人工试玩
-		if (StringUtils.isNotBlank(playModel.getFileId())) {
-			argMap.put("csvFileId", playModel.getFileId());
-		} else {
-			argMap.put("csvFileId", "");
-		}
-
 		// 游戏完成度
-		if (StringUtils.isEmpty((String) argMap.get("gameDegree"))) {
-			argMap.put("gameDegree", "100");
+		if (StringUtils.isEmpty((String) argMap.get("game_complete"))) {
+			argMap.put("game_complete", "");
 		}
 
-		// 付费方式
-		if (StringUtils.isEmpty((String) argMap.get("pay_type"))) {
-			argMap.put("pay_type", "");
+		// 是否IP授权
+		if (StringUtils.isEmpty((String) argMap.get("is_authorization"))) {
+			argMap.put("is_authorization", "");
 		}
 
-		// 付费优惠类型
-		if (StringUtils.isEmpty((String) argMap.get("favorable_type"))) {
-			argMap.put("favorable_type", "");
+		// 简评
+		if (StringUtils.isEmpty((String) argMap.get("game_comment"))) {
+			argMap.put("game_comment", "");
 		}
 
-		// 评测模式
-		if (StringUtils.isEmpty((String) argMap.get("evaluate_mode"))) {
-			argMap.put("evaluate_mode", "");
+		// 附件
+		if (StringUtils.isNotBlank(attachModel.getFileId())) {
+			argMap.put("attachFileId", attachModel.getFileId());
+		} else {
+			argMap.put("attachFileId", "");
 		}
 
-		// 潜力等级
-		if (StringUtils.isEmpty((String) argMap.get("evaluation_potential_grade"))) {
-			argMap.put("evaluation_potential_grade", "");
+		// 游戏图标
+		if (StringUtils.isNotBlank(iconModel.getFileId())) {
+			argMap.put("iconFileId", iconModel.getFileId());
+		} else {
+			argMap.put("iconFileId", "");
+		}
+
+		// 复测情况
+		if (StringUtils.isEmpty((String) argMap.get("retest_status"))) {
+			argMap.put("retest_status", "");
 		}
 
 		// 上线表现级别
@@ -99,19 +102,19 @@ public class GameInfoHandle extends AbstractGameHandle {
 			argMap.put("online_level", "");
 		}
 
-		// 上线表现评价说明
-		if (StringUtils.isEmpty((String) argMap.get("manifestationExplain"))) {
-			argMap.put("manifestationExplain", "");
+		// 特色
+		if (StringUtils.isEmpty((String) argMap.get("feature"))) {
+			argMap.put("feature", "");
 		}
 
-		// 参考竞品养成方面
-		if (StringUtils.isEmpty((String) argMap.get("qualityGoods_cultivate"))) {
-			argMap.put("qualityGoods_cultivate", "");
-		}
-
-		// 参考战斗养成方面
+		// 竞品（战斗）
 		if (StringUtils.isEmpty((String) argMap.get("qualityGoods_combat"))) {
 			argMap.put("qualityGoods_combat", "");
+		}
+
+		// 竞品（养成）
+		if (StringUtils.isEmpty((String) argMap.get("qualityGoods_cultivate"))) {
+			argMap.put("qualityGoods_cultivate", "");
 		}
 	}
 }

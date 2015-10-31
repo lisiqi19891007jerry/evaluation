@@ -1,5 +1,6 @@
 package cn.com.nl.evaluation.info.create.handle.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.context.annotation.Scope;
@@ -12,31 +13,41 @@ import cn.com.nl.evaluation.info.create.model.FileInfoModel;
 /**
  * @Title GamePlayReportHandle.java
  * @Package cn.com.nl.evaluation.info.create.handle.impl
- * @Description 人工试玩报告上传操作类
+ * @Description 游戏图标上传操作类
  * @Date 2015年9月17日 下午11:55:35
  * @Version V1.0
  */
 @Scope("prototype")
 @Component
-public class GamePlayReportHandle extends AbstractGameHandle {
+public class GameIconHandle extends AbstractGameHandle {
 
 	public String doFilter(Map<String, Object> argMap) {
 
-		FileInfoModel fileModel = getHelper().uploadReportFile(PLAY_PATH_TYPE
-															  ,PLAY_FILE_TYPE
-															  ,(MultipartFile) argMap.get("playReport"));
+		MultipartFile file = null;
+
+		List<MultipartFile> fileList = (List<MultipartFile>) argMap.get("game_icon");
+
+		if (fileList != null && fileList.size() > 0) {
+			file = fileList.get(0);
+		}
+
+		FileInfoModel fileModel = getHelper().uploadReportFile(ICON_PATH_TYPE
+															  ,ICON_FILE_TYPE
+															  ,(String) argMap.get("gameId")
+															  ,(String) argMap.get("in_game_name")
+															  ,file);
 
 		if (fileModel.getDoSuccess()) {
 
-			argMap.put("playModel", fileModel);
+			argMap.put("iconModel", fileModel);
 
 			return getNextGameHandle().doFilter(argMap);
 		} else {
 
 			getHelper().destroyUploadFile(fileModel);
-			getHelper().destroyUploadFile((FileInfoModel) argMap.get("testModel"));
+			getHelper().destroyUploadFile((FileInfoModel) argMap.get("attachModel"));
 
-			return "10分钟人工试玩文件上传失败！";
+			return "游戏图标上传失败！";
 		}
 	}
 }

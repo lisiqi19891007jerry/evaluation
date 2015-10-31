@@ -1,5 +1,6 @@
 package cn.com.nl.evaluation.info.detail.dao;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,5 +29,7 @@ public interface DetailInfoDao {
 	 * @param fileId 文件存放ID
 	 * @return
 	 */
-	public Map<String, Object> doSelectFileIndo(String fileId);
+	public Map<String, Object> doSelectFileInfo(String fileId);
+
+	public List<Map<String, Object>> doSelectImageList(String id);
 }

@@ -12,7 +12,6 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc',endCol
 .navbar .navbar-bd li a:hover{text-decoration:none}
 .navbar .navbar-bd li.active a{border-top-color:#0cadb7;background:#fafafa}
 .table-hover tbody tr:hover>td,.table-hover tbody tr:hover>th{background-color:#d2eff4}
-.table-first thead th:first-child{padding:8px 2px 8px 3px}
 .table-first th,.table-first td{border-width:1px 0;border-color:#ddd;border-style:solid}
 .btn{min-width:76px;-webkit-user-select:none;-moz-user-select:none;-o-user-select:none;-ms-user-select:none;user-select:none}
 .btn-default,.btn-default:focus{color:#333;background:#fff;border-color:#ccc}
@@ -21,3 +20,47 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc',endCol
 .btn-default:hover{background:#ebebeb;border-color:#adadad}
 .btn-primary:active{background:#0cadb7;border-color:#0cadb7}
 .btn:active{-webkit-box-shadow:inset 0 3px 5px rgba(0,0,0,0.125);-moz-box-shadow:inset 0 3px 5px rgba(0,0,0,0.125);-o-box-shadow:inset 0 3px 5px rgba(0,0,0,0.125);-ms-box-shadow:inset 0 3px 5px rgba(0,0,0,0.125);box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}
+/*编号*/		
+.nameTh1{
+	width:6%;
+}
+/*游戏名*/	
+.nameTh2{
+	width:16%
+}
+/*游戏类型*/	
+.nameTh3{
+	width:16%
+}
+/*游戏题材*/	
+.nameTh4{
+	width:15%
+}
+/*包体大小*/	
+.nameTh5{
+ 	width:7%;
+}
+/*平台*/	
+.nameTh6{
+	width:6%
+}
+/*分类*/	
+.nameTh7{
+ 	width:8%
+}
+/*评测日期*/	
+.nameTh9{
+ 	width:8%
+}
+/*测评人*/	
+.nameTh10{
+ 	width:6%
+}
+/*测评分*/	
+.nameTh11{
+ 	width:6%;
+}
+/*测评评级*/	
+.nameTh12{
+ 	width:7%
+}

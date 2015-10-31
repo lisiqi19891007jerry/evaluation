@@ -57,40 +57,31 @@ public class DetailInfoController extends BasicController {
 
 		if (detailInfoMap != null && detailInfoMap.size() > 0) {
 
-			setDataShowFormat("GameClassify", "game_type", detailInfoMap); // 单机or网游
+			setDataShowFormat("GameClassify", "game_type", detailInfoMap); // 分类
 			setDataShowFormat("DegreeOfPlay", "playing_method", detailInfoMap); // 游戏玩法轻重度
 			setDataShowFormat("IsAuthorization", "is_authorization", detailInfoMap); // 是否IP授权
 			setDataShowFormat("Scene", "scene", detailInfoMap); // 场景
 			setDataShowFormat("Show_person_type", "show_person_type", detailInfoMap); // 人物
 
-			setDataShowFormat("Out_test_type_1", "out_test_type_1", detailInfoMap); // 是否删档
-			setDataShowFormat("Out_test_type_2", "out_test_type_2", detailInfoMap); // 是否付费
-			setDataShowFormat("Painting_style_1", "painting_style_1", detailInfoMap); // 绘画
-			setDataShowFormat("Painting_style_2", "painting_style_2", detailInfoMap); // 风格
-			setDataShowFormat("Paytype", "pay_type", detailInfoMap); // 付费方式
+			setDataShowFormat("Draw", "painting_style_1", detailInfoMap); // 绘画
+			setDataShowFormat("Style", "painting_style_2", detailInfoMap); // 风格
 
 			setDataShowFormat("Platform", "platform_type", detailInfoMap); // 平台
-			setDataShowFormat("Privilege", "favorable_type", detailInfoMap); // 付费优惠类型
-			setDataShowFormat("EvaluationModel", "evaluate_mode", detailInfoMap); // 评测模式
 			setDataShowFormat("Retestcondition", "retest_status", detailInfoMap); // 复测情况
 
-			Timestamp dateTime = (Timestamp) detailInfoMap.get("Datetime");
+			Timestamp dateTime = (Timestamp) detailInfoMap.get("EvaluationDatetime");
 
-			detailInfoMap.put("Datetime", DateUtil.formatDate(dateTime, DateUtil.SIMPLE_DATE_FORMAT));
+			detailInfoMap.put("EvaluationDatetime", DateUtil.formatDate(dateTime, DateUtil.SIMPLE_DATE_FORMAT));
 
-			String testFileName = StringUtils.trimToEmpty((String) detailInfoMap.get("test_file_name"));
-			String playFileName = StringUtils.trimToEmpty((String) detailInfoMap.get("play_file_name"));
+			String fileName = StringUtils.trimToEmpty((String) detailInfoMap.get("attachment_file_name"));
 
-			if (StringUtils.isNoneEmpty(testFileName)) {
-				detailInfoMap.put("test_file_name", StringUtils.substring(testFileName, 15));
-			}
-
-			if (StringUtils.isNoneEmpty(playFileName)) {
-				detailInfoMap.put("play_file_name", StringUtils.substring(playFileName, 15));
+			if (StringUtils.isNoneEmpty(fileName)) {
+				detailInfoMap.put("attachmentFile", StringUtils.substring(fileName, 15));
 			}
 		}
 
 		model.addAttribute("userList", attributeDao.doSelectUserList());
+		model.addAttribute("imageList", detailInfoDao.doSelectImageList(parameterMap.get("gameInfoID")));
 		model.addAttribute("parameterMap", parameterMap);
 		model.addAttribute("attributeMap", attributeMap);
 		model.addAttribute("originalMap", originalMap);
@@ -193,58 +184,53 @@ public class DetailInfoController extends BasicController {
 	private Map<String, String> reSetArgMap(Map<String, String> argMap) {
 
 		// 研发商
-		if (StringUtils.isEmpty(argMap.get("upd_developName"))) {
+		if (StringUtils.isEmpty((String) argMap.get("upd_developName"))) {
 			argMap.put("upd_developName", "");
 		}
 
 		// 发行商
-		if (StringUtils.isEmpty(argMap.get("upd_sendName"))) {
+		if (StringUtils.isEmpty((String) argMap.get("upd_sendName"))) {
 			argMap.put("upd_sendName", "");
 		}
 
 		// 游戏完成度
-		if (StringUtils.isEmpty(argMap.get("upd_gameDegree"))) {
-			argMap.put("upd_gameDegree", "100");
+		if (StringUtils.isEmpty((String) argMap.get("upd_game_complete"))) {
+			argMap.put("upd_game_complete", "");
 		}
 
-		// 付费方式
-		if (StringUtils.isEmpty(argMap.get("upd_pay_type"))) {
-			argMap.put("upd_pay_type", "");
+		// 是否IP授权
+		if (StringUtils.isEmpty((String) argMap.get("upd_is_authorization"))) {
+			argMap.put("upd_is_authorization", "");
 		}
 
-		// 付费优惠类型
-		if (StringUtils.isEmpty(argMap.get("upd_favorable_type"))) {
-			argMap.put("upd_favorable_type", "");
+		// 简评
+		if (StringUtils.isEmpty((String) argMap.get("upd_game_comment"))) {
+			argMap.put("upd_game_comment", "");
 		}
 
-		// 评测模式
-		if (StringUtils.isEmpty(argMap.get("upd_evaluate_mode"))) {
-			argMap.put("upd_evaluate_mode", "");
-		}
-
-		// 潜力等级
-		if (StringUtils.isEmpty(argMap.get("upd_evaluation_potential_grade"))) {
-			argMap.put("upd_evaluation_potential_grade", "");
+		// 复测情况
+		if (StringUtils.isEmpty((String) argMap.get("upd_retest_status"))) {
+			argMap.put("upd_retest_status", "");
 		}
 
 		// 上线表现级别
-		if (StringUtils.isEmpty(argMap.get("upd_online_level"))) {
+		if (StringUtils.isEmpty((String) argMap.get("upd_online_level"))) {
 			argMap.put("upd_online_level", "");
 		}
 
-		// 上线表现评价说明
-		if (StringUtils.isEmpty(argMap.get("upd_manifestationExplain"))) {
-			argMap.put("upd_manifestationExplain", "");
+		// 特色
+		if (StringUtils.isEmpty((String) argMap.get("upd_feature"))) {
+			argMap.put("upd_feature", "");
 		}
 
-		// 参考竞品养成方面
-		if (StringUtils.isEmpty(argMap.get("upd_qualityGoods_cultivate"))) {
-			argMap.put("upd_qualityGoods_cultivate", "");
-		}
-
-		// 参考战斗养成方面
-		if (StringUtils.isEmpty(argMap.get("upd_qualityGoods_combat"))) {
+		// 竞品（战斗）
+		if (StringUtils.isEmpty((String) argMap.get("upd_qualityGoods_combat"))) {
 			argMap.put("upd_qualityGoods_combat", "");
+		}
+
+		// 竞品（养成）
+		if (StringUtils.isEmpty((String) argMap.get("upd_qualityGoods_cultivate"))) {
+			argMap.put("upd_qualityGoods_cultivate", "");
 		}
 
 		return argMap;

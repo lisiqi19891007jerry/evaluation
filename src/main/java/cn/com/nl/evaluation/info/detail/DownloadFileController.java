@@ -29,20 +29,12 @@ public class DownloadFileController extends BasicController {
 	@Autowired
 	private DetailInfoDao detailInfoDao;
 
-	/**
-	 *
-	 * 根据URL请求跳转到detailInfo.jsp画面
-	 *
-	 * @param model
-	 * @return
-	 * @throws DownloadFileNotFoundException 如果文件不存在的情况下，抛出异常
-	 */
 	@RequestMapping(value = "/detailInfo/download")
 	public ResponseEntity<byte[]> doShowDetailInfo(ModelMap model
 												  ,@RequestParam(value = "fileID", required = false) String fileID)
 												  throws DownloadFileNotFoundException {
 
-		Map<String, Object> fileInfoMap = detailInfoDao.doSelectFileIndo(fileID);
+		Map<String, Object> fileInfoMap = detailInfoDao.doSelectFileInfo(fileID);
 
 		if (fileInfoMap == null || fileInfoMap.size() < 1) {
 			throw new DownloadFileNotFoundException("在数据表中查不到文件记录");
@@ -66,7 +58,7 @@ public class DownloadFileController extends BasicController {
 		headers.setContentDispositionFormData("attachment", fileName);
 		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 
-		if (file.exists()) {
+		if (!file.exists()) {
 			throw new DownloadFileNotFoundException("《" + fileName + "》文件不存在！");
 		}
 

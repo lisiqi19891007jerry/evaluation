@@ -76,11 +76,10 @@ public class QueryInfoController extends BasicController {
 
 					setDataShowFormat("Platform", "platform_type", gameInfo);
 					setDataShowFormat("GameClassify", "game_type", gameInfo);
-					setDataShowFormat("EvaluationModel", "evaluate_mode", gameInfo);
 
-					Timestamp dateTime = (Timestamp) gameInfo.get("Datetime");
+					Timestamp dateTime = (Timestamp) gameInfo.get("EvaluationDatetime");
 
-					gameInfo.put("Datetime", DateUtil.formatDate(dateTime, DateUtil.SIMPLE_DATE_FORMAT));
+					gameInfo.put("EvaluationDatetime", DateUtil.formatDate(dateTime, DateUtil.SIMPLE_DATE_FORMAT));
 				}
 			}
 		}

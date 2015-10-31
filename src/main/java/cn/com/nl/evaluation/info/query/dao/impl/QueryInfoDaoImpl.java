@@ -70,18 +70,60 @@ public class QueryInfoDaoImpl implements QueryInfoDao {
 	 */
 	private void setQueryCondition(Map<String, String> parameterMap, StringBuffer sql) {
 
+		// 平台
+		String platformType = parameterMap.get("platform_type");
+
+		if (StringUtils.isNotBlank(platformType)) {
+			sql.append(" AND Platform = '" + platformType + "' ");
+		}
+
+		// 分类
+		String gameType = parameterMap.get("game_type");
+
+		if (StringUtils.isNotBlank(gameType)) {
+			sql.append(" AND GameClassify = '" + gameType + "' ");
+		}
+
+		// 区域
+		String area = parameterMap.get("area");
+
+		if (StringUtils.isNotBlank(area)) {
+			sql.append(" AND Area = '" + area + "' ");
+		}
+
+		// 游戏题材
+		String inGameTheme = parameterMap.get("in_game_theme");
+
+		if (StringUtils.isNotBlank(inGameTheme)) {
+			sql.append(" AND GameTheme LIKE '%" + inGameTheme + "%' ");
+		}
+
 		// 绘画
 		String paintingStyle1 = parameterMap.get("painting_style_1");
 
 		if (StringUtils.isNotBlank(paintingStyle1)) {
-			sql.append(" AND Painting_style_1 = '" + paintingStyle1 + "' ");
+			sql.append(" AND Draw = '" + paintingStyle1 + "' ");
 		}
 
 		// 风格
 		String paintingStyle2 = parameterMap.get("painting_style_2");
 
 		if (StringUtils.isNotBlank(paintingStyle2)) {
-			sql.append(" AND Painting_style_2 = '" + paintingStyle2 + "' ");
+			sql.append(" AND Style = '" + paintingStyle2 + "' ");
+		}
+
+		// 测评人
+		String evaluationPerson = parameterMap.get("evaluation_person");
+
+		if (StringUtils.isNotBlank(evaluationPerson)) {
+			sql.append(" AND EvaluationPeople = '" + evaluationPerson + "' ");
+		}
+
+		// 游戏类型
+		String inGameType = parameterMap.get("in_game_type");
+
+		if (StringUtils.isNotBlank(inGameType)) {
+			sql.append(" AND GameType LIKE '%" + inGameType + "%' ");
 		}
 
 		// 场景
@@ -98,62 +140,6 @@ public class QueryInfoDaoImpl implements QueryInfoDao {
 			sql.append(" AND Show_person_type = '" + showPersonType + "' ");
 		}
 
-		// 游戏名
-		String gameName = parameterMap.get("in_game_name");
-
-		if (StringUtils.isNotBlank(gameName)) {
-			sql.append(" AND GameName LIKE '%" + gameName + "%' ");
-		}
-
-		// 平台
-		String platformType = parameterMap.get("platform_type");
-
-		if (StringUtils.isNotBlank(platformType)) {
-			sql.append(" AND Platform = '" + platformType + "' ");
-		}
-
-		// 单机or网游
-		String gameType = parameterMap.get("game_type");
-
-		if (StringUtils.isNotBlank(gameType)) {
-			sql.append(" AND GameClassify = '" + gameType + "' ");
-		}
-
-		// 游戏类型
-		String inGameType = parameterMap.get("in_game_type");
-
-		if (StringUtils.isNotBlank(inGameType)) {
-			sql.append(" AND GameType LIKE '%" + inGameType + "%' ");
-		}
-
-		// 测评人
-		String evaluationPerson = parameterMap.get("evaluation_person");
-
-		if (StringUtils.isNotBlank(evaluationPerson)) {
-			sql.append(" AND EvaluationPeople = '" + evaluationPerson + "' ");
-		}
-
-		// 测评日期-开始
-		String evaluationDateStart = parameterMap.get("evaluation_date_start");
-
-		if (StringUtils.isNotBlank(evaluationDateStart)) {
-			sql.append(" AND Datetime >= '" + evaluationDateStart + "' ");
-		}
-
-		// 测评日期-结束
-		String evaluationDateEnd = parameterMap.get("evaluation_date_end");
-
-		if (StringUtils.isNotBlank(evaluationDateEnd)) {
-			sql.append(" AND Datetime <= '" + evaluationDateEnd + "' ");
-		}
-
-		// 游戏题材
-		String inGameTheme = parameterMap.get("in_game_theme");
-
-		if (StringUtils.isNotBlank(inGameTheme)) {
-			sql.append(" AND GameTheme LIKE '%" + inGameTheme + "%' ");
-		}
-
 		// 测评评级
 		String evaluationLevel = parameterMap.get("evaluation_level");
 
@@ -161,18 +147,32 @@ public class QueryInfoDaoImpl implements QueryInfoDao {
 			sql.append(" AND Classified_Evaluate = '" + evaluationLevel + "' ");
 		}
 
-		// 上线表现级别
-		String onlineLevel = parameterMap.get("online_level");
+		// 游戏名
+		String gameName = parameterMap.get("in_game_name");
 
-		if (StringUtils.isNotBlank(onlineLevel)) {
-			sql.append(" AND PublishManifestation = '" + onlineLevel + "' ");
+		if (StringUtils.isNotBlank(gameName)) {
+			sql.append(" AND GameName LIKE '%" + gameName + "%' ");
 		}
 
-		// 发行商或研发商
-		String inGamePublisher = parameterMap.get("in_game_publisher");
+		// 测评日期-开始
+		String evaluationDateStart = parameterMap.get("evaluation_date_start");
 
-		if (StringUtils.isNotBlank(inGamePublisher)) {
-			sql.append(" AND (Developer LIKE '%" + inGamePublisher + "%' OR Publisher LIKE '%" + inGamePublisher + "%') ");
+		if (StringUtils.isNotBlank(evaluationDateStart)) {
+			sql.append(" AND EvaluationDatetime >= '" + evaluationDateStart + "' ");
+		}
+
+		// 测评日期-结束
+		String evaluationDateEnd = parameterMap.get("evaluation_date_end");
+
+		if (StringUtils.isNotBlank(evaluationDateEnd)) {
+			sql.append(" AND EvaluationDatetime <= '" + evaluationDateEnd + "' ");
+		}
+
+		// 参考竞品或战斗养成
+		String inGameReference = parameterMap.get("in_game_reference");
+
+		if (StringUtils.isNotBlank(inGameReference)) {
+			sql.append(" AND (QualityGoods_cultivate LIKE '%" + inGameReference + "%' OR QualityGoods_combat LIKE '%" + inGameReference + "%') ");
 		}
 
 		// 测评分-开始
@@ -189,11 +189,11 @@ public class QueryInfoDaoImpl implements QueryInfoDao {
 			sql.append(" AND EvaluationPoint <=" + testScoreEnd + " ");
 		}
 
-		// 参考竞品或战斗养成
-		String inGameReference = parameterMap.get("in_game_reference");
+		// 发行商或研发商
+		String inGamePublisher = parameterMap.get("in_game_publisher");
 
-		if (StringUtils.isNotBlank(inGameReference)) {
-			sql.append(" AND (QualityGoods_cultivate LIKE '%" + inGameReference + "%' OR QualityGoods_combat LIKE '%" + inGameReference + "%') ");
+		if (StringUtils.isNotBlank(inGamePublisher)) {
+			sql.append(" AND (Developer LIKE '%" + inGamePublisher + "%' OR Publisher LIKE '%" + inGamePublisher + "%') ");
 		}
 	}
 }

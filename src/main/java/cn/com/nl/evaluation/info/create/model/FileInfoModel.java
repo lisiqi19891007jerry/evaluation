@@ -11,7 +11,7 @@ public class FileInfoModel {
 
 	private boolean isDoSuccess;
 
-	private String fileId;   // 文件存放ID
+	private String fileId;   // 文件ID
 	private String filePath; // 文件存放路径
 
 	public boolean getDoSuccess() {

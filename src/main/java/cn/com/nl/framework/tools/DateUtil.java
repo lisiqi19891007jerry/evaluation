@@ -19,6 +19,8 @@ public class DateUtil {
 
 	public static final String ALL_DATE_FORMAT = "yyyyMMddHHmmss";
 
+	public static final String DATE_FORMAT_MIN = "yyyyMMddHHmm";
+
 	public static final String BASE_DATE_FORMAT = "yyyyMMdd";
 
 	public static final String DATE_FORMAT_YM = "yyyyMM";

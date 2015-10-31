@@ -3,17 +3,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-<!-- 引入javascript -->
-<script type="text/javascript" src="resources/scripts/info/updateInfo.js"></script>
-<script type="text/javascript" src="resources/scripts/info/pikaday.js"></script>
-<script type="text/javascript" src="resources/scripts/info/moment.min.js"></script>
-
 <!-- 引入css -->
 <link rel="stylesheet" type="text/css" href="resources/style/info/detailInfo.min.css"/>
 <link rel="stylesheet" type="text/css" href="resources/style/info/detailInfo.css" />
-<link rel="stylesheet" type="text/css" href="resources/style/info/pikaday.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="resources/style/info/site.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="resources/style/info/pikaday.css" />
+<link rel="stylesheet" type="text/css" href="resources/style/info/site.css" />
+<link rel="stylesheet" type="text/css" href="resources/style/info/image/picScroll.css" />
 
+<!-- 引入javascript -->
+<script type="text/javascript" src="resources/scripts/info/moment.min.js"></script>
+<script type="text/javascript" src="resources/scripts/info/pikaday.js"></script>
+<script type="text/javascript" src="resources/scripts/info/updateInfo.js"></script>
+<script type="text/javascript" src="resources/scripts/info/image/jquery.museum.js"></script>
+<script type="text/javascript" src="resources/scripts/info/image/jquery.SuperSlide.2.1.1.js"></script>
 
 <script>
 $(document).ready(function() {
@@ -31,7 +33,29 @@ function doGoBackAction() {
 function doDownloadFileAction(fileID) {
 	doRedriect('detailInfo/download.html?fileID=' + fileID);
 }
+function doSelecteAreaAction() {
+
+	var areaValue = $("input[name='area']:checked").val();
+
+	if (areaValue == "国内") {
+		$("#oversea").val('');
+		$("#oversea").attr("disabled", true);
+	} else if (areaValue == "海外") {
+		$("#oversea").attr("disabled", false);
+	}
+}
 </script>
+
+<style type="text/css">
+.suofang {
+	MARGIN: auto;
+	WIDTH: 150px;
+}
+.suofang img {
+	MAX-WIDTH: 100%;
+	HEIGHT: auto;
+	WIDTH: expression(this.width > 150 ? "150px" : this.width);}
+</style>
 
 <div class="container-fluid">
 	<div class="row-fluid">
@@ -50,14 +74,13 @@ function doDownloadFileAction(fileID) {
 
 <form id="detailForm" method="post">
 
-<input type="hidden" id="returnValue" name="returnValue" value="${returnValue}" />
-
-<input type="button" class="btn radius btn-primary btn-small"
-	style="margin-top: 20px; margin-left: 50px;" value="返回" onclick="doGoBackAction();"/>
-<c:if test="${'0' ne sessionScope['IS_ADMIN_USER'] }">
+	<input type="hidden" id="returnValue" name="returnValue" value="${returnValue}" />
 	<input type="button" class="btn radius btn-primary btn-small"
+		style="margin-top: 20px; margin-left: 90px;" value="返回" onclick="doGoBackAction();"/>
+	<c:if test="${'0' ne sessionScope['IS_ADMIN_USER'] }">
+		<input type="button" class="btn radius btn-primary btn-small"
 		style="margin-top: 20px; margin-left: 50px;" value="保存修改" onclick="doUpateDataAction();"/>
-</c:if>
+	</c:if>
 
 <div class="container-content">
 	<div class="m_detail">
@@ -66,7 +89,6 @@ function doDownloadFileAction(fileID) {
 		</h2>
 		<table class="table_m1" id="table_z">
 			<tbody>
-
 				<!-- 第一行数据 -->
 				<tr style="padding：4px 0px;line-height: 24px;">
 					<td>
@@ -87,9 +109,9 @@ function doDownloadFileAction(fileID) {
 							<input type="text" id="upd_in_game_theme" name="upd_in_game_theme" class="textSet" value="${detailInfoMap.GameTheme}" />
 						</c:if>
 					</td>
-					<!-- 单机or网游 -->
+					<!-- 分类 -->
 					<td>
-						${attributeMap.game_type.attributeShowName}：
+						分类：
 						<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">
 							<span id="single">${detailInfoMap.GameClassify}</span>
 						</c:if>
@@ -102,7 +124,7 @@ function doDownloadFileAction(fileID) {
 					</td>
 					<!-- 游戏玩法轻重度 -->
 					<td>
-						${attributeMap.playing_method.attributeShowName}：
+						游戏玩法轻重度：
 						<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">
 							<span id="gameLevel">${detailInfoMap.DegreeOfPlay}</span>
 						</c:if>
@@ -112,6 +134,12 @@ function doDownloadFileAction(fileID) {
 									<c:if test="${playing_method.attributeValue eq originalMap.DegreeOfPlay}">checked="checked"</c:if> />${playing_method.attributeName}&nbsp;
 							</c:forEach>
 						</c:if>
+					</td>
+					<td>
+						<span  style="color:#888">游戏图标：</span>
+						<div class="suofang">
+							<img src="showImages.html?fileId=${detailInfoMap.Game_icon}" />
+						</div>
 					</td>
 				</tr>
 
@@ -140,10 +168,8 @@ function doDownloadFileAction(fileID) {
 						</c:if>
 					</td>
 					<td>
-						画面纬度：
 						<!-- 场景 -->
-						<strong>①</strong>
-						<span class="sence">${attributeMap.scene.attributeShowName}:</span>
+						${attributeMap.scene.attributeShowName}：
 						<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">
 							<span class="sence">${detailInfoMap.Scene}</span>&nbsp;&nbsp;&nbsp;
 						</c:if>
@@ -153,9 +179,10 @@ function doDownloadFileAction(fileID) {
 									<c:if test="${scene.attributeValue eq originalMap.Scene}">checked="checked"</c:if> />${scene.attributeName}&nbsp;
 							</c:forEach>
 						</c:if>
+					</td>
+					<td>
 						<!-- 人物 -->
-						<strong>②</strong>
-						<span class="people">${attributeMap.show_person_type.attributeShowName}:</span>
+						${attributeMap.show_person_type.attributeShowName}：
 						<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">
 							<span class="sence">${detailInfoMap.Show_person_type}</span>
 						</c:if>
@@ -166,31 +193,9 @@ function doDownloadFileAction(fileID) {
 							</c:forEach>
 						</c:if>
 					</td>
-					<td>
-						本次对外测试类型：
-						<strong>①</strong>
-						<span class="sence">是否删档:</span>
-						<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">
-							<span class="sence">${detailInfoMap.Out_test_type_1}</span>&nbsp;&nbsp;&nbsp;
-						</c:if>
-						<c:if test="${'1' eq sessionScope['IS_ADMIN_USER'] }">
-							<input type="checkbox" id="upd_record" name="upd_record"
-								<c:if test="${1 eq originalMap.Out_test_type_1}">checked="true"</c:if> />
-							<input type="hidden" id="recordValue" name="recordValue" />
-						</c:if>
-						<strong>②</strong>
-						<span class="people">是否付费:</span>
-						<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">
-							<span class="sence">${detailInfoMap.Out_test_type_2}</span>
-						</c:if>
-						<c:if test="${'1' eq sessionScope['IS_ADMIN_USER'] }">
-							<input type="checkbox" id="upd_openPay" name="upd_openPay"
-								<c:if test="${1 eq originalMap.Out_test_type_2}">checked="true"</c:if> />
-							<input type="hidden" id="openPayValue" name="openPayValue" />
-						</c:if>
-					</td>
-				</tr>
 
+				</tr>
+	
 				<!-- 第三行数据 -->
 				<tr>
 					<td>
@@ -211,42 +216,29 @@ function doDownloadFileAction(fileID) {
 							<input type="text" id="upd_packageSize" name="upd_packageSize" class="packageText" value="${detailInfoMap.InstallationSize}" />MB
 						</c:if>
 					</td>
-					<td>画风：
+					<td>
 						<!-- 绘画 -->
-						<strong>①</strong>
-						<span class="paint">${attributeMap.painting_style_1.attributeShowName}:</span>
+						${attributeMap.painting_style_2.attributeShowName}：
 						<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">
-							<span class="paint">${detailInfoMap.Painting_style_1}</span>&nbsp;&nbsp;&nbsp;
+							<span class="paint">${detailInfoMap.Draw}</span>&nbsp;&nbsp;&nbsp;
 						</c:if>
 						<c:if test="${'1' eq sessionScope['IS_ADMIN_USER'] }">
 							<c:forEach var="painting_style_1" items="${attributeMap.painting_style_1.attributeValueList}" varStatus="status">
 								<input type="radio" name="upd_painting_style_1" value="${painting_style_1.attributeValue}"
-									<c:if test="${painting_style_1.attributeValue eq originalMap.Painting_style_1}">checked="checked"</c:if> />${painting_style_1.attributeName}&nbsp;
+									<c:if test="${painting_style_1.attributeValue eq originalMap.Draw}">checked="checked"</c:if> />${painting_style_1.attributeName}&nbsp;
 							</c:forEach>
 						</c:if>
+					</td>
+					<td>
 						<!-- 风格 -->
-						<strong>②</strong>
-						<span class="style">${attributeMap.painting_style_2.attributeShowName}:</span>
+						${attributeMap.painting_style_2.attributeShowName}：
 						<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">
-							<span class="style">${detailInfoMap.Painting_style_2}</span>
+							<span class="style">${detailInfoMap.Style}</span>
 						</c:if>
 						<c:if test="${'1' eq sessionScope['IS_ADMIN_USER'] }">
 							<c:forEach var="painting_style_2" items="${attributeMap.painting_style_2.attributeValueList}" varStatus="status">
 								<input type="radio" name="upd_painting_style_2" value="${painting_style_2.attributeValue}"
-									<c:if test="${painting_style_2.attributeValue eq originalMap.Painting_style_2}">checked="checked"</c:if> />${painting_style_2.attributeName}&nbsp;
-							</c:forEach>
-						</c:if>
-					</td>
-					<!-- 付费方式 -->
-					<td>
-						${attributeMap.pay_type.attributeShowName}：
-						<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">
-							<span id="payWay">${detailInfoMap.Paytype}</span>
-						</c:if>
-						<c:if test="${'1' eq sessionScope['IS_ADMIN_USER'] }">
-							<c:forEach var="pay_type" items="${attributeMap.pay_type.attributeValueList}" varStatus="status">
-								<input type="radio" name="upd_pay_type" value="${pay_type.attributeValue}"
-									<c:if test="${pay_type.attributeValue eq originalMap.Paytype}">checked="checked"</c:if> />${pay_type.attributeName}&nbsp;
+									<c:if test="${painting_style_2.attributeValue eq originalMap.Style}">checked="checked"</c:if> />${painting_style_2.attributeName}&nbsp;
 							</c:forEach>
 						</c:if>
 					</td>
@@ -280,19 +272,9 @@ function doDownloadFileAction(fileID) {
 							<span id="gameDegree">${detailInfoMap.Completeness}</span>%
 						</c:if>
 						<c:if test="${'1' eq sessionScope['IS_ADMIN_USER'] }">
-							<input type="text" id="upd_gameDegree" name="upd_gameDegree" class="gameDegree" value="${detailInfoMap.Completeness}" />%
-						</c:if>
-					</td>
-					<!-- 付费优惠类型 -->
-					<td>
-						${attributeMap.favorable_type.attributeShowName}:
-						<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">
-							<span id="payType">${detailInfoMap.Privilege}</span>
-						</c:if>
-						<c:if test="${'1' eq sessionScope['IS_ADMIN_USER'] }">
-							<c:forEach var="favorable_type" items="${attributeMap.favorable_type.attributeValueList}" varStatus="status">
-								<input type="radio" name="upd_favorable_type" value="${favorable_type.attributeValue}"
-									<c:if test="${favorable_type.attributeValue eq originalMap.Privilege}">checked="checked"</c:if> />${favorable_type.attributeName}&nbsp;
+							<c:forEach var="game_complete" items="${attributeMap.game_complete.attributeValueList}" varStatus="status">
+								<input type="radio" name="upd_game_complete" value="${game_complete.attributeValue}"
+									<c:if test="${game_complete.attributeValue eq originalMap.Completeness}">checked="checked"</c:if> />${game_complete.attributeName}&nbsp;
 							</c:forEach>
 						</c:if>
 					</td>
@@ -308,22 +290,49 @@ function doDownloadFileAction(fileID) {
 	</h2>
 	<table  class="table_m2" id="table_z">
 		<tbody>
+
 			<tr style="padding：4px 0px;line-height: 24px;">
-				<!-- 评测模式 -->
-				<td>
-					${attributeMap.evaluate_mode.attributeShowName}：
+				<!-- 测评日期 -->
+				<td class="td1">
+					测评日期：
 					<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">
-						<span id="testmodel">${detailInfoMap.EvaluationModel}</span>
+						<span id="testDate">${detailInfoMap.EvaluationDatetime}</span>
 					</c:if>
 					<c:if test="${'1' eq sessionScope['IS_ADMIN_USER'] }">
-						<c:forEach var="evaluate_mode" items="${attributeMap.evaluate_mode.attributeValueList}" varStatus="status">
-							<input type="radio" name="upd_evaluate_mode" value="${evaluate_mode.attributeValue}"
-								<c:if test="${evaluate_mode.attributeValue eq originalMap.EvaluationModel}">checked="checked"</c:if> />${evaluate_mode.attributeName}
-						</c:forEach>
+						<input type="text" id="upd_evaluation_date"
+							name="upd_evaluation_date" class="testText" readonly="readonly" value="${detailInfoMap.EvaluationDatetime}"/>
+						<div id="selected"></div>
+						<script>
+							var date = new Pikaday(
+							{
+								field: document.getElementById('upd_evaluation_date'),
+								firstDay: 1,
+								minDate: new Date(2000, 0, 1),
+								maxDate: new Date(2020, 12, 31),
+								yearRange: [2000,2020],
+								onSelect: function() {
+									var date = document.createTextNode(this.getMoment().format('YYYY-MM-DD') + ' ');
+								}
+							});
+						</script>
 					</c:if>
 				</td>
+				<td class="t01_c">竞品（养成）：
+					<textarea id="upd_qualityGoods_cultivate" name="upd_qualityGoods_cultivate"
+						<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">readonly="readonly"</c:if>>${detailInfoMap.QualityGoods_cultivate}</textarea>
+				</td>
+				<td style="padding-left: 20px;">
+					<span class="describe"  style="color:#888">简评：</span>
+				</td>
+				<td  rowspan="9" >
+					<textarea id="upd_game_comment" name="upd_game_comment"
+						class="describe_comment3" <c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">readonly="readonly"</c:if>>${detailInfoMap.GameComment}</textarea>
+				</td>
+			</tr>
+
+			<tr>
 				<!-- 复测情况 -->
-				<td>
+				<td class="td1">
 					${attributeMap.retest_status.attributeShowName}：
 					<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">
 						<span id="repeat">${detailInfoMap.Retestcondition}</span>
@@ -337,33 +346,15 @@ function doDownloadFileAction(fileID) {
 	 					</select>
 					</c:if>
 				</td>
-				<td>
-					测评日期：
-					<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">
-						<span id="testDate">${detailInfoMap.Datetime}</span>
-					</c:if>
-					<c:if test="${'1' eq sessionScope['IS_ADMIN_USER'] }">
-						<input type="text" id="upd_evaluation_date" name="upd_evaluation_date"
-							class="testText" style="height: 26px;" readonly="readonly" value="${detailInfoMap.Datetime}" />
-						<div id="selected"></div>
-						<script>
-							var picker = new Pikaday(
-							{
-								field: document.getElementById('upd_evaluation_date'),
-								firstDay: 1,
-								minDate: new Date(2000, 0, 1),
-								maxDate: new Date(2020, 12, 31),
-								yearRange: [2000,2020],
-								onSelect: function() {
-									var date = document.createTextNode(this.getMoment().format('Do MMMM YYYY') + ' ');
-								}
-							});
-						</script>
-					</c:if>
+				<td class="t01_c">竞品（战斗）：
+					<textarea id="upd_qualityGoods_combat" name="upd_qualityGoods_combat"
+						<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">readonly="readonly"</c:if>>${detailInfoMap.QualityGoods_combat}</textarea>
 				</td>
+				</tr>
+				<tr>
 				<!-- 测评人 -->
-				<td>
-					${attributeMap.evaluation_person.attributeShowName}：
+				<td  class="td1">
+					测评人：
 					<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">
 						<span id="testName">${detailInfoMap.username}</span>
 					</c:if>
@@ -376,9 +367,15 @@ function doDownloadFileAction(fileID) {
 	 					</select>
 					</c:if>
 				</td>
-			</tr>
+				<td class="" valign="top" style="padding-left: 20px;" rowspan="7" >
+					<span class="describe"  style="color:#888">亮点/特色/创新：</span>
+					<textarea id="upd_feature" name="upd_feature" class="describe_comment2 k-textbox valid"
+						<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">readonly="readonly"</c:if>>${detailInfoMap.Feature}</textarea>
+				</td>
+			</tr>	
+
 			<tr style="padding：4px 0px;line-height: 24px;">
-				<td>
+				<td  class="td1">
 					测评分：
 					<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">
 						<span id="score">${detailInfoMap.EvaluationPoint}</span>
@@ -387,8 +384,11 @@ function doDownloadFileAction(fileID) {
 						<input type="text" id="upd_score" name="upd_score" value="${detailInfoMap.EvaluationPoint}" />
 					</c:if>
 				</td>
+			</tr>
+
+			<tr>
 				<!-- 测评评级 -->
-				<td>
+				<td  class="td1">
 					${attributeMap.evaluation_level.attributeShowName}：
 					<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">
 						<span id="testGarde">${detailInfoMap.Classified_Evaluate}</span>
@@ -402,67 +402,59 @@ function doDownloadFileAction(fileID) {
 						</select>
 					</c:if>
 				</td>
-				<!-- 潜力等级 -->
-				<td>
-					${attributeMap.evaluation_potential_grade.attributeShowName}：
+			</tr>
+
+			<tr>
+				<td class="td1" colspan="3">
+					<!-- 区域 -->
+					${attributeMap.area.attributeShowName}：
 					<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">
-						<span id="qianli">${detailInfoMap.Evaluation_Potential_Grade}</span>
+						<span id="area">${detailInfoMap.Area}</span>
 					</c:if>
 					<c:if test="${'1' eq sessionScope['IS_ADMIN_USER'] }">
-						<select id="upd_evaluation_potential_grade" name="upd_evaluation_potential_grade" style="height: 26px;">
-							<c:forEach var="evaluation_potential_grade" items="${attributeMap.evaluation_potential_grade.attributeValueList}" varStatus="status">
-								<option value="${evaluation_potential_grade.attributeValue}"
-									<c:if test="${evaluation_potential_grade.attributeValue eq originalMap.Evaluation_Potential_Grade}">selected="selected"</c:if>>${evaluation_potential_grade.attributeName}</option>
+						<c:forEach var="area" items="${attributeMap.area.attributeValueList}" varStatus="status">
+							<input type="radio" name="upd_area" value="${area.attributeValue}" onclick="doSelecteAreaAction();"
+								<c:if test="${area.attributeValue eq detailInfoMap.Area}">checked="checked"</c:if>/>${area.attributeName}&nbsp;
+						</c:forEach>
+						<select id="upd_oversea" name="upd_oversea" style="width: 20%; height: 25px;" disabled="disabled">
+							<c:forEach var="oversea" items="${attributeMap.oversea.attributeValueList}" varStatus="status">
+								<option value="${oversea.attributeValue}"
+									<c:if test="${oversea.attributeValue eq detailInfoMap.Area}">selected="selected"</c:if>>${oversea.attributeName}</option>
 							</c:forEach>
 						</select>
 					</c:if>
 				</td>
-				<!-- 上线表现级别 -->
+			</tr>
+
+			<tr>
 				<td>
-					${attributeMap.online_level.attributeShowName}：
-					<c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">
-						<span id="onlineG">${detailInfoMap.PublishManifestation}</span>
-					</c:if>
-					<c:if test="${'1' eq sessionScope['IS_ADMIN_USER'] }">
-						<select id="upd_online_level" name="upd_online_level" style="height: 26px;">
-							<c:forEach var="online_level" items="${attributeMap.online_level.attributeValueList}" varStatus="status">
-								<option value="${online_level.attributeValue}"
-									<c:if test="${online_level.attributeValue eq originalMap.PublishManifestation}">selected="selected"</c:if>>${online_level.attributeName}</option>
-							</c:forEach>
-						</select>
-					</c:if>
+					<div class="picScroll-left">
+						<div class="hd">
+							<a class="next"></a>
+							<ul></ul>
+							<a class="prev"></a>
+							<span class="pageState"></span>
+						</div>
+						<div id='content' class="bd">
+							<ul class="picList">
+								<c:forEach var="image" items="${imageList}" varStatus="status">
+									<li>
+										<div class="pic">
+											<img src="showImages.html?fileId=${image.file_id}" />
+										</div>
+									</li>
+								</c:forEach>
+
+							</ul>
+						</div>
+					</div>
 				</td>
 			</tr>
 		</tbody>
 	</table>
 </div>
 
-<div class="m_detail2">
-	<table class="table_m2">
-		<tr style="padding：4px 0px;line-height: 24px;">
-			<td class="tabel01_c">
-				上线表现评价说明：
-				<textarea class="k-textbox valid" cols="30" <c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">readonly="readonly"</c:if>
-					rows="5" style="background-color:rgb(243,243,244);"
-					id="upd_manifestationExplain" name="upd_manifestationExplain">${detailInfoMap.ManifestationExplain}</textarea>
-			</td>
-		</tr>
-		<tr style="padding：4px 0px;line-height: 24px;">
-			<td class="tabel01_c">参考竞品养成方面：
-				<textarea class="k-textbox valid" cols="30" <c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">readonly="readonly"</c:if>
-					rows="2" style="background-color:rgb(243,243,244);"
-					id="upd_qualityGoods_cultivate" name="upd_qualityGoods_cultivate">${detailInfoMap.QualityGoods_cultivate}</textarea>
-			</td>
-		</tr>
-		<tr style="padding：4px 0px;line-height: 24px;">
-			<td class="tabel01_c">参考战斗养成方面：
-				<textarea class="k-textbox valid" cols="30" <c:if test="${'0' eq sessionScope['IS_ADMIN_USER'] }">readonly="readonly"</c:if>
-					rows="2" style="background-color:rgb(243,243,244);"
-					id="upd_qualityGoods_combat" name="upd_qualityGoods_combat">${detailInfoMap.QualityGoods_combat}</textarea>
-			</td>
-		</tr>
-	</table>
-</div>
+<input type="hidden" id="areaValue" name="areaValue" />
 
 <input type="hidden" id="gameInfoID" name="gameInfoID" value="${detailInfoMap.ID}" />
 <input type="hidden" id="modifyCount" name="modifyCount" value="${detailInfoMap.modifyCount}" />
@@ -491,25 +483,31 @@ function doDownloadFileAction(fileID) {
 <input type="hidden" id="in_game_reference" name="in_game_reference" value="${parameterMap.in_game_reference}" />
 </form>
 
-<table class="table_m2">
-	<tr style="padding：4px 0px;line-height: 24px;">
-		<td colspan="4">
-			评测报告：<span>${detailInfoMap.test_file_name}</span>
-			<c:if test="${not empty detailInfoMap.EvaluationReport}">
+<table class="m_detail2">
+	<tr>
+		<td colspan="3" class="td1">
+			附件：<span>${detailInfoMap.attachmentFile}</span>
+			<c:if test="${not empty detailInfoMap.attachmentFile}">
 				<span class="upJian">
-					<button class="btn" onclick="doDownloadFileAction('${detailInfoMap.EvaluationReport}')"><i class="icon-arrow-down"></i>下载</button>
-				</span>
-			</c:if>
-		</td>
-	</tr>
-	<tr style="padding：4px 0px;line-height: 24px;">
-		<td colspan="4">
-			10分钟人工试玩：<span>${detailInfoMap.play_file_name}</span>
-			<c:if test="${not empty detailInfoMap.CSV_name}">
-				<span class="upJian">
-					<button class="btn" onclick="doDownloadFileAction('${detailInfoMap.CSV_name}')"><i class="icon-arrow-down"></i>下载</button>
+					<button class="btn" onclick="doDownloadFileAction('${detailInfoMap.Attachment}')"><i class="icon-arrow-down"></i>下载</button>
 				</span>
 			</c:if>
 		</td>
 	</tr>
 </table>
+
+<script>
+/* $(document).ready(function() {
+	$.museum($('#content img'));
+}); */
+
+jQuery(".picScroll-left").slide({
+	titCell: ".hd ul",
+	mainCell: ".bd ul",
+	autoPage: true,
+	effect: "left",
+	autoPlay: true,
+	vis: 3,
+	trigger:"click"
+});
+</script>

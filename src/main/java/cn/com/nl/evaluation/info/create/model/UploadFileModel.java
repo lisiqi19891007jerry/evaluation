@@ -10,6 +10,7 @@ package cn.com.nl.evaluation.info.create.model;
 public class UploadFileModel {
 
 	private String fileId;        // 文件ID
+	private String gameId;        // 游戏ID
 	private String fileType;      // 文件类型
 	private String fileName;      // 文件名
 	private String filePath;      // 文件路径
@@ -53,5 +54,13 @@ public class UploadFileModel {
 
 	public void setFileExtension(String fileExtension) {
 		this.fileExtension = fileExtension;
+	}
+
+	public String getGameId() {
+		return gameId;
+	}
+
+	public void setGameId(String gameId) {
+		this.gameId = gameId;
 	}
 }

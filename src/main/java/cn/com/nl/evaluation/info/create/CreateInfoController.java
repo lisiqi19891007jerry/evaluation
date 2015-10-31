@@ -1,7 +1,6 @@
 package cn.com.nl.evaluation.info.create;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -10,8 +9,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.nl.evaluation.info.attribute.AttributeConfig;
@@ -19,11 +18,13 @@ import cn.com.nl.evaluation.info.attribute.dao.AttributeDao;
 import cn.com.nl.evaluation.info.create.dao.CreateInfoDao;
 import cn.com.nl.evaluation.info.create.dao.FileReportDao;
 import cn.com.nl.evaluation.info.create.handle.IGameHandle;
+import cn.com.nl.evaluation.info.create.handle.impl.GameAttachmentHandle;
+import cn.com.nl.evaluation.info.create.handle.impl.GameIconHandle;
+import cn.com.nl.evaluation.info.create.handle.impl.GameImageHandle;
 import cn.com.nl.evaluation.info.create.handle.impl.GameInfoHandle;
-import cn.com.nl.evaluation.info.create.handle.impl.GamePlayReportHandle;
-import cn.com.nl.evaluation.info.create.handle.impl.GameTestReportHandle;
 import cn.com.nl.framework.base.BasicController;
 import cn.com.nl.framework.constant.SystemConstant;
+import cn.com.nl.framework.tools.SequenceUtil;
 
 @Scope("prototype")
 @Controller
@@ -74,13 +75,11 @@ public class CreateInfoController extends BasicController {
 	 * @return
 	 */
 	@RequestMapping(value = "/createInfo/create")
-	public ModelAndView doCreateInfo(ModelMap model
-									,@RequestParam(value = "testReport", required = false) MultipartFile testReport
-									,@RequestParam(value = "playReport", required = false) MultipartFile playReport) {
+	public ModelAndView doCreateInfo(ModelMap model) {
 
 		IGameHandle handle = createGameInfoHandle();
 
-		String returnValue = handle.doFilter(createArgMap(testReport, playReport, getScreenParameterMap()));
+		String returnValue = handle.doFilter(createArgMap(getScreenParameterMap()));
 
 		model.addAttribute("returnValue", returnValue);
 
@@ -89,37 +88,38 @@ public class CreateInfoController extends BasicController {
 
 	private IGameHandle createGameInfoHandle() {
 
-		IGameHandle testFileHandle = new GameTestReportHandle();
-		IGameHandle playFileHandle = new GamePlayReportHandle();
-		IGameHandle gameInfoHandle = new GameInfoHandle();
+		IGameHandle attachFileHandle = new GameAttachmentHandle();
+		IGameHandle iconFileHandle   = new GameIconHandle();
+		IGameHandle imageFileHandle  = new GameImageHandle();
+		IGameHandle gameInfoHandle   = new GameInfoHandle();
 
-		testFileHandle.setHelper(FileOperationHelper.getInstance(fileReportDao));
-		playFileHandle.setHelper(FileOperationHelper.getInstance(fileReportDao));
+		attachFileHandle.setHelper(FileOperationHelper.getInstance(fileReportDao));
+		iconFileHandle.setHelper(FileOperationHelper.getInstance(fileReportDao));
+		imageFileHandle.setHelper(FileOperationHelper.getInstance(fileReportDao));
 		gameInfoHandle.setHelper(FileOperationHelper.getInstance(fileReportDao));
 
-		testFileHandle.setNextGameHandle(playFileHandle);
-		playFileHandle.setNextGameHandle(gameInfoHandle);
+		attachFileHandle.setNextGameHandle(iconFileHandle);
+		iconFileHandle.setNextGameHandle(imageFileHandle);
+		imageFileHandle.setNextGameHandle(gameInfoHandle);
 
-		return testFileHandle;
+		return attachFileHandle;
 	}
 
-	private Map<String, Object> createArgMap(MultipartFile testReport
-											,MultipartFile playReport
-											,Map<String, String> screenMap) {
+	private Map<String, Object> createArgMap(Map<String, String> screenMap) {
 
 		Map<String, Object> argMap = new HashMap<String, Object>();
 
-		Iterator<Map.Entry<String, String>> iterator = screenMap.entrySet().iterator();
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(getClienHttpSession().getServletContext());
 
-		while (iterator.hasNext()) {
+		if(multipartResolver.isMultipart(getClienHttpRequest())){
 
-			Map.Entry<String, String> entry = (Map.Entry<String, String>) iterator.next();
+			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) getClienHttpRequest();
 
-			argMap.put(entry.getKey(), entry.getValue());
+			argMap.putAll(multiRequest.getMultiFileMap());
 		}
 
-		argMap.put("testReport", testReport);
-		argMap.put("playReport", playReport);
+		argMap.put("gameId", SequenceUtil.getSequenceStr());
+		argMap.putAll(screenMap);
 		argMap.put("createInfoDao", createInfoDao);
 
 		return argMap;

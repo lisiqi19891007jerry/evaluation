@@ -1734,7 +1734,7 @@ legend+.control-group {
 }
 
 table {
-	max-width: 92%;
+	max-width: 85%;
 	background-color: transparent;
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -1748,17 +1748,9 @@ table {
 	word-wrap:break-word;
 }
 .table {
-	width: 100%;
+	width: 85%;
 	magin-bottom: 20px
 }
-
-.table th, .table td {
-	line-height: 20px;
-	text-align: center;
-	vertical-align: top;
-	border-top: 1px solid #ddd
-}
-
 .table th {
 	font-weight: bold
 }
@@ -1767,6 +1759,12 @@ table {
 	vertical-align: bottom
 }
 
+.table th, .table td {
+	line-height: 20px;
+	text-align: center;
+	vertical-align: top;
+	border-top: 1px solid #ddd
+}
 .table caption+thead tr:first-child th, .table caption+thead tr:first-child td,
 	.table colgroup+thead tr:firt-child th, .table colgroup+thead tr:first-child td,
 	.table thead:first-child tr:first-child th, .table thead:first-child tr:first-child td
@@ -5833,7 +5831,7 @@ td{
 	padding-bottom:5px;
 }
 td.td1 {text-align:left;padding-left:120px;}
-td.td2 {text-align:left;padding-left:40px;}
+td.td2 {text-align:left;padding-left:50px;}
 td.td3 {text-align:left;padding-left:70px;}
 td.td4 {text-align:left;padding-left:255px;}
 td.td11{text-align:right;padding-left:40px;}
@@ -5873,63 +5871,25 @@ td.td6{text-align:left;padding-left:168px;}
 .tdtext,.tdtext2,.tdtext3,.tdtext4,.tdtext5{
 	text-align:left;
 }
-
-/*编号*/		
-.nameTh1{
-	width:5%;
+.tips{
+	color:red;
 }
 
-/*游戏名*/	
-.nameTh2{
-	width:13%
-	
+.td14{
+	padding-left:50px;
 }
-/*游戏类型*/	
-.nameTh3{
-	width:13%
+.tdd1{
+	padding-left:70px;
 }
-/*游戏题材*/	
-.nameTh4{
-	width:13%
+.tdd2{
+	padding-left:100px;
+}	
+.tdd3{
+	padding-left:40px;
 }
-/*包体大小*/	
-.nameTh5{
- 	width:6%;
-}
-/*平台*/	
-.nameTh6{
-	width:5%
-}
-/*单机or网游*/	
-.nameTh7{
- 	width:8%
-}
-/*评测模式*/	
-.nameTh8{
- 	width:5%
-}
-/*评测日期*/	
-.nameTh9{
- 	width:8%
-}
-/*测评人*/	
-.nameTh10{
- 	width:5%
-}
-/*测评分*/	
-.nameTh11{
- 	width:5%
-}
-/*测评评级*/	
-.nameTh12{
- 	width:5%
-}
-/*潜力评级*/	
-.nameTh13{
- 	width:5%
+.tdd4{
+	padding-left:40px;
 }
 
 
-	
-	
 	

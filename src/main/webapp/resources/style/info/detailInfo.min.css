@@ -156,13 +156,18 @@ td, th {
     padding-right:40px;
     color:#888;
 }
- .table_m2 td {
+ .table_m2 .td1{
     padding-top:2px;
     paddint-bottom:2px;
     padding-left:14px;
-    padding-right:100px;
     color:#888;
 }
+ .table_m2 .t01_c{
+ 	padding-left:50px;
+ 	color:#888;
+ 	padding-top:2px;
+    paddint-bottom:2px;
+ }
  .table_m3 td {
     padding-top:2px;
     paddint-bottom:2px;
@@ -223,12 +228,8 @@ h2{
 	position: relative;
     left: 80px;
 }
-td.tabel01_c textarea{
-	width: 230px;
-    height: 100px;    
-}
-td.tabel01_c{
-	padding-left:14px;
+.t01_c{
+	padding-left:2px;
 }
 textarea.k-textbox{
 	vertical-align:text-top;
@@ -261,3 +262,31 @@ textarea.k-textbox{
 .backBTn{
 	padding-left:95px;
 }
+.image_photo{
+	width:700px;
+	height:130px;
+	padding-top:5px;
+
+}
+.describe_comment2{
+	width:200px;
+	height:100px;
+}
+.describe_comment3{
+	width:380px;
+	height:160px;
+	padding-bottom:20px;
+}
+.describe{
+	padding-left:20px;
+}
+.icon_image{
+	border:0px;
+	font-size:12px;
+	
+}
+.affix_word{
+	border:0px;
+	font-size:12px;
+}
+

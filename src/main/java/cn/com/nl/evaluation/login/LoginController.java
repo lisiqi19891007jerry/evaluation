@@ -72,7 +72,7 @@ public class LoginController extends BasicController {
 
 				setScreenShowData(model);
 
-				return new ModelAndView("createInfo", model);
+				return new ModelAndView("queryInfo", model);
 			} else {
 				returnValue = "密码错误！";
 			}
@@ -82,6 +82,22 @@ public class LoginController extends BasicController {
 		model.addAttribute("returnValue", returnValue);
 
 		return new ModelAndView("loginview", model);
+	}
+
+	/**
+	 *
+	 * 执行登出操作
+	 *
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/logoutProcess")
+	public ModelAndView doLogoutProcess(ModelMap model) {
+
+		// 将登录成功用户信息从session中清除掉
+		cleanUserMessage();
+
+		return doLogin(model);
 	}
 
 	/**
@@ -102,21 +118,18 @@ public class LoginController extends BasicController {
 		setAttributeToSession(SystemConstant.IS_ADMIN_USER, (Integer) userInfoMap.get("userright"));
 	}
 
+
+	/**
+	 * 将登录成功用户信息从session中清除掉
+	 */
+	private void cleanUserMessage() {
+		setAttributeToSession(SystemConstant.IS_LOGON_USER, false);
+		setAttributeToSession(SystemConstant.LOGON_USERNAME, "");
+		setAttributeToSession(SystemConstant.IS_ADMIN_USER, "");
+	}
+
 	private void setScreenShowData(ModelMap model) {
-
-		List<Map<String, Object>> userList = attributeDao.doSelectUserList();
-
-		if (userList != null && userList.size() > 0) {
-
-			for (Map<String, Object> user : userList) {
-				if (getAttributeFromSession(SystemConstant.LOGON_USERNAME).equals(user.get("username"))) {
-					model.addAttribute("account", user.get("account"));
-					break;
-				}
-			}
-		}
-
-		model.addAttribute("userList", userList);
+		model.addAttribute("userList", attributeDao.doSelectUserList());
 		model.addAttribute("attributeMap", AttributeConfig.getInstance(attributeDao).getAttributemap());
 	}
 }
