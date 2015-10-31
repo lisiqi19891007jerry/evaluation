@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2015-10-11 19:53:57
+Date: 2015-10-31 20:21:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,79 +20,71 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `b_gameinformation`;
 CREATE TABLE `b_gameinformation` (
-  `ID` varchar(50) NOT NULL,
-  `Datetime` datetime NOT NULL,
-  `EvaluationPeople` varchar(20) NOT NULL,
-  `EvaluationPoint` float(20,10) NOT NULL,
-  `PublishManifestation` varchar(10) DEFAULT NULL,
-  `Classified_Evaluate` varchar(10) DEFAULT NULL,
-  `Evaluation_Potential_Grade` varchar(10) DEFAULT NULL,
-  `ManifestationExplain` varchar(255) NOT NULL,
-  `QualityGoods_cultivate` varchar(255) DEFAULT NULL,
-  `QualityGoods_combat` varchar(255) DEFAULT NULL,
-  `EvaluationReport` varchar(50) NOT NULL,
-  `CSV_name` varchar(50) NOT NULL,
-  `GameName` varchar(40) NOT NULL,
-  `Developer` varchar(40) NOT NULL,
-  `Publisher` varchar(40) NOT NULL,
-  `GameType` varchar(40) NOT NULL,
+  `ID` varchar(50) NOT NULL COMMENT 'ID主键',
+  `GameName` varchar(40) NOT NULL COMMENT '游戏名称',
+  `Developer` varchar(40) NOT NULL COMMENT '研发商',
+  `Publisher` varchar(40) NOT NULL COMMENT '发行商',
+  `GameType` varchar(40) NOT NULL COMMENT '游戏类型',
   `GameTheme` varchar(40) NOT NULL COMMENT '游戏题材',
-  `IsAuthorization` varchar(1) DEFAULT NULL,
-  `InstallationSize` float(20,10) NOT NULL,
-  `Platform` varchar(20) NOT NULL,
-  `Completeness` float(20,10) NOT NULL,
-  `GameClassify` varchar(1) NOT NULL,
-  `Scene` varchar(1) NOT NULL,
-  `Show_person_type` varchar(1) NOT NULL,
-  `Painting_style_1` varchar(1) NOT NULL,
-  `Painting_style_2` varchar(1) NOT NULL,
-  `DegreeOfPlay` varchar(10) NOT NULL,
-  `Out_test_type_1` varchar(1) NOT NULL,
-  `Out_test_type_2` varchar(1) NOT NULL,
-  `Paytype` varchar(10) NOT NULL,
-  `Privilege` varchar(10) NOT NULL,
-  `EvaluationModel` varchar(10) NOT NULL,
-  `Retestcondition` varchar(10) NOT NULL,
-  `createDateTime` datetime DEFAULT NULL,
-  `modifyCount` int(11) NOT NULL DEFAULT '0',
+  `InstallationSize` float(20,10) NOT NULL COMMENT '包体大小',
+  `Completeness` varchar(1) NOT NULL COMMENT '游戏完成度',
+  `IsAuthorization` varchar(1) DEFAULT NULL COMMENT '是否IP授权',
+  `GameClassify` varchar(1) NOT NULL COMMENT '游戏分类',
+  `Platform` varchar(20) NOT NULL COMMENT '平台',
+  `Scene` varchar(1) NOT NULL COMMENT '场景',
+  `Show_person_type` varchar(1) NOT NULL COMMENT '人物',
+  `Draw` varchar(1) NOT NULL COMMENT '绘画',
+  `Style` varchar(1) NOT NULL COMMENT '风格',
+  `DegreeOfPlay` varchar(10) NOT NULL COMMENT '游戏玩法轻重度',
+  `Area` varchar(50) DEFAULT NULL COMMENT '区域',
+  `Retestcondition` varchar(10) NOT NULL COMMENT '复测情况',
+  `EvaluationDatetime` datetime NOT NULL COMMENT '测评日期',
+  `EvaluationPeople` varchar(20) NOT NULL COMMENT '评测人',
+  `EvaluationPoint` float(20,10) NOT NULL COMMENT '测评分',
+  `Classified_Evaluate` varchar(10) DEFAULT NULL COMMENT '测评等级',
+  `PublishManifestation` varchar(10) DEFAULT NULL COMMENT '上线表现级别',
+  `Feature` varchar(255) DEFAULT NULL COMMENT '特色',
+  `QualityGoods_combat` varchar(255) DEFAULT NULL COMMENT '参考竞品（战斗方面）',
+  `QualityGoods_cultivate` varchar(255) DEFAULT NULL COMMENT '参考竞品（养成方面）',
+  `GameComment` varchar(3000) DEFAULT NULL COMMENT '游戏简评',
+  `Attachment` varchar(50) DEFAULT NULL COMMENT '附件',
+  `Game_icon` varchar(50) DEFAULT NULL COMMENT '游戏图标',
+  `createDateTime` datetime DEFAULT NULL COMMENT '数据记录创建时间',
+  `modifyCount` int(11) NOT NULL DEFAULT '0' COMMENT '数据更新版本号',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_gameinformation
 -- ----------------------------
-INSERT INTO `b_gameinformation` VALUES ('05f8f69511d0', '2015-09-20 00:00:00', '222', '0.0099999998', 'A+', 'B+', 'A+', '上线表现特殊字符@#%……&×（）&……', '参考竞品特殊字符@#%……&×（）&……', '参考战斗特殊字符@#%……&×（）&……', '', '', '1_特殊字符！@#￥%……&×/n  他', '研发商1', '发行商1', '游戏类型', '游戏题材', '1', '99.9899978638', '0', '100.0000000000', '0', '0', '0', '0', '0', '0', '1', '1', '1', '0', '', '0', '2015-09-23 21:59:29', '0');
-INSERT INTO `b_gameinformation` VALUES ('164f9525d0ec', '2015-09-17 00:00:00', '444', '3.0000000000', 'B+', 'A', 'B', '上线表现评价说明', '参考竞品养成方面', '参考战斗养成方面', '', '', '游戏名', '研发商', '发行商', '游戏类型', '游戏题材', '1', '1.0000000000', '0', '2.0000000000', '0', '0', '0', '1', '0', '2', '1', '1', '1', '1', '2', '2', '2015-09-22 21:59:33', '0');
-INSERT INTO `b_gameinformation` VALUES ('1c84b12c8fca', '2015-09-10 00:00:00', '222', '2314.0000000000', 'B', 'B', 'B+', '1234124321', '123412341241', '12431234214', '', 'f7daea9332b4', '123', '321', '111', '222', '333', '0', '444.0000000000', '0', '100.0000000000', '1', '1', '0', '1', '1', '0', '1', '1', '2', '1', '3', '0', '2015-09-23 22:33:29', '0');
-INSERT INTO `b_gameinformation` VALUES ('1df5a36ef434', '2015-09-19 00:00:00', '111', '1.0000000000', '', 'B', '', '', '', '', '', '', '只填全部必填信息', '1', '', '游戏类型', '游戏题材', '1', '1.0000000000', '0', '100.0000000000', '0', '0', '0', '0', '0', '0', '2', '2', '', '', '1', '0', '2015-09-23 19:59:42', '0');
-INSERT INTO `b_gameinformation` VALUES ('38b86cb077fd', '2015-09-19 00:00:00', '111', '3.0000000000', '', 'A+', '', '', '', '', '', '', '必填信息+评测报告', '', '', '游戏类型', '游戏题材', '0', '1.0000000000', '0', '100.0000000000', '0', '1', '1', '1', '2', '2', '2', '2', '', '', '', '0', '2015-09-14 21:59:48', '0');
-INSERT INTO `b_gameinformation` VALUES ('3c641cf93b54', '2015-09-19 00:00:00', '547773', '3.0000000000', '', 'B', '', '', '', '', '', '', '必填信息+评测报告', '', '', '游戏类型', '游戏题材', '1', '1.0000000000', '0', '100.0000000000', '2', '1', '1', '1', '2', '2', '2', '2', '', '', '', '0', '2015-09-18 21:59:51', '0');
-INSERT INTO `b_gameinformation` VALUES ('4383c78dd846', '2015-09-10 00:00:00', '222', '321.0000000000', 'A', 'B', 'B+', '离开家的沙发你的卡上', '啊深刻了解对方哈索尼克', '', '', '', '游戏名', '研发商', '发行商', '游戏类型', '游戏题材', '1', '123.0000000000', '0', '22.0000000000', '0', '0', '0', '0', '0', '0', '1', '1', '1', '0', '2', '0', '2015-09-23 22:04:45', '0');
-INSERT INTO `b_gameinformation` VALUES ('53532cacd1f6', '2015-09-19 00:00:00', '111', '3.0000000000', '', 'B', '', '', '', '入口即哈输入东风科技', '', '', '非管理员新增的', '2', '', '游戏类型', '游戏题材', '0', '1.0000000000', '0', '100.0000000000', '0', '0', '0', '1', '1', '0', '2', '2', '', '', '', '0', '2015-09-11 21:59:55', '0');
-INSERT INTO `b_gameinformation` VALUES ('a17f0ec63b75', '2015-09-19 00:00:00', '547773', '123.0000000000', '', 'B+', '', '', '', '', '', '', '必填信息+评测报告', '', '', '游戏类型', '游戏题材', '0', '123.0000000000', '1', '100.0000000000', '1', '1', '1', '1', '1', '1', '2', '2', '', '', '', '0', '2015-09-11 22:00:00', '0');
-INSERT INTO `b_gameinformation` VALUES ('a83399e46f6b', '2015-10-15 00:00:00', '222', '555.0000000000', 'A', 'B', 'B+', '555', '555', '555', '', '', '游戏名555', '研发商555', '发行商555', '游戏类型555', '游戏题材555', '1', '555.0000000000', '0', '100.0000000000', '0', '0', '0', '1', '1', '0', '1', '1', '1', '0', '3', '1', '2015-10-08 22:09:54', '0');
-INSERT INTO `b_gameinformation` VALUES ('af4a89ebb471', '2015-09-18 00:00:00', '111', '99.9899978638', 'A+', 'A+', 'A+', '', '', '', '', '', 'test001', '', '2', '游戏类型1', '游戏题材1', '1', '111.0100021362', '0', '100.0000000000', '0', '1', '1', '1', '1', '1', '1', '1', '2', '1', '1', '0', '2015-10-01 22:00:03', '0');
-INSERT INTO `b_gameinformation` VALUES ('effed78b6c0a', '2015-09-20 00:00:00', '111', '0.0099999998', '', 'B', '', '', '', '', '', '', '游戏名称长---很长很长，不够长啦啦', '', '1', '游戏类型会有多少个字呢？一般情况下', '游戏题材会有多少个字呢？一般情况下就这', '1', '1.0000000000', '0', '100.0000000000', '0', '0', '1', '1', '0', '0', '2', '2', '', '', '', '0', '2015-09-01 22:00:07', '0');
-INSERT INTO `b_gameinformation` VALUES ('ff92c39cf7c5', '2015-09-01 00:00:00', '444', '999.0000000000', '', 'A+', '', '', '', '', '', '', '游戏名', '', '', '游戏类型', '游戏题材', '0', '123.0000000000', '1', '100.0000000000', '1', '1', '1', '1', '1', '1', '2', '2', '', '', '', '1', '2015-09-23 22:00:10', '0');
+INSERT INTO `b_gameinformation` VALUES ('50177043078f', 'docker游戏名', 'docker研发商', 'docker发行商', 'docker游戏类型', 'docker游戏题材', '4.0000000000', '1', '1', '0', '0', '0', '0', '0', '0', '0', '国内', '1', '2015-10-22 00:00:00', '111', '33.0000000000', 'B+', '', '亮点/特色/创新', '竞品（战斗）', '竞品（养成）', '简评', 'fb7fdcc9f2e5', 'bdadd910a926', '2015-10-31 00:22:11', '1');
 
 -- ----------------------------
 -- Table structure for b_upload_file
 -- ----------------------------
 DROP TABLE IF EXISTS `b_upload_file`;
 CREATE TABLE `b_upload_file` (
-  `file_id` varchar(50) NOT NULL,
-  `file_type` varchar(255) NOT NULL,
-  `file_name` varchar(255) NOT NULL,
-  `file_path` varchar(500) NOT NULL,
-  `file_extension` varchar(50) NOT NULL,
-  `file_upload_time` datetime NOT NULL,
+  `file_id` varchar(50) NOT NULL COMMENT '文件id（主键字段）',
+  `game_id` varchar(50) NOT NULL COMMENT '游戏ID',
+  `file_type` varchar(255) NOT NULL COMMENT '文件类型',
+  `file_name` varchar(255) NOT NULL COMMENT '文件名称',
+  `file_path` varchar(500) NOT NULL COMMENT '文件存放路径',
+  `file_extension` varchar(50) NOT NULL COMMENT '文件扩展名',
+  `file_upload_time` datetime NOT NULL COMMENT '文件上传时间',
   PRIMARY KEY (`file_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_upload_file
 -- ----------------------------
-INSERT INTO `b_upload_file` VALUES ('f7daea9332b4', 'play', '20150923223328_员工自带电脑申请表', 'E:/test/play//201509/20150923223328_员工自带电脑申请表.doc', 'doc', '2015-09-23 22:33:29');
+INSERT INTO `b_upload_file` VALUES ('353dc5637c44', '50177043078f', 'img', '20151031002211_Tulips', 'E:/test/images//201510/docker游戏名/20151031002211_Tulips.jpg', 'jpg', '2015-10-31 00:22:11');
+INSERT INTO `b_upload_file` VALUES ('994367e16ab3', '50177043078f', 'img', '20151031002211_Desert', 'E:/test/images//201510/docker游戏名/20151031002211_Desert.jpg', 'jpg', '2015-10-31 00:22:11');
+INSERT INTO `b_upload_file` VALUES ('a6963ff66b23', '50177043078f', 'img', '20151031002211_Penguins', 'E:/test/images//201510/docker游戏名/20151031002211_Penguins.jpg', 'jpg', '2015-10-31 00:22:11');
+INSERT INTO `b_upload_file` VALUES ('bd5549571178', '50177043078f', 'img', '20151031002211_Lighthouse', 'E:/test/images//201510/docker游戏名/20151031002211_Lighthouse.jpg', 'jpg', '2015-10-31 00:22:11');
+INSERT INTO `b_upload_file` VALUES ('bdadd910a926', '50177043078f', 'icon', '20151031002204_Chrysanthemum', 'E:/test/icon//201510/20151031002204_Chrysanthemum.jpg', 'jpg', '2015-10-31 00:22:05');
+INSERT INTO `b_upload_file` VALUES ('c2cd2cb55953', '50177043078f', 'img', '20151031002211_Hydrangeas', 'E:/test/images//201510/docker游戏名/20151031002211_Hydrangeas.jpg', 'jpg', '2015-10-31 00:22:11');
+INSERT INTO `b_upload_file` VALUES ('f61d8ca86e94', '50177043078f', 'img', '20151031002211_Jellyfish', 'E:/test/images//201510/docker游戏名/20151031002211_Jellyfish.jpg', 'jpg', '2015-10-31 00:22:11');
+INSERT INTO `b_upload_file` VALUES ('fb7fdcc9f2e5', '50177043078f', 'attachment', '20151031002204_oracle_coherence_cookbook', 'E:/test/attachment//201510/20151031002204_oracle_coherence_cookbook.pdf', 'pdf', '2015-10-31 00:22:05');
 
 -- ----------------------------
 -- Table structure for c_attribute
@@ -111,58 +103,48 @@ CREATE TABLE `c_attribute` (
 -- ----------------------------
 -- Records of c_attribute
 -- ----------------------------
-INSERT INTO `c_attribute` VALUES ('01', 'scene', '场景', '1', '2D', '0');
-INSERT INTO `c_attribute` VALUES ('02', 'scene', '场景', '2', '3D', '1');
-INSERT INTO `c_attribute` VALUES ('03', 'out_test_type_1', '对外测试类型1', '1', '删档', '1');
-INSERT INTO `c_attribute` VALUES ('04', 'out_test_type_1', '对外测试类型1', '2', '不删档', '2');
-INSERT INTO `c_attribute` VALUES ('05', 'out_test_type_2', '对外测试类型2', '1', '付费', '1');
-INSERT INTO `c_attribute` VALUES ('06', 'out_test_type_2', '对外测试类型2', '2', '不付费', '2');
-INSERT INTO `c_attribute` VALUES ('07', 'pay_type', '付费方式', '1', 'SDK', '1');
-INSERT INTO `c_attribute` VALUES ('08', 'pay_type', '付费方式', '2', '短代', '2');
-INSERT INTO `c_attribute` VALUES ('09', 'pay_type', '付费方式', '3', '第三方', '3');
-INSERT INTO `c_attribute` VALUES ('11', 'favorable_type', '付费优惠类型', '1', '多倍', '0');
-INSERT INTO `c_attribute` VALUES ('12', 'favorable_type', '付费优惠类型', '2', '百分比', '1');
-INSERT INTO `c_attribute` VALUES ('13', 'retest_status', '复测情况', '1', '首测', '0');
-INSERT INTO `c_attribute` VALUES ('14', 'retest_status', '复测情况', '2', '二测', '1');
-INSERT INTO `c_attribute` VALUES ('15', 'retest_status', '复测情况', '3', '三测及以上', '2');
-INSERT INTO `c_attribute` VALUES ('16', 'painting_style_1', '绘画', '1', 'Q版', '0');
-INSERT INTO `c_attribute` VALUES ('17', 'painting_style_1', '绘画', '2', '写实', '1');
-INSERT INTO `c_attribute` VALUES ('18', 'painting_style_2', '风格', '1', '日韩', '0');
-INSERT INTO `c_attribute` VALUES ('19', 'painting_style_2', '风格', '2', '欧美', '1');
-INSERT INTO `c_attribute` VALUES ('20', 'painting_style_2', '风格', '3', '中国风', '2');
-INSERT INTO `c_attribute` VALUES ('21', 'platform_type', '平台', '1', 'Android', '0');
-INSERT INTO `c_attribute` VALUES ('22', 'platform_type', '平台', '2', 'IOS', '1');
-INSERT INTO `c_attribute` VALUES ('23', 'evaluate_mode', '评测模式', '1', '独代', '1');
-INSERT INTO `c_attribute` VALUES ('24', 'evaluate_mode', '评测模式', '2', '联运', '2');
-INSERT INTO `c_attribute` VALUES ('25', 'evaluate_mode', '评测模式', '3', '其他', '3');
-INSERT INTO `c_attribute` VALUES ('26', 'show_person_type', '人物', '1', '2D', '0');
-INSERT INTO `c_attribute` VALUES ('27', 'show_person_type', '人物', '2', '3D', '1');
-INSERT INTO `c_attribute` VALUES ('28', 'game_type', '单机or网游', '1', '单机', '0');
-INSERT INTO `c_attribute` VALUES ('29', 'game_type', '单机or网游', '2', '网游', '1');
-INSERT INTO `c_attribute` VALUES ('30', 'game_type', '单机or网游', '3', '弱联网单机', '2');
-INSERT INTO `c_attribute` VALUES ('31', 'playing_method', '游戏玩法轻重度', '1', '轻度', '0');
-INSERT INTO `c_attribute` VALUES ('32', 'playing_method', '游戏玩法轻重度', '2', '中度', '1');
-INSERT INTO `c_attribute` VALUES ('33', 'playing_method', '游戏玩法轻重度', '3', '重度', '2');
-INSERT INTO `c_attribute` VALUES ('34', 'evaluation_person', '测评人', null, '', '');
-INSERT INTO `c_attribute` VALUES ('37', 'evaluation_level', '测评评级', '1', 'B', 'B');
-INSERT INTO `c_attribute` VALUES ('38', 'evaluation_level', '测评评级', '2', 'B+', 'B+');
-INSERT INTO `c_attribute` VALUES ('39', 'evaluation_level', '测评评级', '3', 'A', 'A');
-INSERT INTO `c_attribute` VALUES ('40', 'evaluation_level', '测评评级', '4', 'A+', 'A+');
-INSERT INTO `c_attribute` VALUES ('41', 'online_level', '上线表现级别', '1', 'B', 'B');
-INSERT INTO `c_attribute` VALUES ('42', 'online_level', '上线表现级别', '2', 'B+', 'B+');
-INSERT INTO `c_attribute` VALUES ('43', 'online_level', '上线表现级别', '3', 'A', 'A');
-INSERT INTO `c_attribute` VALUES ('44', 'online_level', '上线表现级别', '4', 'A+', 'A+');
-INSERT INTO `c_attribute` VALUES ('45', 'evaluation_potential_grade', '潜力等级', '1', 'B', 'B');
-INSERT INTO `c_attribute` VALUES ('46', 'evaluation_potential_grade', '潜力等级', '2', 'B+', 'B+');
-INSERT INTO `c_attribute` VALUES ('47', 'evaluation_potential_grade', '潜力等级', '3', 'A', 'A');
-INSERT INTO `c_attribute` VALUES ('48', 'evaluation_potential_grade', '潜力等级', '4', 'A+', 'A+');
-INSERT INTO `c_attribute` VALUES ('49', 'is_authorization', '是否IP授权', '1', '是', '1');
-INSERT INTO `c_attribute` VALUES ('50', 'is_authorization', '是否IP授权', '2', '否', '0');
-INSERT INTO `c_attribute` VALUES ('51', 'online_level', '上线表现级别', '0', '', '');
-INSERT INTO `c_attribute` VALUES ('52', 'evaluation_potential_grade', '潜力等级', '0', '', '');
-INSERT INTO `c_attribute` VALUES ('53', 'evaluate_mode', '评测模式', '4', '未知', '');
-INSERT INTO `c_attribute` VALUES ('54', 'pay_type', '付费方式', '4', '未知', '');
-INSERT INTO `c_attribute` VALUES ('55', 'favorable_type', '付费优惠类型', '3', '未知', '');
+INSERT INTO `c_attribute` VALUES ('0303bea54d1a', 'retest_status', '复测情况', '1', '首测', '0');
+INSERT INTO `c_attribute` VALUES ('0a9649560361', 'painting_style_2', '风格', '1', '日韩', '0');
+INSERT INTO `c_attribute` VALUES ('0daa808c404e', 'game_type', '分类', '1', '单机', '0');
+INSERT INTO `c_attribute` VALUES ('111d9ce87a19', 'platform_type', '平台', '1', 'Android', '0');
+INSERT INTO `c_attribute` VALUES ('1afce1f15da7', 'evaluation_level', '测评评级', '1', 'B', 'B');
+INSERT INTO `c_attribute` VALUES ('1c102cf8ca7a', 'area', '区域', '2', '海外', '海外');
+INSERT INTO `c_attribute` VALUES ('29eec026b050', 'area', '区域', '1', '国内', '国内');
+INSERT INTO `c_attribute` VALUES ('2b68bf5f8aeb', 'playing_method', '重度', '1', '轻度', '0');
+INSERT INTO `c_attribute` VALUES ('3bde1cbe5409', 'playing_method', '重度', '3', '重度', '2');
+INSERT INTO `c_attribute` VALUES ('413ff6f478d2', 'oversea', '海外', '2', '英国', '英国');
+INSERT INTO `c_attribute` VALUES ('433cee7d4fbe', 'evaluation_level', '测评评级', '2', 'B+', 'B+');
+INSERT INTO `c_attribute` VALUES ('4601dbba1b92', 'retest_status', '复测情况', '2', '二测', '1');
+INSERT INTO `c_attribute` VALUES ('462793d3ac29', 'oversea', '海外', '4', '澳大利亚', '澳大利亚');
+INSERT INTO `c_attribute` VALUES ('48b3cf6e4fe5', 'evaluation_level', '测评评级', '3', 'A', 'A');
+INSERT INTO `c_attribute` VALUES ('5d16474376b2', 'oversea', '海外', '5', '香港', '香港');
+INSERT INTO `c_attribute` VALUES ('5df3186898ed', 'online_level', '上线表现级别', '4', 'A', 'A');
+INSERT INTO `c_attribute` VALUES ('6b269077b4a5', 'online_level', '上线表现级别', '5', 'A+', 'A+');
+INSERT INTO `c_attribute` VALUES ('740cc79def27', 'platform_type', '平台', '2', 'IOS', '1');
+INSERT INTO `c_attribute` VALUES ('78d14d0c1092', 'retest_status', '复测情况', '3', '三测及以上', '2');
+INSERT INTO `c_attribute` VALUES ('790c7025b101', 'online_level', '上线表现级别', '2', 'B', 'B');
+INSERT INTO `c_attribute` VALUES ('8810b313b2d0', 'scene', '场景', '2', '3D', '1');
+INSERT INTO `c_attribute` VALUES ('91fc8d5ea09e', 'game_complete', '游戏完成度', '2', '残缺版', '2');
+INSERT INTO `c_attribute` VALUES ('9414d32da85b', 'scene', '场景', '1', '2D', '0');
+INSERT INTO `c_attribute` VALUES ('962f860ecea1', 'oversea', '海外', '3', '加拿大', '加拿大');
+INSERT INTO `c_attribute` VALUES ('9792abbc0d6f', 'online_level', '上线表现级别', '1', '', '');
+INSERT INTO `c_attribute` VALUES ('989a5e6f5326', 'game_type', '分类', '3', '弱联网单机', '2');
+INSERT INTO `c_attribute` VALUES ('aea15b30f974', 'show_person_type', '人物', '2', '3D', '1');
+INSERT INTO `c_attribute` VALUES ('aedeb3df2ee6', 'online_level', '上线表现级别', '3', 'B+', 'B+');
+INSERT INTO `c_attribute` VALUES ('b3a91473b000', 'playing_method', '重度', '2', '中度', '1');
+INSERT INTO `c_attribute` VALUES ('b5d5ac6d5f53', 'game_complete', '游戏完成度', '1', '完整版', '1');
+INSERT INTO `c_attribute` VALUES ('b7626dab1d42', 'oversea', '海外', '6', '台湾', '台湾');
+INSERT INTO `c_attribute` VALUES ('b847a639ebd5', 'painting_style_2', '风格', '3', '中国风', '2');
+INSERT INTO `c_attribute` VALUES ('b8b5fcbdf6c9', 'oversea', '海外', '1', '美国', '美国');
+INSERT INTO `c_attribute` VALUES ('bba3d4f683a2', 'is_authorization', '是否IP授权', '1', '是', '1');
+INSERT INTO `c_attribute` VALUES ('cd130b922d35', 'painting_style_1', '绘画', '1', 'Q版', '0');
+INSERT INTO `c_attribute` VALUES ('ce06a3447467', 'is_authorization', '是否IP授权', '2', '否', '0');
+INSERT INTO `c_attribute` VALUES ('dc686550a974', 'painting_style_1', '绘画', '2', '写实', '1');
+INSERT INTO `c_attribute` VALUES ('e39361b1c11f', 'oversea', '海外', '0', '', '');
+INSERT INTO `c_attribute` VALUES ('e39361b1c41f', 'show_person_type', '人物', '1', '2D', '0');
+INSERT INTO `c_attribute` VALUES ('e67903eb7bad', 'painting_style_2', '风格', '2', '欧美', '1');
+INSERT INTO `c_attribute` VALUES ('ec0d79cbafe3', 'game_type', '分类', '2', '网游', '1');
+INSERT INTO `c_attribute` VALUES ('f913ce46734d', 'evaluation_level', '测评评级', '4', 'A+', 'A+');
 
 -- ----------------------------
 -- Table structure for c_user
