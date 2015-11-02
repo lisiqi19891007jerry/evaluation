@@ -20,6 +20,8 @@
 <script>
 $(document).ready(function() {
 
+	$.museum($('#content img'));
+
 	var msg = $("#returnValue").val();
 
 	if (msg != '') {
@@ -35,13 +37,13 @@ function doDownloadFileAction(fileID) {
 }
 function doSelecteAreaAction() {
 
-	var areaValue = $("input[name='area']:checked").val();
+	var areaValue = $("input[name='upd_area']:checked").val();
 
 	if (areaValue == "国内") {
-		$("#oversea").val('');
-		$("#oversea").attr("disabled", true);
+		$("#upd_oversea").val('');
+		$("#upd_oversea").attr("disabled", true);
 	} else if (areaValue == "海外") {
-		$("#oversea").attr("disabled", false);
+		$("#upd_oversea").attr("disabled", false);
 	}
 }
 </script>
@@ -444,7 +446,6 @@ function doSelecteAreaAction() {
 										</div>
 									</li>
 								</c:forEach>
-
 							</ul>
 						</div>
 					</div>
@@ -497,10 +498,6 @@ function doSelecteAreaAction() {
 </table>
 
 <script>
-/* $(document).ready(function() {
-	$.museum($('#content img'));
-}); */
-
 jQuery(".picScroll-left").slide({
 	titCell: ".hd ul",
 	mainCell: ".bd ul",

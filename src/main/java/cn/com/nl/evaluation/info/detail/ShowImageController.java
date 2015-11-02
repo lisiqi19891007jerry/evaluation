@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.websocket.server.PathParam;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -38,40 +39,43 @@ public class ShowImageController extends BasicController {
 	public void doShowImage(ModelMap model
 						   ,@PathParam(value = "fileId") String fileId) throws DownloadFileNotFoundException {
 
-		Map<String, Object> fileInfoMap = detailInfoDao.doSelectFileInfo(fileId);
+		if (!StringUtils.isBlank(fileId)) {
 
-		if (fileInfoMap == null || fileInfoMap.size() < 1) {
-			throw new DownloadFileNotFoundException("在数据表中查不到文件记录");
-		}
+			Map<String, Object> fileInfoMap = detailInfoDao.doSelectFileInfo(fileId);
 
-		FileInputStream inputStream = null;
-		OutputStream outputStream   = null;
-
-		getClienHttpResponse().setContentType("application/octet-stream;charset=UTF-8");
-
-		try {
-
-			inputStream  = new FileInputStream((String) fileInfoMap.get("file_path"));
-			outputStream = new BufferedOutputStream(getClienHttpResponse().getOutputStream());
-
-			byte[] data = new byte[inputStream.available()];
-
-			inputStream.read(data);
-
-			outputStream.write(data);
-			outputStream.flush();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				inputStream.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+			if (fileInfoMap == null || fileInfoMap.size() < 1) {
+				throw new DownloadFileNotFoundException("在数据表中查不到文件记录");
 			}
+
+			FileInputStream inputStream = null;
+			OutputStream outputStream   = null;
+
+			getClienHttpResponse().setContentType("application/octet-stream;charset=UTF-8");
+
 			try {
-				outputStream.close();
-			} catch (IOException e) {
+
+				inputStream  = new FileInputStream((String) fileInfoMap.get("file_path"));
+				outputStream = new BufferedOutputStream(getClienHttpResponse().getOutputStream());
+
+				byte[] data = new byte[inputStream.available()];
+
+				inputStream.read(data);
+
+				outputStream.write(data);
+				outputStream.flush();
+			} catch (Exception e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					inputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				try {
+					outputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}

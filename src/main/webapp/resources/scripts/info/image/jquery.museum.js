@@ -7,13 +7,13 @@ Project page: http://muratayfer.com/jquery-museum
 Git repo:     http://github.com/mayfer/jquery-museum
 
 */
-/* ´úÂëÕûÀí£ºÀÁÈËÖ®¼Ò www.lanrenzhijia.com */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½ www.lanrenzhijia.com */
 ;(function($) {
 
     $.museum = function(el, options) {
 
         var defaults = {
-            namespace: 'msm',
+            namespace: 'game_img',
             padding: 25,
             disable_url_hash: false,
         }
@@ -176,4 +176,4 @@ Git repo:     http://github.com/mayfer/jquery-museum
     }
 
 })(jQuery);
-/* ´úÂëÕûÀí£ºÀÁÈËÖ®¼Ò www.lanrenzhijia.com */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½ www.lanrenzhijia.com */

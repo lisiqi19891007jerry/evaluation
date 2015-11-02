@@ -24,7 +24,7 @@ public class GameImageHandle extends AbstractGameHandle {
 
 	public String doFilter(Map<String, Object> argMap) {
 
-		List<MultipartFile> multipartFileList = (List<MultipartFile>) argMap.get("fileSelectedList[]");
+		List<MultipartFile> multipartFileList = (List<MultipartFile>) argMap.get("fileSelected");
 
 		if (multipartFileList == null || multipartFileList.size() < 1) {
 			return getNextGameHandle().doFilter(argMap);

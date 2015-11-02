@@ -16,6 +16,6 @@
 		<div class="hd-r-col">
 			<span>欢迎您，${sessionScope['LOGON_USERNAME'] }</span>
 		</div>
-		<input type="button" value="注销" onclick="doLoginoutAction();"/>
+		<input type="button" style="margin: 15px;" value="注销" onclick="doLoginoutAction();"/>
 	</div>
 </div>

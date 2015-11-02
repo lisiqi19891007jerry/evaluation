@@ -116,5 +116,10 @@ public class GameInfoHandle extends AbstractGameHandle {
 		if (StringUtils.isEmpty((String) argMap.get("qualityGoods_cultivate"))) {
 			argMap.put("qualityGoods_cultivate", "");
 		}
+
+		// 区域
+		if (StringUtils.isEmpty((String) argMap.get("areaValue"))) {
+			argMap.put("areaValue", "");
+		}
 	}
 }

@@ -71,6 +71,14 @@ function doQueryAction() {
 		}
 	}
 
+	if ($('input:radio[name="area"]:checked').val() == '国内') {
+		$("#areaValue").val('国内');
+	} else if ($('input:radio[name="area"]:checked').val() == '海外') {
+		$("#areaValue").val($('#oversea').val());
+	} else {
+		$("#areaValue").val('');
+	}
+
 	document.getElementById("queryForm").action = "queryInfo/query.html";
 	document.getElementById("queryForm").submit();
 }
@@ -167,9 +175,10 @@ function doSelecteAreaAction() {
 							<select id="oversea" name="oversea" style="width: 50%" disabled="disabled">
 								<c:forEach var="oversea" items="${attributeMap.oversea.attributeValueList}" varStatus="status">
 									<option value="${oversea.attributeValue}"
-										<c:if test="${oversea.attributeValue eq parameterMap.area}">selected="selected"</c:if>>${oversea.attributeName}</option>
+										<c:if test="${oversea.attributeValue eq parameterMap.oversea}">selected="selected"</c:if>>${oversea.attributeName}</option>
 								</c:forEach>
 							</select>
+							<input type="hidden" id="areaValue" name="areaValue" />
 						</td>
 						<!-- 游戏题材 -->
 						<td class="td11">

@@ -79,6 +79,13 @@ function doSelecteAreaAction() {
 	<input type="hidden" id="returnValue" name="returnValue" value="${returnValue}" />
 	<input type="hidden" id="areaValue" name="areaValue" />
 
+	<div class="submiBtn">
+		<input class="btn radius btn-info" type="button" onclick="doSaveDataAction();" value="保存" />
+		<span class="jiange">
+			<input class="btn radius btn-danger" type="button" onclick="doCleanDataAction();" value="重置"/>
+		</span>
+	</div>
+
 	<div class="tab_content" id="tab1" style="display: block; ">
 		<div class="form-horizontal">
 			<table class="all">
@@ -394,14 +401,5 @@ function doSelecteAreaAction() {
 			</div>
 		</div>
 	</div>
-
-	<div class="submiBtn">
-		<br/><br/>
-		<input class="btn radius btn-info" type="button" onclick="doSaveDataAction();" value="保存" />
-		<span class="jiange">
-			<input class="btn radius btn-danger" type="button" onclick="doCleanDataAction();" value="重置"/>
-		</span>
-	</div>
-
 	</form>
 </div>

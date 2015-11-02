@@ -58,7 +58,7 @@
 	            	html += '				<div class="convent_choice">';
 	            	html += '					<div class="andArea">';
 	            	html += '						<div class="filePicker">点击选择文件</div>';
-	            	html += '						<input id="fileImage" type="file" size="30" name="fileSelectedList[]" '+multiple+'>';
+	            	html += '						<input id="fileImage" type="file" size="30" name="fileSelected" '+multiple+'>';
 	            	html += '					</div>';
 	            	html += '				</div>';
 					html += '				<span id="fileDragArea" class="upload_drag_area">或者将文件拖到此处</span>';
@@ -88,7 +88,7 @@
 		            html += '			<div class="status_bar">';
 		            html += '				<div id="status_info" class="info">选中0张文件，共0B。</div>';
 		            html += '				<div class="btns">';
-		            html += '					<input id="fileImage" type="file" size="30" name="fileSelectedList[]" '+multiple+'>';
+		            html += '					<input id="fileImage" type="file" size="30" name="fileSelected" '+multiple+'>';
 		            html += '					<div class="webuploader_pick">选择文件</div>';
 		            html += '					<div class="upload_btn">开始上传</div>';
 		            html += '				</div>';

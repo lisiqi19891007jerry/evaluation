@@ -85,7 +85,7 @@ public class QueryInfoDaoImpl implements QueryInfoDao {
 		}
 
 		// 区域
-		String area = parameterMap.get("area");
+		String area = parameterMap.get("areaValue");
 
 		if (StringUtils.isNotBlank(area)) {
 			sql.append(" AND Area = '" + area + "' ");

@@ -233,6 +233,11 @@ public class DetailInfoController extends BasicController {
 			argMap.put("upd_qualityGoods_cultivate", "");
 		}
 
+		// 区域
+		if (StringUtils.isEmpty((String) argMap.get("areaValue"))) {
+			argMap.put("areaValue", "");
+		}
+
 		return argMap;
 	}
 }
