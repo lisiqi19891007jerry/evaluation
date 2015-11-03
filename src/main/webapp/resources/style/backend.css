@@ -40,7 +40,7 @@ body{background:#e9fafc;overflow:hidden}
 .header .menu .menu-hd-next i{width:4px;height:8px;background-position:0 -140px}
 .header .menu.menu-hover .menu-hd{background:#fff;color:#333}
 .header .menu.menu-hover i{width:6px;height:6px;background-position:0 -45px}
-.header .hd-l{position:absolute;top:0;left:0;width:900px}
+.header .hd-l{position:absolute;top:0;left:0;}
 .header .hd-r{z-index:10;position:relative;float:right;display:inline}
 .header .hd-r-col{position:relative;float:left;display:inline;
 		height:50px;line-height:50px;color:black;font-size:14px;overflow:hidden}
@@ -49,7 +49,7 @@ body{background:#e9fafc;overflow:hidden}
 .header .hd-r-col span{font:14px/1.5 tahoma,arial,"microsoft yahei",simsun,sans-serif;
 		display:block;height:50px;
 		padding-top:0px;
-		padding-right:400px;
+		padding-left:700px;
 		padding-left:0px;
 		padding-bottom:0px;
 		*zoom:1;

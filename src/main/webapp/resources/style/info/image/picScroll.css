@@ -1,8 +1,9 @@
 .picScroll-left {
-	width: 370px;
+	width:818px;
 	overflow: hidden;
 	position: relative;
 	border: 1px solid #ccc;
+	height: auto;
 }
 .picScroll-left .hd{
 	overflow: hidden;
@@ -65,11 +66,11 @@
 .picScroll-left .bd ul li .pic {
 	text-align: center;
 	margin: auto;
-	width: 100px;
+	width: 250px;
 }
 .picScroll-left .bd ul li .pic img {
 	max-width: 100%;
-	width: expression(this.width > 100 ? "100px" : this.width)!important;
+	width: expression(this.width > 250 ? "250px" : this.width)!important;
 	height: auto;
 	display: block;
 	padding: 2px;

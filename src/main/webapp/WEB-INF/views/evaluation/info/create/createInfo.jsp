@@ -371,14 +371,14 @@ function doSelecteAreaAction() {
 
 			<div class="up_word">
 				<table>
-					<tr>
+					<tr >
 						<!--  附件 -->
 						<td class="td9">
 							<span class="info">附件：</span>
 							<input type="file" class="affix_word"  style="width: 350px" id="attachment" name="attachment" />
 						</td>
 						<!-- 游戏图标 -->
-						<td>
+						<td class="td9">
 							<span class="info">游戏图标：</span>
 							<input type="file" class="icon_image"  style="width: 350px" id="game_icon" name="game_icon" accept="image/*" />
 						</td>
@@ -390,7 +390,7 @@ function doSelecteAreaAction() {
 				<table>
 					<tr>
 						<!-- 截图 -->
-						<td class="td9">
+						<td class="td9" valign="top">
 							<span class="info">截图：</span>
 						</td>
 						<td class="td10">

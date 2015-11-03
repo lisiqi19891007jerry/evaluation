@@ -10,13 +10,11 @@ body {
 table {
 	vertical-align: middle;
 }
-
 input {
 	padding: 2px 8px 0pt 3px;
 	height: 26px;
 	border: 1px solid #999;
 }
-
 select {
 	border: 1px solid #999;
 	height: 70px;
@@ -39,7 +37,28 @@ img {
 	background:-moz-linear-gradient(top,#c3cdd3,#f6f6f8);/*火狐*/ 
 	background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#c3cdd3), to(#f6f6f8));/*谷歌*/ 
 }
+.loingout{
+	color:#e34d40;
+	border:0px;
+	background-color:transparent;
+	font:14px/1.5 tahoma,arial,"microsoft yahei",simsun,sans-serif;
+	font-size: 14px;
+	height:50px;
+	padding-top:-4px;
+    
+	}
+.hr-r-log{
+	font:14px/1.5 tahoma,arial,"microsoft yahei",simsun,sans-serif;
+	z-index: 10;
+    position: relative;
+    float: left;
+    z-index: 10;
+    line-height: 50px;
+    height: 50px;
+    overflow: hidden;
+	padding-right:350px;
 
+}
 .wrapperExt {
 	top: 112px;
 	left: 0;

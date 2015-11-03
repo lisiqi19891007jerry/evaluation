@@ -137,14 +137,13 @@ function doSelecteAreaAction() {
 							</c:forEach>
 						</c:if>
 					</td>
-					<td>
-						<span  style="color:#888">游戏图标：</span>
-						<div class="suofang">
-							<img src="showImages.html?fileId=${detailInfoMap.Game_icon}" />
-						</div>
+					<td rowspan="9" >
+							<span  style="color:#888">游戏图标：</span>
+							<div class="suofang">
+								<img src="showImages.html?fileId=${detailInfoMap.Game_icon}" />
+							</div>
 					</td>
 				</tr>
-
 				<!-- 第二行数据 -->
 				<tr style="padding：4px 0px;line-height: 24px;">
 					<td>
@@ -427,10 +426,13 @@ function doSelecteAreaAction() {
 					</c:if>
 				</td>
 			</tr>
-
+		</tbody>
+	</table>
+	<div  style="padding-left:15px;">
+		<table>
 			<tr>
 				<td>
-					<div class="picScroll-left">
+					<div class="picScroll-left" style="">
 						<div class="hd">
 							<a class="next"></a>
 							<ul></ul>
@@ -447,12 +449,12 @@ function doSelecteAreaAction() {
 									</li>
 								</c:forEach>
 							</ul>
+							</div>
 						</div>
-					</div>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+					</td>
+				</tr>
+			</table>	
+	</div>
 </div>
 
 <input type="hidden" id="areaValue" name="areaValue" />
